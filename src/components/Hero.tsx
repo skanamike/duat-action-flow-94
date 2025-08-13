@@ -34,14 +34,12 @@ const Hero = () => {
               }
             />
 
-            <ContactDialog
-              trigger={
-                <Button variant="outline-hero" size="lg" className="text-lg px-8 py-4 h-auto">
-                  <Play className="mr-2 h-5 w-5" />
-                  Watch Demo
-                </Button>
-              }
-            />
+            <Button asChild variant="outline-hero" size="lg" className="text-lg px-8 py-4 h-auto">
+              <a href="https://demo.duatflow.com" target="_blank" rel="noopener noreferrer">
+                <Play className="mr-2 h-5 w-5" />
+                Watch Demo
+              </a>
+            </Button>
           </div>
         </div>
       </div>

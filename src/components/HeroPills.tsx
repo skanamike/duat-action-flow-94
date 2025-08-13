@@ -10,16 +10,18 @@ export default function HeroPills() {
   return (
     <div className="inline-flex items-stretch rounded-full border border-white/20 bg-white/10 backdrop-blur-md overflow-hidden">
       {items.map((Item, idx) => (
-        <div
+        <a
           key={Item.label}
-          className="flex items-center gap-2 px-4 py-2 text-white text-sm md:text-base hover-scale"
+          href="#features"
+          className="flex items-center gap-2 px-4 py-2 text-white text-sm md:text-base hover-scale focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+          aria-label={`${Item.label} - jump to features`}
         >
           <Item.icon className="h-4 w-4 text-accent" />
           <span className={idx === 1 ? "text-secondary font-semibold" : "text-white/90 font-semibold"}>{Item.label}</span>
           {idx < items.length - 1 && (
             <span className="mx-3 h-4 w-px bg-white/30" aria-hidden="true" />
           )}
-        </div>
+        </a>
       ))}
     </div>
   );
