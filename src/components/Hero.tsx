@@ -15,8 +15,8 @@ const Hero = () => {
               {" "}Systems of ProAction
             </span>
           </h1>
-          
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed"><span className="text-accent font-semibold">MultiModal Satellite</span> and <span className="text-secondary font-semibold">Big Data</span> combined with <span className="text-accent font-semibold">Digital Twinning</span> enables <span className="text-secondary font-semibold">UNIQUE</span> foreknowledge of the best proactions to avoid supply chain disruptions.</p>
+          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-secondary">Avoid Supply Chain Disruptions</h2>
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed"><span className="text-accent font-semibold">MultiModal Satellite</span> and <span className="text-secondary font-semibold">Big Data</span> combined with <span className="text-accent font-semibold">Digital Twinning</span> enables <span className="text-secondary font-semibold">UNIQUE</span> foreknowledge of the best proactions.</p>
           
           <div className="text-lg md:text-xl mb-12 font-semibold text-accent">
             Detect. Define. De-Risk.
@@ -37,26 +37,26 @@ const Hero = () => {
       </div>
       
       {/* Floating animation elements */}
-      <div className="absolute top-[18%] left-[14%] w-5 h-5 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" />
-      <div className="absolute top-[32%] right-[12%] w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      <div className="absolute top-[18%] left-[14%] w-5 h-5 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" />
+      <div className="absolute top-[32%] right-[12%] w-4 h-4 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '0.5s'
     }} />
-      <div className="absolute top-[58%] left-[70%] w-6 h-6 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" style={{
+      <div className="absolute top-[58%] left-[70%] w-6 h-6 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '1s'
     }} />
-      <div className="absolute top-[72%] right-[20%] w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      <div className="absolute top-[72%] right-[20%] w-4 h-4 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '1.5s'
     }} />
-      <div className="absolute bottom-[12%] left-[22%] w-4 h-4 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" style={{
+      <div className="absolute bottom-[12%] left-[22%] w-4 h-4 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '2s'
     }} />
-      <div className="absolute top-[45%] right-[40%] w-5 h-5 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      <div className="absolute top-[45%] right-[40%] w-5 h-5 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '2.5s'
     }} />
-      <div className="absolute bottom-[28%] right-[12%] w-6 h-6 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" style={{
+      <div className="absolute bottom-[28%] right-[12%] w-6 h-6 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '3s'
     }} />
-      <div className="absolute top-[10%] right-[25%] w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      <div className="absolute top-[10%] right-[25%] w-4 h-4 rounded-full bg-[hsl(var(--moonlight))] shadow-[0_0_40px_hsl(var(--moonlight)/0.35)] ring-2 ring-[hsl(var(--moonlight))]/40 animate-pulse" style={{
       animationDelay: '3.5s'
     }} />
     </section>;
