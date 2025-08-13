@@ -1,3 +1,5 @@
+import ContactDialog from "@/components/ContactDialog";
+
 const Footer = () => {
   return (
     <footer className="bg-primary text-white py-16">
@@ -15,27 +17,27 @@ const Footer = () => {
               using patented subsurface SAR intelligence.
             </p>
             <div className="text-accent font-semibold">
-              See What's Next
+              <ContactDialog trigger={<button className="hover:underline">See What's Next</button>} />
             </div>
           </div>
           
           <div>
             <h3 className="font-semibold mb-4">Solutions</h3>
             <ul className="space-y-2 text-white/80">
-              <li><a href="#" className="hover:text-accent transition-colors">Supply Chain Intelligence</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Risk Management</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Digital Twin Modeling</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Predictive Analytics</a></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Supply Chain Intelligence</button>} /></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Risk Management</button>} /></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Digital Twin Modeling</button>} /></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Predictive Analytics</button>} /></li>
             </ul>
           </div>
           
           <div>
             <h3 className="font-semibold mb-4">Company</h3>
             <ul className="space-y-2 text-white/80">
-              <li><a href="#" className="hover:text-accent transition-colors">About</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Press</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Contact</a></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">About</button>} /></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Careers</button>} /></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Press</button>} /></li>
+              <li><ContactDialog trigger={<button className="hover:text-accent transition-colors">Contact</button>} /></li>
             </ul>
           </div>
         </div>

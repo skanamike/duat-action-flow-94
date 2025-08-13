@@ -1,14 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import ContactForm from "@/components/ContactForm";
+import ContactDialog from "@/components/ContactDialog";
 
 const CTA = () => {
   return (
@@ -21,32 +13,27 @@ const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button variant="hero" size="lg" className="text-lg px-8 py-4 h-auto bg-white text-primary hover:bg-white/90">
-              Pilot DuatFlow
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+            <ContactDialog
+              trigger={
+                <Button variant="hero" size="lg" className="text-lg px-8 py-4 h-auto bg-white text-primary hover:bg-white/90">
+                  Pilot DuatFlow
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              }
+            />
 
-            <Dialog>
-              <DialogTrigger asChild>
+            <ContactDialog
+              trigger={
                 <Button
                   variant="outline-hero"
                   size="lg"
                   className="text-lg px-8 py-4 h-auto border-white text-white hover:bg-white hover:text-primary"
-               >
+                >
                   <Calendar className="mr-2 h-5 w-5" />
                   Schedule Demo
                 </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[560px]">
-                <DialogHeader>
-                  <DialogTitle>Request more info</DialogTitle>
-                  <DialogDescription>
-                    Share a few details and we’ll get back to you shortly.
-                  </DialogDescription>
-                </DialogHeader>
-                <ContactForm />
-              </DialogContent>
-            </Dialog>
+              }
+            />
           </div>
         </div>
       </div>

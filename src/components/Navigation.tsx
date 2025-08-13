@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
+import ContactDialog from "@/components/ContactDialog";
+
 const Navigation = () => {
-  return <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-white/10">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -10,27 +13,28 @@ const Navigation = () => {
             </div>
             <span className="text-2xl font-bold text-white">DUAT</span>
           </div>
-          
+
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#solutions" className="text-white/90 hover:text-accent transition-colors">
-              Solutions
-            </a>
-            <a href="#technology" className="text-white/90 hover:text-accent transition-colors">
-              Technology
-            </a>
-            <a href="#company" className="text-white/90 hover:text-accent transition-colors">
-              Company
-            </a>
-            <Button variant="hero" size="sm">
-              Get Started
-            </Button>
+            <ContactDialog
+              trigger={<button className="text-white/90 hover:text-accent transition-colors">Solutions</button>}
+            />
+            <ContactDialog
+              trigger={<button className="text-white/90 hover:text-accent transition-colors">Technology</button>}
+            />
+            <ContactDialog
+              trigger={<button className="text-white/90 hover:text-accent transition-colors">Company</button>}
+            />
+            <ContactDialog
+              trigger={<Button variant="hero" size="sm">Get Started</Button>}
+            />
           </div>
-          
+
           <Button variant="ghost" size="icon" className="md:hidden text-white">
             <Menu className="h-6 w-6" />
           </Button>
         </div>
       </div>
-    </nav>;
+    </nav>
+  );
 };
 export default Navigation;

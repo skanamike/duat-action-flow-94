@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
+import ContactDialog from "@/components/ContactDialog";
 const Hero = () => {
-  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+  return <section className="relative min-h-[100svh] flex items-center justify-center bg-gradient-hero overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-hero opacity-95" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl" />
@@ -18,20 +19,34 @@ const Hero = () => {
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-secondary">Avoid Supply Chain Disruptions</h2>
           <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed"><span className="text-accent font-semibold">MultiModal Satellite</span> and <span className="text-secondary font-semibold">Big Data</span> combined with <span className="text-accent font-semibold">Digital Twinning</span> enables <span className="text-secondary font-semibold">UNIQUE</span> foreknowledge of the best proactions.</p>
           
-          <div className="text-lg md:text-xl mb-12 font-semibold text-accent">
-            Detect. Define. De-Risk.
+          <div className="mb-12 flex items-center justify-center">
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm md:text-base">
+              <span className="text-accent font-semibold">Detect</span>
+              <span className="opacity-40">/</span>
+              <span className="text-secondary font-semibold">Define</span>
+              <span className="opacity-40">/</span>
+              <span className="text-accent font-semibold">De-Risk</span>
+            </div>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button variant="hero" size="lg" className="text-lg px-8 py-4 h-auto">
-              See What's Next
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            
-            <Button variant="outline-hero" size="lg" className="text-lg px-8 py-4 h-auto">
-              <Play className="mr-2 h-5 w-5" />
-              Watch Demo
-            </Button>
+            <ContactDialog
+              trigger={
+                <Button variant="hero" size="lg" className="text-lg px-8 py-4 h-auto">
+                  See What's Next
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              }
+            />
+
+            <ContactDialog
+              trigger={
+                <Button variant="outline-hero" size="lg" className="text-lg px-8 py-4 h-auto">
+                  <Play className="mr-2 h-5 w-5" />
+                  Watch Demo
+                </Button>
+              }
+            />
           </div>
         </div>
       </div>
