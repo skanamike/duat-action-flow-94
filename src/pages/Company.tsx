@@ -75,6 +75,34 @@ const Company = () => {
       deity: "The Technical Strategist, Weaver of Trust",
       description: "A warrior of wisdom, Kristy is the armorer of belief. With Neith's weaving of reality and Athena's precision of strategy, she equips every prospect's champions with the tools and confidence to stand in the light of proof.",
       status: "public"
+    },
+    {
+      name: "𓋴𓂧𓇳𓏏𓊪 (Skōt-Djōb)",
+      role: "Thoth-Apollo",
+      deity: "The Keeper of Mathematical Truth",
+      description: "Guardian of algorithmic wisdom and statistical validity. Ensures mathematical soundness in all predictive models while maintaining the cosmic balance between innovation and ethics.",
+      status: "stealth"
+    },
+    {
+      name: "𓎺𓂋𓎡𓈖 (Vī-vek)",
+      role: "Imhotep-Prometheus", 
+      deity: "The Architect of Vision",
+      description: "Pattern recognition master who sees breakthrough insights in SAR backscatter and spectral analysis data. Builds the grand design while others see only scattered pixels.",
+      status: "stealth"
+    },
+    {
+      name: "𓎸𓄿𓎡𓎛 (Djāk-Ḥab)",
+      role: "Sobek-Poseidon",
+      deity: "Guardian of Supply Networks",
+      description: "Supply chain intelligence specialist who navigates the treacherous waters of global trade flows. Emerges from stealth when the networks align for full manifestation.",
+      status: "stealth"
+    },
+    {
+      name: "𓄿𓈖𓂧𓊪 (Ān-drēs)",
+      role: "Khnum-Vulcan",
+      deity: "The Data Forgemaster", 
+      description: "Architects the technological infrastructure processing 20TB+ daily satellite data into actionable intelligence. Shapes raw cosmic data streams into earthly wisdom.",
+      status: "stealth"
     }
   ];
 
