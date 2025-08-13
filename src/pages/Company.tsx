@@ -29,59 +29,52 @@ const Company = () => {
   const leadership = [
     {
       name: "Michael Weinberg",
-      role: "Chief Technology Officer",
-      deity: "Set - The Breaker of Boundaries",
-      description: "Breakthrough SAR Doppler tomography pioneer who discovered how to peer through industrial facilities using Earth's natural vibrations.",
+      role: "Set-Hades",
+      deity: "The Disruptor, Lord of Necessary Chaos",
+      description: "Bearer of storms and upheaval, Michael blends Set's will to break the old order with Hades' deep dominion over hidden wealth. He brings disorder not for its own sake, but to force rebirth — tearing the fabric so a stronger weave may emerge.",
       status: "public"
     },
     {
-      name: "Jack Bornhoft", 
-      role: "Chief Revenue Officer",
-      deity: "Horus - The Sky's Spear",
-      description: "Transforms satellite intelligence into profitable parametric insurance products and enterprise solutions.",
+      name: "Matthew Weinberg",
+      role: "Ptah-Hephaestus",
+      deity: "The Builder, Shaper of Worlds",
+      description: "Like Ptah crafting creation through thought and word, and Hephaestus forging wonders in hidden forges, Matthew turns vision into tangible form. Every solution is a structure, every structure a statement.",
       status: "public"
-    },
-    {
-      name: "Andreas Welsch",
-      role: "Chief Data Officer", 
-      deity: "Ptah - The Maker of Realities",
-      description: "Architects the technological infrastructure processing 20TB+ daily satellite data into actionable intelligence.",
-      status: "public"
-    },
-    {
-      name: "Scott Jobe",
-      role: "Chief Science Officer",
-      deity: "Thoth - The Keeper of Truth", 
-      description: "Ensures mathematical soundness and statistical validity of all predictive algorithms and models.",
-      status: "stealth"
-    },
-    {
-      name: "Vivek Srivastava",
-      role: "Chief Recognition Officer",
-      deity: "Imhotep - The Architect of Vision",
-      description: "Pattern recognition master who sees breakthrough insights in SAR backscatter and spectral analysis data.",
-      status: "stealth"
     },
     {
       name: "Brett Egloff",
-      role: "Chief Partnership Officer", 
-      deity: "Hermes - The Divine Diplomat",
-      description: "Bridges technology and business worlds, forging impossible partnerships between domains.",
-      status: "stealth"
+      role: "Hermes Trismegistus (Thoth-Hermes)",
+      deity: "The Bridge Between Worlds",
+      description: "Messenger, negotiator, and keeper of sacred knowledge, Brett walks between realms — divine and mortal, technical and commercial. In the lineage of Thoth and Hermes united, he forges alliances that bind the Duat to the living world.",
+      status: "public"
     },
     {
-      name: "Jack [Stealth]",
-      role: "Strategic Advisor",
-      deity: "Guardian of Networks",
-      description: "Supply chain intelligence specialist operating in stealth until full funding completion.",
-      status: "stealth"
+      name: "Jaymie Weinberg",
+      role: "Hestia-Renenutet",
+      deity: "The Keeper of the Hearth and Order",
+      description: "Jaymie is the silent rhythm-keeper, blending Hestia's steady flame with Renenutet's harvest-guarding care. She maintains the center, ensures the work flows, and keeps the house of the gods in perfect order.",
+      status: "public"
     },
     {
-      name: "Kristy [Stealth]", 
-      role: "Strategic Advisor",
-      deity: "Weaver of Connections",
-      description: "Enterprise technology leader operating in stealth until full funding completion.",
-      status: "stealth"
+      name: "Eleni V Weinberg",
+      role: "Isis-Hera",
+      deity: "The Strength, the Sovereign Support",
+      description: "Eleni stands as Isis the healer and restorer, and Hera the queen and steadfast partner. She sustains the Disruptor's path with quiet power, ensuring the empire endures through its storms.",
+      status: "public"
+    },
+    {
+      name: "Kit Sanford",
+      role: "Dionysus-Horus",
+      deity: "The Seeker of Purpose, Guardian of Vision",
+      description: "Kit blends Dionysus' restless spirit for meaning with Horus' keen watchfulness. A soul in search of a higher calling, his sight reaches beyond comfort toward the horizon of destiny.",
+      status: "public"
+    },
+    {
+      name: "Kristy Garrison",
+      role: "Neith-Athena",
+      deity: "The Technical Strategist, Weaver of Trust",
+      description: "A warrior of wisdom, Kristy is the armorer of belief. With Neith's weaving of reality and Athena's precision of strategy, she equips every prospect's champions with the tools and confidence to stand in the light of proof.",
+      status: "public"
     }
   ];
 
