@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-hero opacity-95" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl" />
@@ -18,30 +16,19 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
-            DuatFlow combines MultiModal sources and digital twin modeling to empower enterprises 
-            with foreknowledge and the best actions to avoid supply chain disruptions.
-          </p>
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">MultiModal Satellite and Big Data combined with Digital Twinning enables UNIQUE foreknowledge of the best proactions to avoid supply chain disruptions.</p>
           
           <div className="text-lg md:text-xl mb-12 font-semibold text-accent">
             Detect. Define. De-Risk.
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button 
-              variant="hero" 
-              size="lg"
-              className="text-lg px-8 py-4 h-auto"
-            >
+            <Button variant="hero" size="lg" className="text-lg px-8 py-4 h-auto">
               See What's Next
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             
-            <Button 
-              variant="outline-hero" 
-              size="lg"
-              className="text-lg px-8 py-4 h-auto"
-            >
+            <Button variant="outline-hero" size="lg" className="text-lg px-8 py-4 h-auto">
               <Play className="mr-2 h-5 w-5" />
               Watch Demo
             </Button>
@@ -51,10 +38,12 @@ const Hero = () => {
       
       {/* Floating animation elements */}
       <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-accent rounded-full animate-pulse" />
-      <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '1s' }} />
-      <div className="absolute top-1/2 left-3/4 w-1 h-1 bg-accent rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
-    </section>
-  );
+      <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-secondary rounded-full animate-pulse" style={{
+      animationDelay: '1s'
+    }} />
+      <div className="absolute top-1/2 left-3/4 w-1 h-1 bg-accent rounded-full animate-pulse" style={{
+      animationDelay: '2s'
+    }} />
+    </section>;
 };
-
 export default Hero;
