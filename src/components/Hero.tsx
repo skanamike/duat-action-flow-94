@@ -37,12 +37,27 @@ const Hero = () => {
       </div>
       
       {/* Floating animation elements */}
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-accent rounded-full animate-pulse" />
-      <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-secondary rounded-full animate-pulse" style={{
+      <div className="absolute top-[18%] left-[14%] w-5 h-5 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" />
+      <div className="absolute top-[32%] right-[12%] w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      animationDelay: '0.5s'
+    }} />
+      <div className="absolute top-[58%] left-[70%] w-6 h-6 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" style={{
       animationDelay: '1s'
     }} />
-      <div className="absolute top-1/2 left-3/4 w-1 h-1 bg-accent rounded-full animate-pulse" style={{
+      <div className="absolute top-[72%] right-[20%] w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      animationDelay: '1.5s'
+    }} />
+      <div className="absolute bottom-[12%] left-[22%] w-4 h-4 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" style={{
       animationDelay: '2s'
+    }} />
+      <div className="absolute top-[45%] right-[40%] w-5 h-5 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      animationDelay: '2.5s'
+    }} />
+      <div className="absolute bottom-[28%] right-[12%] w-6 h-6 rounded-full bg-gradient-to-br from-accent to-secondary shadow-glow ring-2 ring-accent/30 animate-pulse" style={{
+      animationDelay: '3s'
+    }} />
+      <div className="absolute top-[10%] right-[25%] w-4 h-4 rounded-full bg-gradient-to-br from-secondary to-accent shadow-glow ring-2 ring-secondary/30 animate-pulse" style={{
+      animationDelay: '3.5s'
     }} />
     </section>;
 };
