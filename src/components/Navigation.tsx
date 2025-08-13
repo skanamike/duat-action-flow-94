@@ -15,15 +15,9 @@ const Navigation = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <ContactDialog
-              trigger={<button className="text-white/90 hover:text-accent transition-colors">Solutions</button>}
-            />
-            <ContactDialog
-              trigger={<button className="text-white/90 hover:text-accent transition-colors">Technology</button>}
-            />
-            <ContactDialog
-              trigger={<button className="text-white/90 hover:text-accent transition-colors">Company</button>}
-            />
+            <a href="/solutions" className="text-white/90 hover:text-accent transition-colors">Solutions</a>
+            <a href="/technology" className="text-white/90 hover:text-accent transition-colors">Technology</a>
+            <a href="/company" className="text-white/90 hover:text-accent transition-colors">Company</a>
             <ContactDialog
               trigger={<Button variant="hero" size="sm">Get Started</Button>}
             />
