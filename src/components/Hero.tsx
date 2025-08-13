@@ -14,7 +14,7 @@ const Hero = () => {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Turning Systems of Record into 
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">
-              {" "}Systems of Action
+              {" "}Systems of ProAction
             </span>
           </h1>
           
