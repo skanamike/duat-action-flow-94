@@ -46,7 +46,7 @@ const Company = () => {
       role: "Hermes Trismegistus (Thoth-Hermes)",
       deity: "The Bridge Between Worlds",
       description: "Messenger, negotiator, and keeper of sacred knowledge, Brett walks between realms — divine and mortal, technical and commercial. In the lineage of Thoth and Hermes united, he forges alliances that bind the Duat to the living world.",
-      status: "public"
+      status: "stealth"
     },
     {
       name: "Jaymie Weinberg",
