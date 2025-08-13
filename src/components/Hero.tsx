@@ -16,7 +16,7 @@ const Hero = () => {
             </span>
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">MultiModal Satellite and Big Data combined with Digital Twinning enables UNIQUE foreknowledge of the best proactions to avoid supply chain disruptions.</p>
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed"><span className="text-accent font-semibold">MultiModal Satellite</span> and <span className="text-secondary font-semibold">Big Data</span> combined with <span className="text-accent font-semibold">Digital Twinning</span> enables <span className="text-secondary font-semibold">UNIQUE</span> foreknowledge of the best proactions to avoid supply chain disruptions.</p>
           
           <div className="text-lg md:text-xl mb-12 font-semibold text-accent">
             Detect. Define. De-Risk.
