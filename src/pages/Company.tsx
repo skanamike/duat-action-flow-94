@@ -157,7 +157,7 @@ const Company = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-                The Legend of Duat LLC
+                The Legend of Duat
               </h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
                 In the realm where the known world ends and the impossible begins, 
@@ -184,7 +184,7 @@ const Company = () => {
               <div className="max-w-4xl mx-auto text-center space-y-4 text-muted-foreground">
                 <p className="text-lg leading-relaxed">
                   Using the same principles that allowed ancient architects to map hidden chambers, 
-                  Duat LLC creates digital maps of global supply chain vulnerabilities.
+                  Duat creates digital maps of global supply chain vulnerabilities.
                 </p>
                 <p className="text-lg leading-relaxed">
                   Through SAR Doppler tomography and multi-modal satellite fusion, we penetrate 
@@ -264,7 +264,7 @@ const Company = () => {
                   Connect with the Pantheon
                 </Button>
               }
-              title="Connect with Duat LLC"
+              title="Connect with Duat"
               description="Reach out to learn more about our mission and explore partnership opportunities."
             />
           </div>
