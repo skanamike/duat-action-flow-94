@@ -29,9 +29,13 @@ const Navigation = () => {
             />
           </div>
 
-          <Button variant="ghost" size="icon" className="md:hidden text-white">
-            <Menu className="h-6 w-6" />
-          </Button>
+          <ContactDialog
+            trigger={
+              <Button variant="ghost" size="icon" className="md:hidden text-white" aria-label="Open contact form">
+                <Menu className="h-6 w-6" />
+              </Button>
+            }
+          />
         </div>
       </div>
     </nav>
