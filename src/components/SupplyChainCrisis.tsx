@@ -1,4 +1,5 @@
 import { BadgeAlert, EyeOff, Wallet } from "lucide-react";
+import globalSupplyChainImage from "@/assets/global-supply-chain.jpg";
 
 const items = [
   {
@@ -62,8 +63,8 @@ export default function SupplyChainCrisis() {
           {/* Right column: visual */}
           <div className="rounded-2xl overflow-hidden bg-card shadow-lg border border-border">
             <img
-              src="/placeholder.svg"
-              alt="World map visualization of global supply chain risks"
+              src={globalSupplyChainImage}
+              alt="Global supply chain interconnectivity visualization showing network connections across continents"
               loading="lazy"
               className="w-full h-full object-cover aspect-[4/3]"
             />

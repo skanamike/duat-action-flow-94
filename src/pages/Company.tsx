@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { MapPin, Users, Eye, Shield, Zap } from "lucide-react";
+import globalSupplyChainImage from "@/assets/global-supply-chain.jpg";
 
 const Company = () => {
   const coreValues = [
