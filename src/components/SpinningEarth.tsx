@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere, Line } from "@react-three/drei";
+import { OrbitControls, Sphere } from "@react-three/drei";
 import * as THREE from "three";
 
 // Major port coordinates (lat, lng)
@@ -134,7 +134,7 @@ function ShippingLanes() {
       // Animate shipping lanes
       lanesRef.current.children.forEach((lane, index) => {
         const time = state.clock.elapsedTime;
-        const offset = Math.sin(time * 0.5 + index * 0.3) * 0.1;
+        const offset = Math.sin(time * 0.5 + index * 0.3) * 0.2;
         const line = lane as THREE.Line;
         if (line.material && 'opacity' in line.material) {
           (line.material as THREE.LineBasicMaterial).opacity = 0.4 + offset;
@@ -143,25 +143,27 @@ function ShippingLanes() {
     }
   });
 
-  const routes = useMemo(() => {
+  const routeGeometries = useMemo(() => {
     return shippingRoutes.map(([startIdx, endIdx]) => {
       const start = latLngToVector3(majorPorts[startIdx].lat, majorPorts[startIdx].lng, 2.05);
       const end = latLngToVector3(majorPorts[endIdx].lat, majorPorts[endIdx].lng, 2.05);
-      return createCurvedPath(start, end);
+      const points = createCurvedPath(start, end);
+      return new THREE.BufferGeometry().setFromPoints(points);
     });
   }, []);
 
   return (
     <group ref={lanesRef}>
-      {routes.map((points, index) => (
-        <Line
-          key={index}
-          points={points}
-          color="#06b6d4"
-          transparent
-          opacity={0.6}
-          lineWidth={2}
-        />
+      {routeGeometries.map((geometry, index) => (
+        <line key={index}>
+          <primitive attach="geometry" object={geometry} />
+          <lineBasicMaterial 
+            attach="material"
+            color="#06b6d4" 
+            transparent 
+            opacity={0.6}
+          />
+        </line>
       ))}
     </group>
   );
