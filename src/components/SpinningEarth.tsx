@@ -6,92 +6,81 @@ import * as THREE from "three";
 function Earth() {
   const earthRef = useRef<THREE.Mesh>(null);
   
-  // Create realistic earth texture
-  const earthTexture = useMemo(() => {
+  // Create dotted earth texture inspired by uploaded images
+  const texture = useMemo(() => {
     const canvas = document.createElement('canvas');
     canvas.width = 1024;
     canvas.height = 512;
     const ctx = canvas.getContext('2d')!;
     
-    // Ocean blue background
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    gradient.addColorStop(0, '#1e3a8a'); // Deep blue at poles
-    gradient.addColorStop(0.5, '#1e40af'); // Ocean blue at equator
-    gradient.addColorStop(1, '#1e3a8a'); // Deep blue at poles
-    ctx.fillStyle = gradient;
+    // Light gray/white background like the uploaded images
+    ctx.fillStyle = '#f8fafc';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // More realistic continent shapes
-    ctx.fillStyle = '#16a34a'; // Green for land
+    // Function to draw dotted landmass
+    const drawDottedLand = (startX: number, startY: number, width: number, height: number, density = 0.3) => {
+      ctx.fillStyle = '#1e293b'; // Dark dots for land
+      const dotSize = 2;
+      const spacing = 6;
+      
+      for (let x = startX; x < startX + width; x += spacing) {
+        for (let y = startY; y < startY + height; y += spacing) {
+          // Create organic shapes using noise-like pattern
+          if (Math.random() < density) {
+            // Vary dot positions slightly for organic feel
+            const offsetX = (Math.random() - 0.5) * 2;
+            const offsetY = (Math.random() - 0.5) * 2;
+            ctx.beginPath();
+            ctx.arc(x + offsetX, y + offsetY, dotSize, 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+      }
+    };
     
-    // North America (more realistic shape)
-    ctx.beginPath();
-    ctx.moveTo(80, 120);
-    ctx.quadraticCurveTo(120, 100, 180, 120);
-    ctx.quadraticCurveTo(200, 140, 180, 180);
-    ctx.quadraticCurveTo(120, 200, 80, 180);
-    ctx.quadraticCurveTo(60, 150, 80, 120);
-    ctx.fill();
+    // Draw continents with dotted pattern
     
-    // South America
-    ctx.beginPath();
-    ctx.moveTo(160, 220);
-    ctx.quadraticCurveTo(180, 200, 200, 240);
-    ctx.quadraticCurveTo(190, 300, 170, 320);
-    ctx.quadraticCurveTo(150, 310, 140, 280);
-    ctx.quadraticCurveTo(150, 240, 160, 220);
-    ctx.fill();
+    // North America
+    drawDottedLand(60, 100, 140, 120, 0.4);
     
-    // Europe/Africa
-    ctx.beginPath();
-    ctx.moveTo(480, 100);
-    ctx.quadraticCurveTo(520, 90, 540, 120);
-    ctx.quadraticCurveTo(550, 160, 530, 200);
-    ctx.quadraticCurveTo(540, 260, 520, 300);
-    ctx.quadraticCurveTo(500, 340, 480, 360);
-    ctx.quadraticCurveTo(460, 320, 470, 280);
-    ctx.quadraticCurveTo(460, 240, 480, 200);
-    ctx.quadraticCurveTo(470, 160, 480, 120);
-    ctx.quadraticCurveTo(470, 110, 480, 100);
-    ctx.fill();
+    // South America  
+    drawDottedLand(140, 240, 80, 160, 0.35);
+    
+    // Europe
+    drawDottedLand(480, 90, 80, 80, 0.45);
+    
+    // Africa
+    drawDottedLand(500, 170, 60, 140, 0.4);
     
     // Asia
-    ctx.beginPath();
-    ctx.moveTo(580, 80);
-    ctx.quadraticCurveTo(680, 70, 780, 100);
-    ctx.quadraticCurveTo(820, 120, 800, 160);
-    ctx.quadraticCurveTo(780, 200, 720, 180);
-    ctx.quadraticCurveTo(650, 190, 600, 170);
-    ctx.quadraticCurveTo(570, 140, 580, 100);
-    ctx.quadraticCurveTo(575, 90, 580, 80);
-    ctx.fill();
+    drawDottedLand(580, 60, 180, 120, 0.35);
+    drawDottedLand(620, 180, 140, 80, 0.3);
     
     // Australia
-    ctx.beginPath();
-    ctx.moveTo(720, 280);
-    ctx.quadraticCurveTo(780, 270, 800, 290);
-    ctx.quadraticCurveTo(810, 310, 780, 320);
-    ctx.quadraticCurveTo(740, 325, 720, 310);
-    ctx.quadraticCurveTo(710, 295, 720, 280);
-    ctx.fill();
+    drawDottedLand(720, 280, 70, 50, 0.4);
     
-    // Add some cloud texture with subtle white overlay
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
-    for (let i = 0; i < 20; i++) {
-      const x = Math.random() * canvas.width;
-      const y = Math.random() * canvas.height;
-      const radius = 20 + Math.random() * 40;
+    // Add orange accent dots like in the uploaded images
+    ctx.fillStyle = '#fb7185'; // Orange-red accent color
+    const accentDots = [
+      { x: 120, y: 160 }, // North America
+      { x: 520, y: 200 }, // Africa/Middle East
+      { x: 650, y: 120 }, // Asia
+      { x: 750, y: 300 }, // Australia
+      { x: 180, y: 280 }, // South America
+    ];
+    
+    accentDots.forEach(dot => {
       ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.arc(dot.x, dot.y, 4, 0, Math.PI * 2);
       ctx.fill();
-    }
+    });
     
     return new THREE.CanvasTexture(canvas);
   }, []);
 
   useFrame(() => {
     if (earthRef.current) {
-      earthRef.current.rotation.y += 0.003; // Slower, more realistic rotation
+      earthRef.current.rotation.y += 0.002; // Smooth rotation
     }
   });
 
@@ -99,9 +88,9 @@ function Earth() {
     <mesh ref={earthRef}>
       <sphereGeometry args={[2, 64, 64]} />
       <meshPhongMaterial 
-        map={earthTexture} 
-        shininess={10}
-        specular={new THREE.Color(0x111111)}
+        map={texture} 
+        transparent={true}
+        opacity={1}
       />
     </mesh>
   );
