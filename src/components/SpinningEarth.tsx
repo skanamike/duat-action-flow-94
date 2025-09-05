@@ -135,35 +135,37 @@ function ShippingLanes() {
       lanesRef.current.children.forEach((lane, index) => {
         const time = state.clock.elapsedTime;
         const offset = Math.sin(time * 0.5 + index * 0.3) * 0.2;
-        const line = lane as THREE.Line;
-        if (line.material && 'opacity' in line.material) {
-          (line.material as THREE.LineBasicMaterial).opacity = 0.4 + offset;
+        const mesh = lane as THREE.Mesh;
+        if (mesh.material && 'opacity' in mesh.material) {
+          (mesh.material as THREE.MeshBasicMaterial).opacity = 0.4 + offset;
         }
       });
     }
   });
 
-  const routeGeometries = useMemo(() => {
+  const routeTubes = useMemo(() => {
     return shippingRoutes.map(([startIdx, endIdx]) => {
       const start = latLngToVector3(majorPorts[startIdx].lat, majorPorts[startIdx].lng, 2.05);
       const end = latLngToVector3(majorPorts[endIdx].lat, majorPorts[endIdx].lng, 2.05);
       const points = createCurvedPath(start, end);
-      return new THREE.BufferGeometry().setFromPoints(points);
+      
+      // Create tube geometry from curve
+      const curve = new THREE.CatmullRomCurve3(points);
+      return new THREE.TubeGeometry(curve, 50, 0.01, 8, false);
     });
   }, []);
 
   return (
     <group ref={lanesRef}>
-      {routeGeometries.map((geometry, index) => (
-        <line key={index}>
+      {routeTubes.map((geometry, index) => (
+        <mesh key={index}>
           <primitive attach="geometry" object={geometry} />
-          <lineBasicMaterial 
-            attach="material"
+          <meshBasicMaterial 
             color="#06b6d4" 
             transparent 
             opacity={0.6}
           />
-        </line>
+        </mesh>
       ))}
     </group>
   );
