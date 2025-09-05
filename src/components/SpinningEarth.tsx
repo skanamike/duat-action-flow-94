@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -13,6 +13,18 @@ const majorPorts = [
   { name: "Dubai", lat: 25.2048, lng: 55.2708, continent: "Asia" },
   { name: "Hong Kong", lat: 22.3193, lng: 114.1694, continent: "Asia" },
   { name: "New York", lat: 40.7128, lng: -74.0060, continent: "America" },
+];
+
+// Shipping routes between major ports
+const shippingRoutes = [
+  [0, 1], // Shanghai - Singapore
+  [0, 6], // Shanghai - Hong Kong
+  [1, 5], // Singapore - Dubai
+  [2, 4], // Rotterdam - Hamburg
+  [3, 7], // Los Angeles - New York
+  [5, 2], // Dubai - Rotterdam
+  [1, 3], // Singapore - Los Angeles
+  [2, 7], // Rotterdam - New York
 ];
 
 // Convert lat/lng to 3D coordinates on sphere
@@ -30,6 +42,31 @@ const latLngToVector3 = (lat: number, lng: number, radius = 2) => {
 function Earth() {
   const earthRef = useRef<THREE.Mesh>(null);
   
+  // Create earth texture (simple blue with green continents effect)
+  const earthTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d')!;
+    
+    // Ocean blue background
+    ctx.fillStyle = '#1e40af';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Simple continent shapes
+    ctx.fillStyle = '#22c55e';
+    // North America
+    ctx.fillRect(50, 80, 80, 60);
+    // Europe/Africa
+    ctx.fillRect(200, 70, 60, 100);
+    // Asia
+    ctx.fillRect(300, 60, 120, 80);
+    // Australia
+    ctx.fillRect(350, 150, 40, 30);
+    
+    return new THREE.CanvasTexture(canvas);
+  }, []);
+
   useFrame(() => {
     if (earthRef.current) {
       earthRef.current.rotation.y += 0.005; // Slow rotation
@@ -39,7 +76,7 @@ function Earth() {
   return (
     <mesh ref={earthRef}>
       <sphereGeometry args={[2, 64, 64]} />
-      <meshPhongMaterial color="#1e40af" />
+      <meshPhongMaterial map={earthTexture} />
     </mesh>
   );
 }
@@ -79,6 +116,60 @@ function Ports() {
   );
 }
 
+function ShippingLanes() {
+  const lanesRef = useRef<THREE.Group>(null);
+  
+  useFrame((state) => {
+    if (lanesRef.current) {
+      // Animate shipping lanes opacity
+      lanesRef.current.children.forEach((lane, index) => {
+        const time = state.clock.elapsedTime;
+        const offset = Math.sin(time * 0.5 + index * 0.3) * 0.2;
+        const mesh = lane as THREE.Mesh;
+        const material = mesh.material as THREE.MeshBasicMaterial;
+        material.opacity = 0.4 + offset;
+      });
+    }
+  });
+
+  const routeCylinders = useMemo(() => {
+    return shippingRoutes.map(([startIdx, endIdx]) => {
+      const start = latLngToVector3(majorPorts[startIdx].lat, majorPorts[startIdx].lng, 2.05);
+      const end = latLngToVector3(majorPorts[endIdx].lat, majorPorts[endIdx].lng, 2.05);
+      
+      // Calculate cylinder properties for straight line between ports
+      const direction = new THREE.Vector3().subVectors(end, start);
+      const distance = direction.length();
+      const center = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+      
+      // Create quaternion for rotation
+      const up = new THREE.Vector3(0, 1, 0);
+      const quaternion = new THREE.Quaternion().setFromUnitVectors(up, direction.normalize());
+      
+      return { center, quaternion, distance };
+    });
+  }, []);
+
+  return (
+    <group ref={lanesRef}>
+      {routeCylinders.map((route, index) => (
+        <mesh 
+          key={index} 
+          position={route.center}
+          quaternion={route.quaternion}
+        >
+          <cylinderGeometry args={[0.005, 0.005, route.distance, 8]} />
+          <meshBasicMaterial 
+            color="#06b6d4" 
+            transparent 
+            opacity={0.6}
+          />
+        </mesh>
+      ))}
+    </group>
+  );
+}
+
 export default function SpinningEarth() {
   return (
     <div className="w-full h-full rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 to-slate-800">
@@ -95,6 +186,7 @@ export default function SpinningEarth() {
         
         <Earth />
         <Ports />
+        <ShippingLanes />
         
         <OrbitControls 
           enableZoom={false}
