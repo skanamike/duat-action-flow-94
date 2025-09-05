@@ -1,6 +1,6 @@
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Sphere } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 
 // Major port coordinates (lat, lng)
@@ -15,18 +15,6 @@ const majorPorts = [
   { name: "New York", lat: 40.7128, lng: -74.0060, continent: "America" },
 ];
 
-// Shipping routes between major ports
-const shippingRoutes = [
-  [0, 1], // Shanghai - Singapore
-  [0, 6], // Shanghai - Hong Kong
-  [1, 5], // Singapore - Dubai
-  [2, 4], // Rotterdam - Hamburg
-  [3, 7], // Los Angeles - New York
-  [5, 2], // Dubai - Rotterdam
-  [1, 3], // Singapore - Los Angeles
-  [2, 7], // Rotterdam - New York
-];
-
 // Convert lat/lng to 3D coordinates on sphere
 const latLngToVector3 = (lat: number, lng: number, radius = 2) => {
   const phi = (90 - lat) * (Math.PI / 180);
@@ -39,53 +27,20 @@ const latLngToVector3 = (lat: number, lng: number, radius = 2) => {
   );
 };
 
-// Create curved path between two points on sphere
-const createCurvedPath = (start: THREE.Vector3, end: THREE.Vector3) => {
-  const mid = start.clone().add(end).multiplyScalar(0.5);
-  mid.normalize().multiplyScalar(2.5); // Curve outward
-  
-  const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
-  return curve.getPoints(50);
-};
-
 function Earth() {
   const earthRef = useRef<THREE.Mesh>(null);
   
-  // Create earth texture (simple blue with green continents effect)
-  const earthTexture = useMemo(() => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 512;
-    canvas.height = 256;
-    const ctx = canvas.getContext('2d')!;
-    
-    // Ocean blue background
-    ctx.fillStyle = '#1e40af';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Simple continent shapes
-    ctx.fillStyle = '#22c55e';
-    // North America
-    ctx.fillRect(50, 80, 80, 60);
-    // Europe/Africa
-    ctx.fillRect(200, 70, 60, 100);
-    // Asia
-    ctx.fillRect(300, 60, 120, 80);
-    // Australia
-    ctx.fillRect(350, 150, 40, 30);
-    
-    return new THREE.CanvasTexture(canvas);
-  }, []);
-
-  useFrame((state) => {
+  useFrame(() => {
     if (earthRef.current) {
       earthRef.current.rotation.y += 0.005; // Slow rotation
     }
   });
 
   return (
-    <Sphere ref={earthRef} args={[2, 64, 64]}>
-      <meshPhongMaterial map={earthTexture} />
-    </Sphere>
+    <mesh ref={earthRef}>
+      <sphereGeometry args={[2, 64, 64]} />
+      <meshPhongMaterial color="#1e40af" />
+    </mesh>
   );
 }
 
@@ -99,74 +54,27 @@ function Ports() {
         const time = state.clock.elapsedTime;
         const flash = Math.sin(time * 2 + index * 0.5) * 0.5 + 0.5;
         const mesh = port as THREE.Mesh;
-        if (mesh.material && 'opacity' in mesh.material) {
-          (mesh.material as THREE.MeshBasicMaterial).opacity = 0.5 + flash * 0.5;
-        }
+        const material = mesh.material as THREE.MeshBasicMaterial;
+        material.opacity = 0.5 + flash * 0.5;
       });
     }
   });
-
-  const portPositions = useMemo(() => {
-    return majorPorts.map(port => latLngToVector3(port.lat, port.lng, 2.05));
-  }, []);
 
   return (
     <group ref={portsRef}>
-      {portPositions.map((position, index) => (
-        <mesh key={index} position={position}>
-          <sphereGeometry args={[0.03, 8, 8]} />
-          <meshBasicMaterial 
-            color="#fbbf24" 
-            transparent 
-            opacity={0.8}
-          />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-function ShippingLanes() {
-  const lanesRef = useRef<THREE.Group>(null);
-  
-  useFrame((state) => {
-    if (lanesRef.current) {
-      // Animate shipping lanes
-      lanesRef.current.children.forEach((lane, index) => {
-        const time = state.clock.elapsedTime;
-        const offset = Math.sin(time * 0.5 + index * 0.3) * 0.2;
-        const mesh = lane as THREE.Mesh;
-        if (mesh.material && 'opacity' in mesh.material) {
-          (mesh.material as THREE.MeshBasicMaterial).opacity = 0.4 + offset;
-        }
-      });
-    }
-  });
-
-  const routeTubes = useMemo(() => {
-    return shippingRoutes.map(([startIdx, endIdx]) => {
-      const start = latLngToVector3(majorPorts[startIdx].lat, majorPorts[startIdx].lng, 2.05);
-      const end = latLngToVector3(majorPorts[endIdx].lat, majorPorts[endIdx].lng, 2.05);
-      const points = createCurvedPath(start, end);
-      
-      // Create tube geometry from curve
-      const curve = new THREE.CatmullRomCurve3(points);
-      return new THREE.TubeGeometry(curve, 50, 0.01, 8, false);
-    });
-  }, []);
-
-  return (
-    <group ref={lanesRef}>
-      {routeTubes.map((geometry, index) => (
-        <mesh key={index}>
-          <primitive attach="geometry" object={geometry} />
-          <meshBasicMaterial 
-            color="#06b6d4" 
-            transparent 
-            opacity={0.6}
-          />
-        </mesh>
-      ))}
+      {majorPorts.map((port, index) => {
+        const position = latLngToVector3(port.lat, port.lng, 2.05);
+        return (
+          <mesh key={index} position={position}>
+            <sphereGeometry args={[0.03, 8, 8]} />
+            <meshBasicMaterial 
+              color="#fbbf24" 
+              transparent 
+              opacity={0.8}
+            />
+          </mesh>
+        );
+      })}
     </group>
   );
 }
@@ -182,13 +90,11 @@ export default function SpinningEarth() {
         <directionalLight 
           position={[5, 5, 5]} 
           intensity={1}
-          castShadow
         />
         <pointLight position={[-5, -5, 5]} intensity={0.5} color="#1e40af" />
         
         <Earth />
         <Ports />
-        <ShippingLanes />
         
         <OrbitControls 
           enableZoom={false}
