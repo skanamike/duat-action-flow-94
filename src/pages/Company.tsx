@@ -33,6 +33,12 @@ const Company = () => {
       role: "Lead Agentic AI Systems Architect",
       bio: "Architected enterprise-scale agent orchestration platforms processing millions of daily events",
       credentials: "Co-developed Chef-Metal-SSH adopted into Chef's official stack and highlighted at CHEFCONF"
+    },
+    {
+      name: "Ruben Villa",
+      role: "Co-Founder & Agricultural Supply Chain Strategist",
+      bio: "Professional pilot bringing unique aerial perspective to supply chain monitoring. Combines education in agriculture and marketing to provide creative problem-solving for the complexities of modern agricultural supply chains",
+      credentials: "Agriculture & Marketing expertise with aviation operations background"
     }
   ];
 
@@ -61,12 +67,6 @@ const Company = () => {
       role: "Technical Advisor",
       bio: "ex-Manhattan Associates VP of R&D",
       credentials: "With Michael Created one of the first Supply Chain AI models for Determining Geospecific Warehousing Priority to Eliminate Out Of Stocks"
-    },
-    {
-      name: "Ruben Villa",
-      role: "Advisor",
-      bio: "",
-      credentials: ""
     }
   ];
 
