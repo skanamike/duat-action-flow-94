@@ -18,6 +18,7 @@ const Navigation = () => {
             <a href="/solutions" className="text-white/90 hover:text-accent transition-colors">Solutions</a>
             <a href="/technology" className="text-white/90 hover:text-accent transition-colors">Technology</a>
             <a href="/company" className="text-white/90 hover:text-accent transition-colors">Company</a>
+            <a href="/pantheon" className="text-white/90 hover:text-accent transition-colors">Pantheon</a>
             <ContactDialog
               trigger={<Button variant="hero" size="sm">Get Started</Button>}
             />
