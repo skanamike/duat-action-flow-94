@@ -3,9 +3,17 @@ import { ArrowRight, Play } from "lucide-react";
 import ContactDialog from "@/components/ContactDialog";
 import HeroPills from "@/components/HeroPills";
 const Hero = () => {
-  return <section className="relative min-h-[100svh] pt-24 md:pt-28 flex items-center justify-center bg-gradient-hero overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-95" />
+  return <section className="relative min-h-[100svh] pt-24 md:pt-28 flex items-center justify-center overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0 bg-gradient-hero">
+        <img
+          src="/images/generated/hero-background.png"
+          alt="Supply chain network visualization"
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/80" />
+      </div>
+      {/* Additional background effects */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-accent/20 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
       

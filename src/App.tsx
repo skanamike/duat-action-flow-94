@@ -8,6 +8,8 @@ import Company from "./pages/Company";
 import CompanyV1 from "./pages/CompanyV1";
 import Pantheon from "./pages/Pantheon";
 import Technology from "./pages/Technology";
+import Team from "./pages/Team";
+import WhyDuat from "./pages/WhyDuat";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/company" element={<Company />} />
+          <Route path="/company/team" element={<Team />} />
+          <Route path="/why-duat" element={<WhyDuat />} />
           <Route path="/technology" element={<Technology />} />
           <Route path="/pantheon" element={<Pantheon />} />
           <Route path="/companyv1" element={<CompanyV1 />} />
