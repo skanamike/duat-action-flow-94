@@ -47,9 +47,9 @@ const Features = () => {
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {features.map((feature, index) => (
-            <div 
+            <div
               key={index}
               className="p-8 rounded-xl bg-card border border-border hover:shadow-card transition-all duration-300 hover:scale-105 group"
             >
@@ -60,6 +60,25 @@ const Features = () => {
               <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>
           ))}
+        </div>
+
+        {/* SAR Intelligence Visualization */}
+        <div className="mt-20 max-w-6xl mx-auto">
+          <div className="text-center mb-10">
+            <h3 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+              Proprietary Satellite and Data Neural Network AI
+            </h3>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              From satellite data to actionable insights - our proprietary technology transforms invisible supply chain dynamics into strategic advantage
+            </p>
+          </div>
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-border bg-card">
+            <img
+              src="/images/generated/sar-intelligence.png"
+              alt="SAR intelligence pipeline from satellite to supply chain insights"
+              className="w-full h-auto"
+            />
+          </div>
         </div>
       </div>
     </section>

@@ -61,8 +61,27 @@ export default function SupplyChainCrisis() {
           </div>
 
           {/* Right column: visual */}
-          <div className="rounded-2xl overflow-hidden bg-card shadow-lg border border-border aspect-[4/3]">
-            <SpinningEarth />
+          <div className="rounded-2xl overflow-hidden bg-card shadow-lg border border-border aspect-[4/3] relative">
+            <img
+              src="/images/generated/supply-chain-flow.png"
+              alt="Multi-tier supply chain visualization showing full upstream coverage"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+          </div>
+        </div>
+
+        {/* Disruption Timeline Section */}
+        <div className="mt-20 max-w-5xl mx-auto">
+          <h3 className="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground">
+            Months-Ahead Detection vs. Reactive Response
+          </h3>
+          <div className="rounded-2xl overflow-hidden shadow-2xl border border-border">
+            <img
+              src="/images/generated/disruption-timeline.png"
+              alt="Timeline comparison showing Duat's months-ahead detection advantage"
+              className="w-full h-auto"
+            />
           </div>
         </div>
       </div>
