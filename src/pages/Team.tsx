@@ -462,6 +462,82 @@ const Team = () => {
                   </p>
                 </CardContent>
               </Card>
+
+              {/* Mark Rogers */}
+              <Card className="hover:shadow-lg transition-all">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">Mark Rogers</h3>
+                  <p className="text-lg text-primary font-semibold mb-4">GTM Advisor</p>
+
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    As CRO at Coolfire, Mark leads high-impact customer solutions and strategic partnerships. He has a proven track record of creating lasting customer relationships and pioneering new markets.
+                  </p>
+
+                  <div className="mb-4">
+                    <h4 className="font-bold mb-2">Credentials:</h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <strong className="text-foreground">Chief Revenue Officer at Coolfire</strong>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        As SVP of Business Development, helped pioneer the low-code market at <strong className="text-foreground">Mendix</strong>, landing Gartner leadership quadrants year over year and contributing to its <strong className="text-foreground">$760M acquisition by Siemens (2018)</strong>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        Former head of product management for <strong className="text-foreground">Microsoft Azure</strong> during its 2009 launch, forming the foundation for Microsoft's cloud strategy
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        Led Microsoft Windows Developer and ISV ecosystem for the global launch of Windows 7
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p className="text-sm text-accent italic">
+                    <strong>Value to Duat:</strong> Deep expertise in go-to-market strategy, strategic partnerships, and scaling enterprise software businesses from startup to successful exit.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Pete LaSpina */}
+              <Card className="hover:shadow-lg transition-all">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-bold mb-2">Pete LaSpina</h3>
+                  <p className="text-lg text-primary font-semibold mb-4">Sales Operations Advisor</p>
+
+                  <p className="text-muted-foreground leading-relaxed mb-4">
+                    Pete brings extensive experience in building and scaling high-performing sales teams, with a proven track record of driving revenue growth and executing winning sales strategies.
+                  </p>
+
+                  <div className="mb-4">
+                    <h4 className="font-bold mb-2">Credentials:</h4>
+                    <ul className="space-y-2 text-muted-foreground text-sm">
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <strong className="text-foreground">Executive Vice President of Sales at Wrights Impact Window</strong> (June 2024 - Present)
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        Rapidly advanced from Sales Representative (2020) to Assistant Sales Manager (2023) to EVP of Sales (2024)
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <strong className="text-foreground">15+ years as Title Insurance Producer in New Jersey</strong> (2009 - Present)
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        Expert in sales strategy development, team building, sales forecasting, and customer relationship management
+                      </li>
+                    </ul>
+                  </div>
+
+                  <p className="text-sm text-accent italic">
+                    <strong>Value to Duat:</strong> Front-line sales operations expertise, from building teams and setting targets to executing strategies that drive consistent revenue growth.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
