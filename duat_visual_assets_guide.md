@@ -246,10 +246,10 @@ represents forecasting capability, minimal style, 128x128px transparent
 #### **Primary Team Members (7 people):**
 1. Michael Weinberg - CEO
 2. Scott Jobe - CTO
-3. Shaun Stewart - CPO
-4. Zack Zondlo - Lead AI Architect
+3. Zack Zondlo - CIO and Chief AI Architect
+4. Mark Rogers - GTM and Operational Advisor
 5. Ruben Villa - Agricultural Supply Chain Strategist
-6. Dean Evans - Advisor
+6. Dean Evans - Marketing Advisor
 7. Andreas Welsch - AI Advisor
 
 #### **Photo Specifications:**
