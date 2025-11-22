@@ -13,8 +13,8 @@ const Footer = () => {
               <span className="text-2xl font-bold">DUATFLOW</span>
             </div>
             <p className="text-white/80 mb-6 max-w-md">
-              The first and only platform to predict supply chain disruptions before they happen 
-              using patented subsurface SAR intelligence.
+              The first and only platform to predict supply chain disruptions before they happen
+              using proprietary satellite and data neural network AI.
             </p>
             <div className="text-accent font-semibold">
               <ContactDialog trigger={<button className="hover:underline">See What's Next</button>} />
