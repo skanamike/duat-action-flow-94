@@ -228,7 +228,7 @@ Michael brings 10+ years of hands-on supply chain experience from the metals ind
 - M.D., M.S. Biomedical Chemistry
 - B.A./B.S. Computer Science
 
-**Why Duat:** *"I've watched companies lose millions because they couldn't see disruptions forming in their tier-3 and tier-4 suppliers. Duat gives enterprises the visibility they need to operate confidently in an uncertain world."*
+**Why Duat:** *"I've watched companies lose millions because they couldn't see disruptions forming deep in their supply chains - tier-3, tier-4, and beyond. Duat gives enterprises the visibility they need to operate confidently in an uncertain world."*
 
 ---
 
@@ -394,7 +394,7 @@ Supply chain opacity represents one of the largest unpriced risks in modern ente
 - 75% of companies experienced supply chain disruptions in 2023, but only 15% had advance warning
 - Average cost of supply chain disruption: **$184 million per event** (Gartner)
 
-**The core issue:** Most companies only monitor their Tier 1 (direct) suppliers. But **80% of disruptions originate in Tier 2-4 suppliers** - hidden from view until it's too late to respond effectively.
+**The core issue:** Most companies only monitor their Tier 1 (direct) suppliers. But **80% of disruptions originate in deeper supply chain tiers** - hidden from view until it's too late to respond effectively.
 
 ---
 
@@ -424,7 +424,7 @@ Duat delivers **months-ahead disruption intelligence** through three core capabi
 #### **1. Full Upstream Mapping**
 We map your entire supply chain ecosystem - from raw material extraction through every tier of processing and assembly.
 
-**Competitive advantage:** While competitors track 1-2 tiers, we track 4-6 tiers deep.
+**Competitive advantage:** While competitors track 1-2 tiers, we track every tier of your supply chain with unlimited depth.
 
 #### **2. Patented Subsurface SAR Intelligence**
 Our proprietary satellite data analysis reveals production activity in real-time, regardless of weather, darkness, or attempts to conceal activity.

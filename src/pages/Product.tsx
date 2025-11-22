@@ -33,7 +33,7 @@ const Product = () => {
     {
       icon: Network,
       title: "Multi-Tier Supply Chain Mapping",
-      description: "Visualize your entire upstream supply chain from raw materials through tier 3+ suppliers with automated dependency mapping.",
+      description: "Visualize your entire upstream supply chain from raw materials through every supplier tier with automated dependency mapping.",
       demoLink: "https://aurachainmonitor-claude-code.onrender.com/"
     },
     {

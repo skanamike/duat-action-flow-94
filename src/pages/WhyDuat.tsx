@@ -79,7 +79,7 @@ const WhyDuat = () => {
               <CardContent className="p-8">
                 <p className="text-xl leading-relaxed font-semibold">
                   <strong className="text-primary">The core issue:</strong> Most companies only monitor their Tier 1 (direct) suppliers.
-                  But <strong>80% of disruptions originate in Tier 2-4 suppliers</strong> - hidden from view until it's too late to respond effectively.
+                  But <strong>80% of disruptions originate in deeper supply chain tiers</strong> - hidden from view until it's too late to respond effectively.
                 </p>
               </CardContent>
             </Card>
@@ -156,7 +156,7 @@ const WhyDuat = () => {
                     We map your entire supply chain ecosystem - from raw material extraction through every tier of processing and assembly.
                   </p>
                   <p className="text-lg font-semibold text-primary">
-                    Competitive advantage: While competitors track 1-2 tiers, we track 4-6 tiers deep.
+                    Competitive advantage: While competitors track 1-2 tiers, we track every tier of your supply chain with unlimited depth.
                   </p>
                 </CardContent>
               </Card>

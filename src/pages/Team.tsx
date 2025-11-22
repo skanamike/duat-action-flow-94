@@ -78,9 +78,9 @@ const Team = () => {
                       <Card className="bg-primary/5 border-primary/20">
                         <CardContent className="p-4">
                           <p className="italic text-foreground">
-                            "I've watched companies lose millions because they couldn't see disruptions forming in their tier-3
-                            and tier-4 suppliers. Duat gives enterprises the visibility they need to operate confidently in an
-                            uncertain world."
+                            "I've watched companies lose millions because they couldn't see disruptions forming deep in their
+                            supply chains - tier-3, tier-4, and beyond. Duat gives enterprises the visibility they need to operate
+                            confidently in an uncertain world."
                           </p>
                         </CardContent>
                       </Card>
