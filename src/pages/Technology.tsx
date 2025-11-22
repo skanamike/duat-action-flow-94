@@ -190,7 +190,7 @@ const Technology = () => {
                     <li className="flex items-start">
                       <span className="text-primary text-xl font-bold mr-3 mt-1">→</span>
                       <span className="leading-relaxed">
-                        Upstream-downstream dependency mapping across Tier 1, 2, and 3 suppliers
+                        Upstream-downstream dependency mapping across every tier from raw materials to finished goods
                       </span>
                     </li>
                     <li className="flex items-start">
