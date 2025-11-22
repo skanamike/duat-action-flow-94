@@ -29,7 +29,7 @@ const Company = () => {
             </h1>
 
             <p className="text-xl md:text-2xl text-white/90 mb-6 max-w-4xl mx-auto leading-relaxed">
-              Duat transforms invisible supply chain risk into strategic advantage using patented subsurface SAR intelligence.
+              Duat transforms invisible supply chain risk into strategic advantage using proprietary satellite and data neural network AI.
             </p>
 
             <p className="text-lg text-white/80 mb-8 max-w-3xl mx-auto font-medium">
@@ -243,7 +243,7 @@ const Company = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8 pb-3 border-b-4 border-primary inline-block">
-              Powered by Patented Subsurface SAR Intelligence
+              Proprietary Satellite and Data Neural Network AI
             </h2>
 
             <div className="mt-12">

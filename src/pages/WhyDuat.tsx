@@ -163,7 +163,7 @@ const WhyDuat = () => {
 
               <Card className="border-l-4 border-secondary hover:shadow-lg transition-all">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold mb-4">2. Patented Subsurface SAR Intelligence</h3>
+                  <h3 className="text-2xl font-bold mb-4">2. Proprietary Satellite and Data Neural Network AI</h3>
                   <p className="text-lg leading-relaxed text-muted-foreground mb-4">
                     Our proprietary satellite data analysis reveals production activity in real-time, regardless of weather,
                     darkness, or attempts to conceal activity.
@@ -320,7 +320,7 @@ const WhyDuat = () => {
                   <ul className="space-y-3 text-lg">
                     <li className="flex items-start">
                       <span className="text-white text-2xl mr-3">✓</span>
-                      <span>Only platform with patented subsurface SAR intelligence</span>
+                      <span>Only platform with proprietary satellite and data neural network AI</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-white text-2xl mr-3">✓</span>

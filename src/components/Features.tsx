@@ -5,7 +5,7 @@ const Features = () => {
     {
       icon: Eye,
       title: "Detect",
-      description: "Early warning system using patented subsurface SAR intelligence and multimodal data sources to identify potential disruptions before they manifest."
+      description: "Early warning system using proprietary satellite and data neural network AI and multimodal data sources to identify potential disruptions before they manifest."
     },
     {
       icon: Target,
@@ -42,8 +42,8 @@ const Features = () => {
             The Future of Supply Chain Foresight
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            DuatFlow is the first and only platform to predict supply chain disruptions 
-            before they happen using patented subsurface SAR intelligence.
+            DuatFlow is the first and only platform to predict supply chain disruptions
+            before they happen using proprietary satellite and data neural network AI.
           </p>
         </div>
         
