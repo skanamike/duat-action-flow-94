@@ -11,6 +11,7 @@ import Pantheon from "./pages/Pantheon";
 import Technology from "./pages/Technology";
 import Team from "./pages/Team";
 import WhyDuat from "./pages/WhyDuat";
+import Product from "./pages/Product";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
         <AnalyticsTracker />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/product" element={<Product />} />
           <Route path="/company" element={<Company />} />
           <Route path="/company/team" element={<Team />} />
           <Route path="/why-duat" element={<WhyDuat />} />

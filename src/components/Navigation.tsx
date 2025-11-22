@@ -15,7 +15,7 @@ const Navigation = () => {
           </a>
 
           <div className="hidden md:flex items-center space-x-8">
-            <span className="text-white/30 cursor-not-allowed">Solutions</span>
+            <a href="/product" className="text-white/90 hover:text-accent transition-colors">Product</a>
             <a href="/technology" className="text-white/90 hover:text-accent transition-colors">Technology</a>
             <a href="/company" className="text-white/90 hover:text-accent transition-colors">Company</a>
             <a href="/company/team" className="text-white/90 hover:text-accent transition-colors">Team</a>
