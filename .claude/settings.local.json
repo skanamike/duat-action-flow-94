@@ -4,7 +4,8 @@
       "Bash(npm run dev:*)",
       "Bash(npm install)",
       "Read(//c/Users/ctlmi/Downloads/**)",
-      "Bash(node scripts/generate-images.js:*)"
+      "Bash(node scripts/generate-images.js:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []
