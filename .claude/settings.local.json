@@ -5,7 +5,9 @@
       "Bash(npm install)",
       "Read(//c/Users/ctlmi/Downloads/**)",
       "Bash(node scripts/generate-images.js:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd comprehensive Product page with demo and Pre-MVP status\n\n- Created new /product page showcasing AuraChain demo\n- Added development status section (Pre-MVP with validated tech)\n- Included 6 platform capabilities with demo links\n- Added technology stack breakdown (data, AI, architecture)\n- Created roadmap timeline from Q1 2025 through 2026+\n- Added transparency section with professional disclaimers\n- Multiple CTAs for different audiences (demo, briefing, investor)\n- Updated navigation: replaced \"Solutions\" with \"Product\" link\n- Added /product route to App.tsx\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
