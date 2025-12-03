@@ -8,6 +8,8 @@
 ### **Concept:**
 Animated supply chain network visualization with glowing connection nodes
 
+![Animated supply chain network visualization with glowing connection nodes](./assets/image_1_hero_background.webp "Hero Background Animation")
+
 ### **AI Generation Prompt (Midjourney/DALL-E):**
 ```
 Abstract supply chain network visualization, dark navy blue background (#0A1628), 
@@ -39,6 +41,8 @@ SaaS platform hero section --ar 16:9 --no text
 ### **Concept:**
 Multi-tier supply chain showing Duat's coverage from raw materials to finished product
 
+![Multi-tier supply chain showing Duat's coverage](./assets/image_2_supply_chain_flow.webp "Supply Chain Flow Diagram")
+
 ### **AI Generation Prompt:**
 ```
 Isometric infographic showing supply chain tiers, labeled stages: 
@@ -69,6 +73,8 @@ representative icon, suitable for business presentation --ar 16:9 --style clean
 
 ### **Concept:**
 Before/after comparison showing Duat's early warning advantage
+
+![Before/after comparison showing Duat's early warning advantage](./assets/image_3_disruption_timeline.webp "Disruption Detection Timeline")
 
 ### **AI Generation Prompt:**
 ```
@@ -105,6 +111,8 @@ Timeline: ━━━⚠️━━━━━━━━━━━━[Mitigate]━━✅
 ### **Concept:**
 Satellite data collection to supply chain intelligence pipeline
 
+![Satellite data collection to supply chain intelligence pipeline](./assets/image_4_sar_visualization.webp "SAR Intelligence Visualization")
+
 ### **AI Generation Prompt:**
 ```
 Technical diagram showing satellite in space beaming radar signals 
@@ -133,6 +141,8 @@ professional corporate style --ar 16:9 --style technical
 ### **Concept:**
 Domino visualization showing how upstream disruptions cascade
 
+![Domino visualization showing how upstream disruptions cascade](./assets/image_5_cascade_effect.webp "Cascade Risk Domino Effect")
+
 ### **AI Generation Prompt:**
 ```
 Domino effect illustration showing supply chain cascade, five dominoes 
@@ -160,12 +170,14 @@ Line icon of clock with radar rings emanating, teal color,
 simple modern style, 128x128px, transparent background, 
 suitable for web --style minimal --v 6
 ```
+![Early Warning Icon](./assets/icons/icon_01_early_warning.svg "Early Warning / Clock Icon")
 
 ### **Icon 2: Shield / Protection**
 ```
 Line icon of shield with checkmark, teal color, modern minimal style, 
 represents protection and security, 128x128px transparent background
 ```
+![Shield Icon](./assets/icons/icon_02_shield.svg "Shield / Protection Icon")
 
 ### **Icon 3: Supply Chain Network**
 ```
@@ -173,12 +185,14 @@ Line icon of connected nodes forming network/web pattern,
 teal color, represents supply chain connectivity, minimal style, 
 128x128px transparent
 ```
+![Network Icon](./assets/icons/icon_03_network.svg "Supply Chain Network Icon")
 
 ### **Icon 4: Satellite**
 ```
 Line icon of satellite in orbit with signal waves, teal color, 
 technical minimal style, 128x128px transparent background
 ```
+![Satellite Icon](./assets/icons/icon_04_satellite.svg "Satellite Icon")
 
 ### **Icon 5: AI / Neural Network**
 ```
@@ -186,12 +200,14 @@ Line icon of brain with circuit pattern or neural network nodes,
 teal color, represents AI and machine learning, minimal modern style, 
 128x128px transparent
 ```
+![AI Icon](./assets/icons/icon_05_ai.svg "AI / Neural Network Icon")
 
 ### **Icon 6: Automation / Gears**
 ```
 Line icon of connected gears in motion, teal color, represents 
 automation and process optimization, minimal style, 128x128px transparent
 ```
+![Automation Icon](./assets/icons/icon_06_automation.svg "Automation / Gears Icon")
 
 ### **Icon 7: Financial / Margin Protection**
 ```
@@ -199,36 +215,42 @@ Line icon of upward trending arrow with shield, teal color,
 represents financial protection and growth, minimal style, 
 128x128px transparent
 ```
+![Financial Icon](./assets/icons/icon_07_financial.svg "Financial / Margin Protection Icon")
 
 ### **Icon 8: Global Coverage**
 ```
 Line icon of globe/world map with connection points, teal color, 
 represents global supply chain coverage, minimal style, 128x128px transparent
 ```
+![Global Icon](./assets/icons/icon_08_global.svg "Global Coverage Icon")
 
 ### **Icon 9: Risk Detection**
 ```
 Line icon of magnifying glass over warning triangle, teal color, 
 represents risk identification, minimal style, 128x128px transparent
 ```
+![Risk Detection Icon](./assets/icons/icon_09_risk.svg "Risk Detection Icon")
 
 ### **Icon 10: Material Flow**
 ```
 Line icon of flowing arrows with boxes, teal color, represents 
 material movement through supply chain, minimal style, 128x128px transparent
 ```
+![Material Flow Icon](./assets/icons/icon_10_material_flow.svg "Material Flow Icon")
 
 ### **Icon 11: Bottleneck Detection**
 ```
 Line icon of funnel with alert symbol, teal color, represents 
 bottleneck identification, minimal style, 128x128px transparent
 ```
+![Bottleneck Detection Icon](./assets/icons/icon_11_bottleneck.svg "Bottleneck Detection Icon")
 
 ### **Icon 12: Predictive Analytics**
 ```
 Line icon of crystal ball or chart with trend prediction, teal color, 
 represents forecasting capability, minimal style, 128x128px transparent
 ```
+![Predictive Analytics Icon](./assets/icons/icon_12_predictive.svg "Predictive Analytics Icon")
 
 ### **Icon System Specifications:**
 - **Style:** Consistent line weight (2-3px)
@@ -244,13 +266,20 @@ represents forecasting capability, minimal style, 128x128px transparent
 ### **Photoshoot Requirements:**
 
 #### **Primary Team Members (7 people):**
-1. Michael Weinberg - CEO
-2. Scott Jobe - CTO
-3. Zack Zondlo - CIO and Chief AI Architect
-4. Mark Rogers - GTM and Operational Advisor
-5. Ruben Villa - Agricultural Supply Chain Strategist
-6. Dean Evans - Marketing Advisor
-7. Andreas Welsch - AI Advisor
+1.  Michael Weinberg - CEO
+    ![Michael Weinberg Headshot](./assets/team/michael_weinberg.jpg "Michael Weinberg Headshot")
+2.  Scott Jobe - CTO
+    ![Scott Jobe Headshot](./assets/team/scott_jobe.jpg "Scott Jobe Headshot")
+3.  Zack Zondlo - CIO and Chief AI Architect
+    ![Zack Zondlo Headshot](./assets/team/zack_zondlo.jpg "Zack Zondlo Headshot")
+4.  Mark Rogers - GTM and Operational Advisor
+    ![Mark Rogers Headshot](./assets/team/mark_rogers.jpg "Mark Rogers Headshot")
+5.  Ruben Villa - Agricultural Supply Chain Strategist
+    ![Ruben Villa Headshot](./assets/team/ruben_villa.jpg "Ruben Villa Headshot")
+6.  Dean Evans - Marketing Advisor
+    ![Dean Evans Headshot](./assets/team/dean_evans.jpg "Dean Evans Headshot")
+7.  Andreas Welsch - AI Advisor
+    ![Andreas Welsch Headshot](./assets/team/andreas_welsch.jpg "Andreas Welsch Headshot")
 
 #### **Photo Specifications:**
 
@@ -297,6 +326,8 @@ represents forecasting capability, minimal style, 128x128px transparent
 └─────────────────────────────────────────────────────────────────┘
 ```
 
+![Hero stat callout cards mockup](./assets/image_8_stat_cards.webp "Hero Stat Callout Cards")
+
 ### **AI Generation Prompt for Card Backgrounds:**
 ```
 Set of 4 abstract background patterns for stat cards, subtle geometric 
@@ -319,6 +350,8 @@ low opacity suitable for text overlay, modern clean style --ar 1:1 --style minim
 
 ### **Concept:**
 Side-by-side comparison of reactive vs proactive supply chain management
+
+![Side-by-side comparison of reactive vs proactive supply chain management](./assets/image_9_reactive_vs_proactive.webp "Reactive vs Proactive Visualization")
 
 ### **AI Generation Prompt:**
 ```
@@ -344,6 +377,8 @@ clean modern infographic design --ar 16:9 --no photo
 
 ### **Concept:**
 Stylized example of Duat platform interface showing risk analytics
+
+![Stylized example of Duat platform interface showing risk analytics](./assets/image_10_dashboard_mockup.webp "Platform Dashboard Mockup")
 
 ### **AI Generation Prompt:**
 ```
@@ -380,6 +415,7 @@ data packets flow along connections, occasional disruption warning
 appears and gets automatically resolved, loop duration 15 seconds, 
 teal and navy colors, professional tech aesthetic
 ```
+![Animation: Supply Chain Pulse](./assets/animations/bonus_1_pulse.webp "Supply Chain Pulse Animation")
 
 ### **Animation 2: Risk Cascade**
 ```
@@ -387,6 +423,7 @@ Animated domino cascade showing supply chain disruption propagating
 through tiers, then rewinding to show Duat intervention stopping 
 the cascade, loop duration 10 seconds, teal shield icon intercepts
 ```
+![Animation: Risk Cascade](./assets/animations/bonus_2_cascade.webp "Risk Cascade Animation")
 
 ### **Animation 3: Data Flow**
 ```
@@ -394,6 +431,7 @@ Satellite data streaming down to Earth, processing through AI nodes,
 outputting to risk dashboard, loop duration 12 seconds, clean 
 technical animation style
 ```
+![Animation: Data Flow](./assets/animations/bonus_3_data_flow.webp "Data Flow Animation")
 
 ---
 

@@ -20,13 +20,12 @@ const Hero = () => {
       <div className="relative z-10 container mx-auto px-6 text-center text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-        
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-secondary">
-              {" "}Systems of ProAction
+              Predict Supply Chain Disruptions Months Before They Happen
             </span>
           </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-secondary">Avoid Supply Chain Disruptions</h2>
-          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed"><span className="text-accent font-semibold">MultiModal Satellite</span> and <span className="text-secondary font-semibold">Big Data</span> combined with <span className="text-accent font-semibold">Digital Twinning</span> enables <span className="text-secondary font-semibold">UNIQUE</span> foreknowledge of the best proactions.</p>
+          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-secondary">Avoid supply chain disruptions with satellite-backed predictive intelligence.</h2>
+          <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">Satellite + multimodal data and digital twins to detect risks early and recommend precise actions.</p>
           
           <div className="mb-10 md:mb-12 flex justify-center">
             <HeroPills />
