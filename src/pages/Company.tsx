@@ -13,41 +13,38 @@ const Company = () => {
       <Navigation />
 
       {/* HERO SECTION */}
-      <section className="relative pt-32 pb-20 bg-gradient-to-br from-primary via-primary/95 to-secondary">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-10" />
+      <section className="relative pt-40 pb-24 bg-gradient-to-br from-primary via-primary/98 to-secondary overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(172,210,255,0.08),transparent_50%)]" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl" />
 
-        <div className="container mx-auto px-6 relative">
+        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 text-sm bg-white/20 text-white border-white/30">
-              <MapPin className="w-3 h-3 mr-1" />
+            <Badge variant="secondary" className="mb-8 text-sm bg-white/15 text-white border-white/20 backdrop-blur-sm hover:bg-white/20 transition-colors">
+              <MapPin className="w-3 h-3 mr-2" />
               West Palm Beach, Florida
             </Badge>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
-              Predict Supply Chain Disruptions
-              <span className="block mt-2">Months Before They Happen</span>
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-tight tracking-tight">
+              Predict Disruptions
+              <span className="block text-secondary/95 mt-3">Months Before Impact</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-white/90 mb-6 max-w-4xl mx-auto leading-relaxed">
-              Duat transforms invisible supply chain risk into strategic advantage using proprietary satellite and data neural network AI.
-            </p>
-
-            <p className="text-lg text-white/80 mb-8 max-w-3xl mx-auto font-medium">
-              From raw material extraction to finished goods, see what others can't - before disruption hits.
+            <p className="text-lg md:text-xl text-white/85 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
+              Transform invisible supply chain risk into strategic advantage using proprietary satellite intelligence and advanced AI.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <ContactDialog
                 trigger={
-                  <Button size="lg" variant="secondary" className="text-lg px-8 py-6 h-auto hover:scale-105 transition-transform">
+                  <Button size="lg" variant="secondary" className="text-base px-8 py-3 h-auto rounded-lg font-semibold hover:shadow-lg hover:scale-102 transition-all">
                     Request Executive Briefing
                   </Button>
                 }
                 title="Request Executive Briefing"
                 description="Connect with our team to learn how Duat can protect your supply chain."
               />
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6 h-auto bg-white/10 text-white border-white/30 hover:bg-white/20" asChild>
-                <a href="/technology">See Our Technology →</a>
+              <Button size="lg" variant="outline" className="text-base px-8 py-3 h-auto bg-white/10 text-white border-white/30 hover:bg-white/20 rounded-lg font-semibold transition-all" asChild>
+                <a href="/technology">Explore Technology →</a>
               </Button>
             </div>
           </div>
@@ -55,65 +52,77 @@ const Company = () => {
       </section>
 
       {/* HERO STATS SECTION */}
-      <section className="py-20 bg-background">
+      <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="border-l-4 border-primary hover:shadow-lg transition-all">
+              <Card className="border-0 hover:shadow-xl transition-all duration-300 bg-white border border-border/50">
                 <CardContent className="p-8">
-                  <Clock className="w-12 h-12 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-2">MONTHS-AHEAD DETECTION</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                    <Clock className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">MONTHS-AHEAD DETECTION</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     Predict supply chain risks 3-6 months before traditional methods
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-primary hover:shadow-lg transition-all">
+              <Card className="border-0 hover:shadow-xl transition-all duration-300 bg-white border border-border/50">
                 <CardContent className="p-8">
-                  <Network className="w-12 h-12 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-2">FULL UPSTREAM VISIBILITY</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <div className="w-14 h-14 rounded-lg bg-secondary/10 flex items-center justify-center mb-5">
+                    <Network className="w-7 h-7 text-secondary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">FULL UPSTREAM VISIBILITY</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     Map every tier from raw materials to finished products
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-primary hover:shadow-lg transition-all">
+              <Card className="border-0 hover:shadow-xl transition-all duration-300 bg-white border border-border/50">
                 <CardContent className="p-8">
-                  <Shield className="w-12 h-12 text-primary mb-4" />
-                  <h3 className="text-xl font-bold mb-2">AUTOMATED MITIGATION</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                    <Shield className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">AUTOMATED MITIGATION</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     AI-generated strategies protect margins and market position
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-secondary hover:shadow-lg transition-all">
+              <Card className="border-0 hover:shadow-xl transition-all duration-300 bg-white border border-border/50">
                 <CardContent className="p-8">
-                  <Satellite className="w-12 h-12 text-secondary mb-4" />
-                  <h3 className="text-xl font-bold mb-2">PATENTED TECHNOLOGY</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <div className="w-14 h-14 rounded-lg bg-secondary/10 flex items-center justify-center mb-5">
+                    <Satellite className="w-7 h-7 text-secondary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">PATENTED TECHNOLOGY</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     Subsurface SAR intelligence reveals what satellites and spreadsheets miss
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-secondary hover:shadow-lg transition-all">
+              <Card className="border-0 hover:shadow-xl transition-all duration-300 bg-white border border-border/50">
                 <CardContent className="p-8">
-                  <Target className="w-12 h-12 text-secondary mb-4" />
-                  <h3 className="text-xl font-bold mb-2">MULTI-TIER RISK MODELING</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-5">
+                    <Target className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">MULTI-TIER RISK MODELING</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     Detect cascade effects across your entire supplier network
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border-l-4 border-secondary hover:shadow-lg transition-all">
+              <Card className="border-0 hover:shadow-xl transition-all duration-300 bg-white border border-border/50">
                 <CardContent className="p-8">
-                  <TrendingUp className="w-12 h-12 text-secondary mb-4" />
-                  <h3 className="text-xl font-bold mb-2">PREDICTIVE ANALYTICS</h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <div className="w-14 h-14 rounded-lg bg-secondary/10 flex items-center justify-center mb-5">
+                    <TrendingUp className="w-7 h-7 text-secondary" />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2 text-foreground">PREDICTIVE ANALYTICS</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     Actionable insights for material flow, bottlenecks, and enterprise impact
                   </p>
                 </CardContent>
@@ -124,111 +133,134 @@ const Company = () => {
       </section>
 
       {/* THE PROBLEM SECTION */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-24 bg-muted/40">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">Why This Matters Now</h2>
+            <div className="mb-12">
+              <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-2">Why This Matters Now</h2>
+              <div className="w-16 h-1 bg-secondary rounded-full"></div>
+            </div>
 
-            <Card className="border-l-4 border-primary bg-gradient-to-r from-primary/5 to-secondary/5 mb-8">
-              <CardContent className="p-8">
-                <p className="text-2xl md:text-3xl font-semibold text-foreground italic leading-relaxed">
-                  "Supply chain opacity is among the greatest unpriced risks in enterprise operations."
+            <Card className="border-0 bg-gradient-to-br from-primary/8 to-secondary/8 mb-12 shadow-sm">
+              <CardContent className="p-8 md:p-10">
+                <p className="text-2xl md:text-3xl font-light text-foreground italic leading-relaxed">
+                  &ldquo;Supply chain opacity is among the greatest unpriced risks in enterprise operations.&rdquo;
                 </p>
               </CardContent>
             </Card>
 
-            <p className="text-lg leading-relaxed text-muted-foreground mb-6">
-              Most companies operate blind to threats lurking in their upstream supply chains. By the time traditional monitoring systems flag a problem, it's too late to avoid impact.
+            <p className="text-lg leading-relaxed text-muted-foreground mb-8">
+              Most companies operate blind to threats lurking in their upstream supply chains. By the time traditional monitoring systems flag a problem, it&apos;s too late to avoid impact.
             </p>
 
-            <h3 className="text-2xl font-bold mb-4">The hidden costs of reactive supply chain management:</h3>
+            <h3 className="text-2xl font-bold text-foreground mb-6">The hidden costs of reactive supply chain management:</h3>
 
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-start text-lg">
-                <span className="text-primary text-2xl font-bold mr-4 mt-1">→</span>
+            <ul className="space-y-4 mb-10">
+              <li className="flex items-start text-lg group">
+                <span className="text-secondary font-bold mr-4 mt-0.5 group-hover:scale-125 transition-transform">•</span>
                 <span className="leading-relaxed">
-                  <strong>Margin erosion</strong> from unexpected material price spikes
+                  <strong className="text-foreground">Margin erosion</strong> <span className="text-muted-foreground">from unexpected material price spikes</span>
                 </span>
               </li>
-              <li className="flex items-start text-lg">
-                <span className="text-primary text-2xl font-bold mr-4 mt-1">→</span>
+              <li className="flex items-start text-lg group">
+                <span className="text-secondary font-bold mr-4 mt-0.5 group-hover:scale-125 transition-transform">•</span>
                 <span className="leading-relaxed">
-                  <strong>Production delays</strong> cascading through multi-tier suppliers
+                  <strong className="text-foreground">Production delays</strong> <span className="text-muted-foreground">cascading through multi-tier suppliers</span>
                 </span>
               </li>
-              <li className="flex items-start text-lg">
-                <span className="text-primary text-2xl font-bold mr-4 mt-1">→</span>
+              <li className="flex items-start text-lg group">
+                <span className="text-secondary font-bold mr-4 mt-0.5 group-hover:scale-125 transition-transform">•</span>
                 <span className="leading-relaxed">
-                  <strong>Working capital</strong> trapped in excessive safety stock
+                  <strong className="text-foreground">Working capital</strong> <span className="text-muted-foreground">trapped in excessive safety stock</span>
                 </span>
               </li>
-              <li className="flex items-start text-lg">
-                <span className="text-primary text-2xl font-bold mr-4 mt-1">→</span>
+              <li className="flex items-start text-lg group">
+                <span className="text-secondary font-bold mr-4 mt-0.5 group-hover:scale-125 transition-transform">•</span>
                 <span className="leading-relaxed">
-                  <strong>Revenue loss</strong> from fulfillment failures and stockouts
+                  <strong className="text-foreground">Revenue loss</strong> <span className="text-muted-foreground">from fulfillment failures and stockouts</span>
                 </span>
               </li>
-              <li className="flex items-start text-lg">
-                <span className="text-primary text-2xl font-bold mr-4 mt-1">→</span>
+              <li className="flex items-start text-lg group">
+                <span className="text-secondary font-bold mr-4 mt-0.5 group-hover:scale-125 transition-transform">•</span>
                 <span className="leading-relaxed">
-                  <strong>Competitive disadvantage</strong> from slower response than rivals
+                  <strong className="text-foreground">Competitive disadvantage</strong> <span className="text-muted-foreground">from slower response than rivals</span>
                 </span>
               </li>
             </ul>
 
-            <p className="text-xl font-semibold text-primary">
-              Duat changes the equation. Instead of reacting to disruptions, you anticipate and mitigate them - turning supply chain intelligence from cost center to competitive weapon.
-            </p>
+            <Card className="border-0 bg-secondary/8 rounded-xl">
+              <CardContent className="p-8">
+                <p className="text-lg font-medium text-foreground leading-relaxed">
+                  <span className="text-secondary font-bold">Duat changes the equation.</span> Instead of reacting to disruptions, you anticipate and mitigate them—turning supply chain intelligence from cost center to competitive weapon.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* THE DUAT ADVANTAGE SECTION */}
-      <section className="py-20">
+      <section className="py-24">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-12 pb-3 border-b-4 border-primary inline-block">
-              What Makes Duat Different
-            </h2>
+            <div className="mb-16">
+              <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-3">What Makes Duat Different</h2>
+              <div className="w-16 h-1 bg-secondary rounded-full"></div>
+            </div>
 
-            <div className="space-y-12 mt-12">
+            <div className="space-y-14 mt-12">
               <div>
-                <h3 className="text-3xl font-bold mb-4">1. Full Upstream Visibility</h3>
-                <p className="text-lg leading-relaxed text-muted-foreground mb-4">
-                  Most platforms track only your direct (Tier 1) suppliers. <strong className="text-foreground">Duat maps your entire upstream ecosystem</strong> - from raw material extraction through every processing and assembly tier to your finished goods.
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-secondary/15 flex items-center justify-center">
+                    <span className="text-lg font-bold text-secondary">1</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-foreground">Full Upstream Visibility</h3>
+                </div>
+                <p className="text-lg leading-relaxed text-muted-foreground mb-5 pl-16">
+                  Most platforms track only your direct (Tier 1) suppliers. <strong className="text-foreground">Duat maps your entire upstream ecosystem</strong>—from raw material extraction through every processing and assembly tier to your finished goods.
                 </p>
-                <Card className="bg-primary/5 border-primary/20">
+                <Card className="bg-gradient-to-br from-secondary/8 to-secondary/4 border-secondary/20 ml-16">
                   <CardContent className="p-6">
                     <p className="text-lg leading-relaxed">
-                      <strong className="text-primary">Why this matters:</strong> A disruption at a lithium mine in Chile affects your electric vehicle production 6 months later. We show you this connection before your competitors know there's a problem.
+                      <span className="text-secondary font-semibold">Why this matters:</span> <span className="text-muted-foreground">A disruption at a lithium mine in Chile affects your EV production 6 months later. We show you this connection before competitors know there&apos;s a problem.</span>
                     </p>
                   </CardContent>
                 </Card>
               </div>
 
               <div>
-                <h3 className="text-3xl font-bold mb-4">2. Months-Ahead Detection</h3>
-                <p className="text-lg leading-relaxed text-muted-foreground mb-4">
-                  Traditional supply chain monitoring relies on reported data - supplier surveys, shipping manifests, news reports. <strong className="text-foreground">Duat uses advanced satellite data and proprietary AI</strong> to detect disruptions forming in real-time.
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center">
+                    <span className="text-lg font-bold text-primary">2</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-foreground">Months-Ahead Detection</h3>
+                </div>
+                <p className="text-lg leading-relaxed text-muted-foreground mb-5 pl-16">
+                  Traditional supply chain monitoring relies on reported data—supplier surveys, shipping manifests, news reports. <strong className="text-foreground">Duat uses advanced satellite data and proprietary AI</strong> to detect disruptions forming in real-time.
                 </p>
-                <Card className="bg-secondary/5 border-secondary/20">
+                <Card className="bg-gradient-to-br from-primary/8 to-primary/4 border-primary/20 ml-16">
                   <CardContent className="p-6">
                     <p className="text-lg leading-relaxed">
-                      <strong className="text-secondary">The advantage:</strong> 3-6 months early warning vs. 3-6 weeks with conventional methods. That's the difference between proactive mitigation and crisis management.
+                      <span className="text-primary font-semibold">The advantage:</span> <span className="text-muted-foreground">3–6 months early warning vs. 3–6 weeks with conventional methods. That&apos;s the difference between proactive mitigation and crisis management.</span>
                     </p>
                   </CardContent>
                 </Card>
               </div>
 
               <div>
-                <h3 className="text-3xl font-bold mb-4">3. Predictive, Actionable Intelligence</h3>
-                <p className="text-lg leading-relaxed text-muted-foreground mb-4">
-                  Alerts without guidance create noise, not value. <strong className="text-foreground">Duat's AI doesn't just warn you - it models the cascade impact</strong> across your supply chain and recommends mitigation strategies.
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 rounded-full bg-secondary/15 flex items-center justify-center">
+                    <span className="text-lg font-bold text-secondary">3</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-foreground">Predictive, Actionable Intelligence</h3>
+                </div>
+                <p className="text-lg leading-relaxed text-muted-foreground mb-5 pl-16">
+                  Alerts without guidance create noise, not value. <strong className="text-foreground">Duat&apos;s AI doesn&apos;t just warn you—it models the cascade impact</strong> across your supply chain and recommends mitigation strategies.
                 </p>
-                <Card className="bg-primary/5 border-primary/20">
+                <Card className="bg-gradient-to-br from-secondary/8 to-secondary/4 border-secondary/20 ml-16">
                   <CardContent className="p-6">
                     <p className="text-lg leading-relaxed">
-                      <strong className="text-primary">The result:</strong> Clear, prioritized actions that protect margins, maintain production, and preserve competitive position.
+                      <span className="text-secondary font-semibold">The result:</span> <span className="text-muted-foreground">Clear, prioritized actions that protect margins, maintain production, and preserve competitive position.</span>
                     </p>
                   </CardContent>
                 </Card>
@@ -239,28 +271,29 @@ const Company = () => {
       </section>
 
       {/* TECHNOLOGY TEASER SECTION */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-24 bg-muted/40">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8 pb-3 border-b-4 border-primary inline-block">
-              Proprietary Satellite and Data Neural Network AI
-            </h2>
+            <div className="mb-12">
+              <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-3">Proprietary Satellite & AI</h2>
+              <div className="w-16 h-1 bg-secondary rounded-full"></div>
+            </div>
 
-            <div className="mt-12">
-              <p className="text-lg leading-relaxed text-muted-foreground mb-6">
-                Duat leverages <strong className="text-foreground">Synthetic Aperture Radar (SAR) satellite technology</strong> to monitor global production infrastructure in real-time - regardless of cloud cover, darkness, or attempts to hide activity.
+            <div className="mt-14">
+              <p className="text-lg leading-relaxed text-muted-foreground mb-8">
+                Duat leverages <strong className="text-foreground">Synthetic Aperture Radar (SAR) satellite technology</strong> to monitor global production infrastructure in real-time—regardless of cloud cover, darkness, or attempts to hide activity.
               </p>
 
-              <Card className="bg-gradient-to-r from-primary to-secondary text-white border-0 mb-8">
-                <CardContent className="p-8 text-center">
-                  <p className="text-xl md:text-2xl font-semibold leading-relaxed">
-                    This isn't guesswork. This is physics-based intelligence applied to your specific supply chain architecture.
+              <Card className="bg-gradient-to-br from-primary via-primary/95 to-secondary text-white border-0 mb-10 shadow-lg">
+                <CardContent className="p-10 md:p-12 text-center">
+                  <p className="text-xl md:text-2xl font-light leading-relaxed">
+                    This isn&apos;t guesswork. This is physics-based intelligence applied to your specific supply chain architecture.
                   </p>
                 </CardContent>
               </Card>
 
               <div className="text-center">
-                <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+                <Button size="lg" variant="outline" className="text-base px-8 py-3 rounded-lg font-semibold" asChild>
                   <a href="/technology">Explore Our Technology Platform →</a>
                 </Button>
               </div>
@@ -270,29 +303,31 @@ const Company = () => {
       </section>
 
       {/* INVESTOR VALUE TEASER */}
-      <section className="py-20">
+      <section className="py-24">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <Card className="bg-gradient-to-br from-primary/10 via-background to-secondary/10 border-l-4 border-primary hover:shadow-xl transition-all">
-              <CardContent className="p-8 md:p-12">
-                <div className="flex items-start gap-6 mb-6">
-                  <TrendingDown className="w-16 h-16 text-primary flex-shrink-0" />
-                  <div>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <Card className="bg-gradient-to-br from-primary/8 via-background to-secondary/5 border-0 hover:shadow-xl transition-all shadow-md">
+              <CardContent className="p-10 md:p-14">
+                <div className="flex flex-col md:flex-row items-start gap-8 mb-8">
+                  <div className="w-16 h-16 rounded-lg bg-secondary/15 flex items-center justify-center flex-shrink-0">
+                    <TrendingDown className="w-8 h-8 text-secondary" />
+                  </div>
+                  <div className="flex-1">
+                    <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
                       For Operational Leaders & Investors
                     </h2>
-                    <p className="text-xl font-semibold mb-6">
+                    <p className="text-xl font-medium text-foreground mb-2">
                       Duat transforms supply chain intelligence into enterprise alpha.
                     </p>
                   </div>
                 </div>
 
-                <p className="text-lg leading-relaxed text-muted-foreground mb-6">
+                <p className="text-lg leading-relaxed text-muted-foreground mb-8">
                   Early insights enable proactive decisions that sustain profitability and competitive advantage. Our platform empowers you to anticipate disruptions before they impact EBITDA, quantify and hedge supply chain risk exposure, and shield earnings from volatility.
                 </p>
 
                 <div className="flex justify-center">
-                  <Button size="lg" className="text-lg px-8 py-6" asChild>
+                  <Button size="lg" className="text-base px-8 py-3 rounded-lg font-semibold" asChild>
                     <Link to="/why-duat">
                       See Market Opportunity & Business Model
                       <ArrowRight className="ml-2 w-5 h-5" />
@@ -306,21 +341,22 @@ const Company = () => {
       </section>
 
       {/* TEAM TEASER SECTION */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-24 bg-muted/40">
         <div className="container mx-auto px-6">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-8 pb-3 border-b-4 border-primary inline-block">
-              World-Class Team from Enterprise Leaders
-            </h2>
+            <div className="mb-12">
+              <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-3">World-Class Team</h2>
+              <div className="w-16 h-1 bg-secondary rounded-full"></div>
+            </div>
 
-            <p className="text-xl leading-relaxed text-muted-foreground mb-8 mt-12">
-              Duat's founding team brings decades of experience from <strong className="text-foreground">IBM, VMware, SAP, Manhattan Associates, and PureStorage</strong> - companies that built the enterprise software and supply chain platforms Fortune 500 companies depend on.
+            <p className="text-lg leading-relaxed text-muted-foreground mb-10 mt-12">
+              Duat&apos;s founding team brings decades of experience from <strong className="text-foreground">IBM, VMware, SAP, Manhattan Associates, and PureStorage</strong>—companies that built the enterprise software and supply chain platforms Fortune 500 companies depend on.
             </p>
 
-            <Card className="bg-gradient-to-br from-primary to-primary/90 text-white border-0 mb-12">
-              <CardContent className="p-8 text-center">
-                <p className="text-xl md:text-2xl font-semibold leading-relaxed">
-                  We've solved these problems at global scale. Now we're making that intelligence accessible.
+            <Card className="bg-gradient-to-br from-primary to-primary/95 text-white border-0 mb-12 shadow-lg">
+              <CardContent className="p-10 md:p-12 text-center">
+                <p className="text-xl md:text-2xl font-light leading-relaxed">
+                  We&apos;ve solved these problems at global scale. Now we&apos;re making that intelligence accessible.
                 </p>
               </CardContent>
             </Card>
