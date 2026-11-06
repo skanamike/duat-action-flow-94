@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/*
+ * DUAT design tokens. All colours are HSL channel triplets so they can be
+ * used with alpha: hsl(var(--primary) / 0.5). Ported 1:1 from the previous
+ * Tailwind 3 config (see context/delivery/design_system.md).
+ */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 213 84% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 213 84% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 213 84% 11%;
+  --primary: 213 84% 11%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 180 95% 56%;
+  --secondary-foreground: 213 84% 11%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 40%;
+  --accent: 180 95% 56%;
+  --accent-foreground: 213 84% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 213 84% 11%;
+  --radius: 0.5rem;
+  --moonlight: 210 40% 96%;
+  --moonlight-glow: 210 100% 85%;
+
+  --gradient-primary: linear-gradient(135deg, hsl(213 84% 11%), hsl(213 70% 8%));
+  --gradient-secondary: linear-gradient(135deg, hsl(180 95% 56%), hsl(180 85% 60%));
+  --gradient-hero: linear-gradient(135deg, hsl(213 84% 11%) 0%, hsl(213 70% 15%) 50%, hsl(180 95% 56%) 100%);
+}
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --shadow-glow: 0 0 40px hsl(180 95% 56% / 0.3);
+  --shadow-card: 0 10px 30px -10px hsl(213 84% 11% / 0.1);
+
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Previous Tailwind 3 container: centred, 2rem gutter, max 1400px. */
+@utility container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: 2rem;
+  max-width: 1400px;
+}
+
+@utility bg-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+@utility bg-gradient-secondary {
+  background-image: var(--gradient-secondary);
+}
+@utility bg-gradient-hero {
+  background-image: var(--gradient-hero);
+}
+@utility hover-scale {
+  transition: transform 200ms ease-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Tailwind 4 resets button cursor to default; keep pointer for clickable controls. */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid hsl(var(--secondary));
+    outline-offset: 2px;
+  }
+  dialog::backdrop {
+    background: hsl(213 84% 11% / 0.7);
+    backdrop-filter: blur(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

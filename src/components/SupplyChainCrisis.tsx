@@ -1,5 +1,4 @@
 import { BadgeAlert, EyeOff, Wallet } from "lucide-react";
-import SpinningEarth from "./SpinningEarth";
 
 const items = [
   {
@@ -63,7 +62,11 @@ export default function SupplyChainCrisis() {
           {/* Right column: visual */}
           <div className="rounded-2xl overflow-hidden bg-card shadow-lg border border-border aspect-[4/3] relative">
             <img
-              src="/images/generated/supply-chain-flow.png"
+              src="/images/generated/supply-chain-flow.jpg"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              decoding="async"
               alt="Multi-tier supply chain visualization showing full upstream coverage"
               className="w-full h-full object-cover"
             />
@@ -78,7 +81,11 @@ export default function SupplyChainCrisis() {
           </h3>
           <div className="rounded-2xl overflow-hidden shadow-2xl border border-border">
             <img
-              src="/images/generated/disruption-timeline.png"
+              src="/images/generated/disruption-timeline.jpg"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              decoding="async"
               alt="Timeline comparison showing Duat's months-ahead detection advantage"
               className="w-full h-auto"
             />

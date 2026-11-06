@@ -20,7 +20,9 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         hero: "bg-gradient-secondary text-white hover:shadow-glow hover:scale-105 border-0 font-semibold",
         gradient: "bg-gradient-primary text-white hover:opacity-90 border-0",
-        "outline-hero": "border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white",
+        "outline-hero": "border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-primary",
+        // For buttons on dark/gradient sections: transparent fill, light text.
+        "outline-light": "border border-white/40 bg-white/10 text-white hover:bg-white/20",
       },
       size: {
         default: "h-10 px-4 py-2",

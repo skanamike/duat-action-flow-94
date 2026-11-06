@@ -1,0 +1,53 @@
+---
+import Logo from "@/components/Logo.astro";
+import { DEMO_URL, NAV_ITEMS, SITE } from "@/config/site";
+
+const year = new Date().getFullYear();
+const linkClass = "text-white/80 transition-colors hover:text-accent";
+---
+
+<footer class="bg-primary py-16 text-white">
+  <div class="container mx-auto px-6">
+    <div class="grid gap-10 md:grid-cols-4">
+      <div class="md:col-span-2">
+        <div class="mb-6"><Logo label="DUATFLOW" /></div>
+        <p class="mb-6 max-w-md text-white/80">
+          Supply-chain risk intelligence that combines multimodal satellite data, big data and digital twinning to
+          predict disruptions before they happen.
+        </p>
+        <button type="button" data-contact class="font-semibold text-accent hover:underline">See What's Next →</button>
+      </div>
+
+      <div>
+        <h2 class="mb-4 font-semibold">Explore</h2>
+        <ul class="space-y-2">
+          {
+            NAV_ITEMS.map((item) => (
+              <li>
+                <a href={item.href} class={linkClass}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href={DEMO_URL} target="_blank" rel="noopener noreferrer" class={linkClass}>Interactive demo ↗</a>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="mb-4 font-semibold">Contact</h2>
+        <ul class="space-y-2">
+          <li><a href={`mailto:${SITE.email}`} class={linkClass}>{SITE.email}</a></li>
+          <li class="text-white/80">{SITE.location}</li>
+          <li><button type="button" data-contact class={linkClass}>Request a briefing</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 border-t border-white/20 pt-8 text-center text-white/70">
+      <p>&copy; {year} Duat. All rights reserved. Turning Systems of Record into Systems of Action.</p>
+    </div>
+  </div>
+</footer>

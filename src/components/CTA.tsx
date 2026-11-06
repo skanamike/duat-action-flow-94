@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
-import ContactDialog from "@/components/ContactDialog";
+import ContactTrigger from "@/components/ContactTrigger";
 
 const CTA = () => {
   return (
@@ -13,7 +13,7 @@ const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <ContactDialog
+            <ContactTrigger
               trigger={
                 <Button variant="hero" size="lg" className="text-lg px-8 py-4 h-auto bg-white text-primary hover:bg-white/90">
                   Pilot DuatFlow
@@ -22,7 +22,7 @@ const CTA = () => {
               }
             />
 
-            <ContactDialog
+            <ContactTrigger
               trigger={
                 <Button
                   variant="outline-hero"

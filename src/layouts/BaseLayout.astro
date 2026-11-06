@@ -1,0 +1,91 @@
+---
+import "@/styles/global.css";
+import Nav from "@/components/Nav.astro";
+import Footer from "@/components/Footer.astro";
+import ContactModal from "@/components/ContactModal.astro";
+import { SITE } from "@/config/site";
+import { publicPath } from "@/lib/paths";
+
+interface Props {
+  /** Page title. The company name is appended unless `fullTitle` is set. */
+  title: string;
+  description: string;
+  fullTitle?: boolean;
+  /** Social share image, relative to the site root. */
+  ogImage?: string;
+  /** Set false for pages that should not be indexed (e.g. 404). */
+  index?: boolean;
+}
+
+const { title, description, fullTitle = false, ogImage = "/images/og-default.jpg", index = true } = Astro.props;
+const pageTitle = fullTitle ? title : `${title} | ${SITE.company}`;
+const canonical = new URL(publicPath(Astro.url.pathname), Astro.site);
+const ogImageUrl = new URL(ogImage, Astro.site);
+
+const organizationLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.company,
+  url: Astro.site?.toString(),
+  logo: new URL("/favicon.png", Astro.site).toString(),
+  email: SITE.email,
+  description: SITE.description,
+  address: { "@type": "PostalAddress", addressLocality: "West Palm Beach", addressRegion: "FL", addressCountry: "US" },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {!index && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#04162d" />
+
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.company} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+
+    <!-- Google Analytics (DEBT-007: add consent mode). Loaded async; never blocks rendering. -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analyticsId}`}></script>
+    <script is:inline define:vars={{ id: SITE.analyticsId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        // gtag.js requires the Arguments object itself; an array breaks event processing.
+        // eslint-disable-next-line prefer-rest-params
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", id);
+    </script>
+  </head>
+  <body class="min-h-screen bg-background">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-primary"
+      >Skip to content</a
+    >
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <ContactModal />
+  </body>
+</html>
