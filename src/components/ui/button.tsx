@@ -21,8 +21,9 @@ const buttonVariants = cva(
         hero: "bg-gradient-secondary text-white hover:shadow-glow hover:scale-105 border-0 font-semibold",
         gradient: "bg-gradient-primary text-white hover:opacity-90 border-0",
         "outline-hero": "border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-primary",
-        // For buttons on dark/gradient sections: transparent fill, light text.
-        "outline-light": "border border-white/40 bg-white/10 text-white hover:bg-white/20",
+        // For buttons on dark/gradient sections. A translucent navy fill keeps white text ≥ 4.5:1
+        // even where the gradient ends in cyan (R7; a white/10 fill measured as low as 1.5:1).
+        "outline-light": "border border-white/50 bg-primary/80 text-white hover:bg-primary",
       },
       size: {
         default: "h-10 px-4 py-2",

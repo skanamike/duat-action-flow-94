@@ -108,9 +108,11 @@
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
+  /* R14: two-tone focus ring. A navy outline plus a white halo stays ≥ 3:1 on both light and dark surfaces. */
   :focus-visible {
-    outline: 2px solid hsl(var(--secondary));
+    outline: 2px solid hsl(var(--primary));
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px #fff;
   }
   dialog::backdrop {
     background: hsl(213 84% 11% / 0.7);

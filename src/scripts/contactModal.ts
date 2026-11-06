@@ -28,8 +28,8 @@ export function initContactModal(root: Document = document): void {
 
   const setStatus = (kind: "success" | "error" | "hidden", text = ""): void => {
     if (!status) return;
-    status.textContent = text;
-    status.classList.toggle("hidden", kind === "hidden");
+    status.textContent = kind === "hidden" ? "" : text;
+    status.classList.toggle("p-3", kind !== "hidden");
     status.classList.toggle("bg-emerald-50", kind === "success");
     status.classList.toggle("text-emerald-800", kind === "success");
     status.classList.toggle("bg-red-50", kind === "error");
@@ -51,11 +51,23 @@ export function initContactModal(root: Document = document): void {
     if (firstInvalid) (form.elements.namedItem(firstInvalid) as HTMLElement | null)?.focus();
   };
 
+  const clearErrors = (): void => {
+    for (const field of FIELDS) {
+      (form.elements.namedItem(field) as HTMLElement | null)?.removeAttribute("aria-invalid");
+      const message = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+      if (message) {
+        message.textContent = "";
+        message.classList.add("hidden");
+      }
+    }
+  };
+
   const open = (trigger: HTMLElement): void => {
     opener = trigger;
     if (title) title.textContent = trigger.dataset.contactTitle || title.dataset.default || "";
     if (description) description.textContent = trigger.dataset.contactDescription || description.dataset.default || "";
     setStatus("hidden");
+    clearErrors(); // R4: no stale errors from a previous attempt
     dialog.showModal();
   };
 
@@ -67,11 +79,23 @@ export function initContactModal(root: Document = document): void {
   });
 
   dialog.querySelector("[data-contact-close]")?.addEventListener("click", () => dialog.close());
-  // Close when the backdrop (the dialog element itself, outside the panel) is clicked.
-  dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) dialog.close();
+
+  // R10: close on backdrop only when the press *started* on the backdrop too,
+  // so a text selection dragged out of an input doesn't dismiss the form.
+  let pressStartedOnBackdrop = false;
+  dialog.addEventListener("pointerdown", (event) => {
+    pressStartedOnBackdrop = event.target === dialog;
   });
-  dialog.addEventListener("close", () => opener?.focus());
+  dialog.addEventListener("click", (event) => {
+    if (event.target === dialog && pressStartedOnBackdrop) dialog.close();
+    pressStartedOnBackdrop = false;
+  });
+
+  // R12: return focus to the opener, or to the menu toggle if the opener was hidden (e.g. inside the closed mobile menu).
+  dialog.addEventListener("close", () => {
+    const target = opener && opener.offsetParent !== null ? opener : root.querySelector<HTMLElement>("[data-menu-toggle]");
+    target?.focus();
+  });
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -110,6 +134,8 @@ export function initContactModal(root: Document = document): void {
     } else {
       setStatus("error", result.error);
     }
+    // R12: the submit button was disabled (dropping focus to <body>); put focus on the outcome instead.
+    status?.focus();
   });
 }
 

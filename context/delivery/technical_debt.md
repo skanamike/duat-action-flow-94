@@ -11,11 +11,17 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 
 ---
 
-### DEBT-001: Hugging Face token remains in git history
-**AREA:** Security · **PRIORITY:** P1-Critical
-**DESCRIPTION:** `scripts/generate-images.js` hard-coded an `hf_…` token. It has been removed from source (SEC-001) but is still in history.
-**RESOLUTION:** Operator revokes the token at huggingface.co → Settings → Access Tokens. Rewriting history is optional once the token is revoked.
+### DEBT-001: Hugging Face token remains in git history (PUBLIC repo)
+**AREA:** Security · **PRIORITY:** P0-Critical (SecDev)
+**DESCRIPTION:** `scripts/generate-images.js` hard-coded an `hf_…` token, introduced in 57f3d7f (2025-10-23). Removed from source in 23571e5, but it is in history, and SecDev confirmed the repo is **public**, so the token has been publicly exposed for about a year.
+**RESOLUTION:** Operator revokes the token at huggingface.co → Settings → Access Tokens and checks usage/billing for unknown activity. Rewriting history does not help (clones and forks keep it); revocation is the fix. Also enable GitHub secret scanning + push protection.
 **TRIGGER:** Immediately.
+
+### DEBT-013: Old Zapier catch hook is public
+**AREA:** Security / lead capture · **PRIORITY:** P1-High (SecDev deploy condition C2)
+**DESCRIPTION:** The previous hook URL (`…/24194548/u6f847r/`) is in public git history, so anyone can post to Zapier directly and bypass the relay. The relay no longer has a hard-coded fallback (R5).
+**RESOLUTION:** Operator creates a new Catch Hook, sets it as `ZAPIER_WEBHOOK_URL` in Netlify (Functions scope), then disables the old hook. Turn on Zapier task-usage alerts.
+**TRIGGER:** Before the first Netlify deploy of this branch (the form returns 503 until the variable is set).
 
 ### DEBT-002: Unsourced statistics and claims
 **AREA:** Content / credibility · **PRIORITY:** P2-High
@@ -50,6 +56,28 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 **AREA:** Security / dependencies · **PRIORITY:** P4-Low
 **DESCRIPTION:** `npm audit` reports 11 moderate findings, all from a transitive `minimatch` (ReDoS) pulled in by dev tooling. Production dependencies: 0 vulnerabilities (CI enforces `--omit=dev --audit-level=high`).
 **RESOLUTION:** Pick up on the next routine tooling bump; don't `audit fix --force` (breaking).
+
+### DEBT-010: CSP allows `'unsafe-inline'` scripts
+**AREA:** Security · **PRIORITY:** P3-Medium (dual review R9, SecDev #8)
+**DESCRIPTION:** Astro inlines the menu/contact module scripts and the gtag bootstrap, so `script-src` includes `'unsafe-inline'`. That removes most of the CSP's XSS protection. The e2e suite runs pages under the real CSP and verifies there are no violations.
+**RESOLUTION:** Switch to hashes (there are only 3 stable inline scripts) via Astro's `security.csp`, with a test that recomputes the hashes from dist/.
+**TRIGGER:** Next change to inline scripts, or before adding any user-generated content.
+
+### DEBT-011: Cyan text on light backgrounds (pre-existing content)
+**AREA:** Accessibility · **PRIORITY:** P2-High (dual review R15)
+**DESCRIPTION:** `text-secondary` (cyan) labels such as "The advantage:" in `src/views/Company.tsx` sit on near-white cards at about 1.3:1 contrast.
+**RESOLUTION:** UI/UX Lead adds a dark-teal text token for light surfaces and replaces light-surface uses of `text-secondary`.
+**TRIGGER:** Next content pass on /company, /technology or /why-duat.
+
+### DEBT-012: CI hardening
+**AREA:** DevOps · **PRIORITY:** P3-Medium (SecDev #11)
+**DESCRIPTION:** GitHub Actions are pinned to movable tags (`@v4`). The secret scan greps only the working tree.
+**RESOLUTION:** Pin actions to SHAs (and keep them updated with Dependabot). Replace the grep with gitleaks over PR commits.
+
+### DEBT-014: Relay rate limiting depends on the Netlify plan
+**AREA:** Security / cost · **PRIORITY:** P3-Medium (SecDev #2)
+**DESCRIPTION:** `config.rateLimit` (5/min/IP) is declared in the function. Whether it is enforced depends on the Netlify plan. Every forwarded lead uses one Zapier task.
+**RESOLUTION:** Operator confirms the plan supports function rate limiting. Add Cloudflare Turnstile if spam appears.
 
 ### DEBT-008: Product roadmap has no dates
 **AREA:** Content · **PRIORITY:** P3-Medium

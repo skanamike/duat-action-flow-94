@@ -34,6 +34,25 @@ test.describe("mobile navigation", () => {
     await expect(page.locator("h1")).toContainText("The Duat Team");
   });
 
+  test("menu scrolls to its last item on a landscape phone (R11)", async ({ page }) => {
+    await page.setViewportSize({ width: 740, height: 360 });
+    await page.goto("/");
+    await page.getByRole("button", { name: "Open menu" }).click();
+    const last = page.locator("#mobile-menu").getByRole("button", { name: "Get Started" });
+    await last.scrollIntoViewIfNeeded();
+    const box = await last.boundingBox();
+    expect((box?.y ?? 999) + (box?.height ?? 0)).toBeLessThanOrEqual(360);
+  });
+
+  test("closing a dialog opened from the menu returns focus to the menu button (R12)", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await page.locator("#mobile-menu").getByRole("button", { name: "Get Started" }).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.locator("[data-menu-toggle]")).toBeFocused();
+  });
+
   test("Escape closes the menu and returns focus to the toggle", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("button", { name: "Open menu" }).click();

@@ -60,7 +60,8 @@ const organizationLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+    <!-- Escape "<" so no value can ever close the script element (R22). -->
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd).replace(/</g, "\\u003c")} />
 
     <!-- Google Analytics (DEBT-007: add consent mode). Loaded async; never blocks rendering. -->
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analyticsId}`}></script>
@@ -71,6 +72,8 @@ const organizationLd = {
         // eslint-disable-next-line prefer-rest-params
         window.dataLayer.push(arguments);
       }
+      // define:vars wraps this script in a function scope; publish gtag so other scripts can send events (R1).
+      window.gtag = gtag;
       gtag("js", new Date());
       gtag("config", id);
     </script>

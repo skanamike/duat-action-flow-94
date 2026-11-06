@@ -15,6 +15,14 @@ test("retired routes 301 to /company (ADR-005)", () => {
   assert.doesNotMatch(redirects, /^\/\*\s+\/index\.html\s+200/m, "SPA catch-all must be gone");
 });
 
+test("trailing-slash URLs 301 to the canonical form (R6)", () => {
+  const redirects = read("public/_redirects");
+  for (const route of ["/product", "/technology", "/company", "/company/team", "/why-duat"]) {
+    assert.match(redirects, new RegExp(`^${route}/\\s+${route}\\s+301$`, "m"), route);
+  }
+  assert.doesNotMatch(redirects, /^\/solutions/m, "no redirects for routes that never existed");
+});
+
 test("security headers are declared for every path", () => {
   const headers = read("public/_headers");
   for (const h of ["X-Content-Type-Options: nosniff", "Referrer-Policy:", "Content-Security-Policy:", "frame-ancestors 'none'"]) {

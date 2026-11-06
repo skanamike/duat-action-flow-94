@@ -8,7 +8,8 @@ import { SITE } from "@/config/site";
 
 const inputClass =
   "mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-base text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-2 focus:ring-secondary/40 aria-[invalid=true]:border-destructive";
-const errorClass = "mt-1 hidden text-sm text-destructive";
+// red-700 on white ≈ 6.5:1 (red-500 was 3.76:1, below AA). R13.
+const errorClass = "mt-1 hidden text-sm text-red-700";
 ---
 
 <dialog
@@ -64,7 +65,8 @@ const errorClass = "mt-1 hidden text-sm text-destructive";
         <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
       </div>
 
-      <p role="status" aria-live="polite" class="hidden rounded-md p-3 text-sm" data-contact-status></p>
+      <!-- Always in the accessibility tree (empty when idle) so live-region updates are announced; focusable for R12. -->
+      <p role="status" aria-live="polite" tabindex="-1" class="rounded-md text-sm empty:hidden" data-contact-status></p>
 
       <div class="flex items-center justify-between gap-3 pt-2">
         <a href={`mailto:${SITE.email}`} class="text-sm text-muted-foreground underline-offset-4 hover:underline">Or email {SITE.email}</a>

@@ -60,7 +60,8 @@ CONTEXT: The form POSTed to a Zapier catch hook with `mode: "no-cors"`. The resp
 DECISION:
 - `src/lib/leadCapture.ts` defines `LeadCaptureAdapter` plus pure helpers (`buildLeadPayload`, `isSpam`). These are unit-tested.
 - The browser posts JSON to a same-origin endpoint, `/api/contact` (Netlify Function `netlify/functions/contact.mts`). The function validates input and forwards it to Zapier server-side, returning the real status.
-- The Zapier URL is read from `ZAPIER_WEBHOOK_URL`, falling back to the existing hook URL so leads keep flowing on first deploy. The URL was already public in git history; moving it server-side stops new exposure.
+- The Zapier URL is read **only** from `ZAPIER_WEBHOOK_URL`; the relay returns 503 when it is unset. *(Amended 2026-11-06 after SecDev review: the original hard-coded fallback was removed because the old hook is public in history. See DEBT-013.)*
+- Relay logic lives in `src/lib/contactRelay.ts` (unit-tested); the Netlify Function is a thin wrapper. It enforces JSON-only (415), refuses cross-site requests (403), checks size by bytes (413), validates shape (400) and content (422), and sanitises the Referer to a same-site path.
 
 RATIONALE: Same-origin request → readable response → truthful success/failure UI. Lead routing (Zapier → existing Zap) is unchanged.
 

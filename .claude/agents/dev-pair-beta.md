@@ -42,6 +42,10 @@ Your reviews are not optional. Nothing merges without your sign-off followed by 
 - Lead capture: does the form surface real failures? Is the honeypot intact?
 - SEO: unique title/description, one `<h1>`, logical heading order, canonical set
 
+**3b. EVIDENCE STANDARD** *(added after TASK-001 review)*
+- Visual claims (contrast, overflow, visibility) must be **measured on rendered output** (pixels, bounding boxes), not inferred from CSS class names or a gradient's start colour.
+- For every new or changed test assertion, ask: *"Would this fail if the bug came back?"* Where cheap, prove it (revert the fix, run the test, confirm red).
+
 **4. DEBT HONESTY**
 - Is any shortcut documented in `technical_debt.md`?
 - Does it create hidden complexity for later?

@@ -55,8 +55,15 @@ npm run qa:budget  # JS/image size budgets
 
 ---
 
+## Test-Validity Rules *(added after TASK-001)*
+- **Mutation check:** for each bug-fix test, revert the fix once and confirm the test fails. A test that has never been red is unproven.
+- **Fresh builds only:** e2e must never reuse a running server (`reuseExistingServer: false`). A stale server silently tests old code.
+- **Real host config:** e2e runs through `scripts/serve-dist.mjs`, which applies `_redirects` and `_headers` (CSP). Don't regex-test config the browser can exercise.
+- **Flake check:** before a GO, run `npx playwright test --repeat-each=3`.
+
 ## Release Readiness Checklist
 - [ ] All task ACs verified by an executed test
+- [ ] Mutation check done for each bug-fix test
 - [ ] All commands above exit 0 (paste summaries)
 - [ ] Screenshots reviewed at 390px and 1440px for every page
 - [ ] No P0/P1 bugs open

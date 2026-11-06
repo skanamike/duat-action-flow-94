@@ -54,7 +54,8 @@ templates/agent-team/  Reusable copy of the agent team for other repos
 ## Deployment (Netlify)
 
 Build command `npm run build`, publish directory `dist` (already set in `netlify.toml`).
-Set `ZAPIER_WEBHOOK_URL` in Netlify environment variables (see `.env.example`).
+
+> **Required before the first deploy:** set `ZAPIER_WEBHOOK_URL` in Netlify → Site configuration → Environment variables (scope: Functions). Use a **new** Zapier Catch Hook, because the old one is public in git history. Without it, the contact form shows an error and offers the email link instead.
 
 ## How we work
 

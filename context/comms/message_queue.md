@@ -14,5 +14,49 @@ BODY: Migrate the site to Astro, preserving content and fixing the Phase 0 defec
 ACTION REQUIRED: Plan (PROC-001), ADRs, implement, run all T3 gates.
 BLOCKERS: Production host unconfirmed (assume Netlify per netlify.toml).
 DEADLINE: No hard deadline
-STATUS: IN-PROGRESS
+STATUS: RESOLVED (pending operator actions in MSG-004)
+---
+
+---
+MSG-002
+FROM: Dev Pair Beta (A: sonnet, B: opus), blind dual review
+TO: Tech Lead
+TYPE: REVIEW
+PRIORITY: P1-High
+TIER: T3
+SUBJECT: TASK-001 review: CHANGES REQUIRED (both reviewers)
+BODY: See context/delivery/task001_dual_review.md (R1–R24). All MUST items fixed in the follow-up commit; deferred items logged as DEBT-010…014.
+STATUS: RESOLVED
+---
+
+---
+MSG-003
+FROM: QA Manager (executed via QA Runner)
+TO: Tech Lead
+TYPE: SIGN-OFF
+PRIORITY: P1-High
+SUBJECT: Release readiness: TASK-001 after review fixes
+BODY:
+  VERDICT: GO (code), conditional on operator actions in MSG-004 before production deploy
+  EXECUTED: check → 0 errors · lint → clean · unit → 29/29 · build → 7 pages · qa:budget → all met (2.4 KB first-party JS/page) · e2e → 71 passed, 7 device-skipped; --repeat-each=3 → 213/213
+  MUTATION CHECK: reverting the R7 fix makes the AC4 contrast test fail (1.48–3.18:1) ✓
+  COVERAGE GAPS: /api/contact is exercised by unit tests (handler) and e2e (stubbed); no live Netlify deploy-preview smoke yet
+STATUS: RESOLVED
+---
+
+---
+MSG-004
+FROM: SecDev Manager
+TO: Operator
+TYPE: TASK
+PRIORITY: P0-Critical
+SUBJECT: Operator actions before public deploy
+BODY:
+  1. P0: revoke the Hugging Face token (DEBT-001); the repo is public.
+  2. Create a new Zapier Catch Hook → set ZAPIER_WEBHOOK_URL in Netlify (Functions scope) → disable the old hook (DEBT-013).
+  3. Turn on Zapier task-usage alerts; confirm the Netlify plan's function rate limiting (DEBT-014).
+  4. Enable GitHub secret scanning + push protection.
+  5. Confirm every *.duatflow.com subdomain serves HTTPS (HSTS includeSubDomains).
+  6. Smoke-test a Netlify deploy preview: /pantheon → 301, /company/ → 301, contact form submits.
+STATUS: OPEN
 ---

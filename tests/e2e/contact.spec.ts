@@ -59,6 +59,53 @@ test("a failed relay shows an error and keeps the visitor's input (old bug: alwa
   await expect(page.getByLabel("Email")).toHaveValue("jane@acme.com");
 });
 
+test("reopening the dialog clears stale validation errors (R4)", async ({ page }) => {
+  await page.goto("/company");
+  await page.locator("[data-contact]:visible").first().click();
+  await page.getByRole("button", { name: "Send request" }).click();
+  await expect(page.locator('[data-error-for="email"]')).toBeVisible();
+  await page.keyboard.press("Escape");
+  await page.locator("[data-contact]:visible").nth(1).click();
+  await expect(page.locator('[data-error-for="email"]')).toBeHidden();
+  await expect(page.getByLabel("Email")).not.toHaveAttribute("aria-invalid", "true");
+});
+
+test("a text selection dragged out onto the backdrop does not close the dialog (R10)", async ({ page, isMobile }) => {
+  test.skip(isMobile, "pointer drag checked on desktop");
+  await page.goto("/");
+  await page.locator("[data-contact]:visible").first().click();
+  const name = page.getByLabel("Full name");
+  await name.fill("Jane Doe");
+  const box = await name.boundingBox();
+  await page.mouse.move((box?.x ?? 0) + 10, (box?.y ?? 0) + 10);
+  await page.mouse.down();
+  await page.mouse.move(5, 5, { steps: 5 });
+  await page.mouse.up();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  // A genuine backdrop click still closes it.
+  await page.mouse.click(5, 5);
+  await expect(page.getByRole("dialog")).toBeHidden();
+});
+
+test("after submitting, focus moves to the result message, not <body> (R12)", async ({ page }) => {
+  await stubContact(page, 200);
+  await page.goto("/");
+  await page.locator("[data-contact]:visible").first().click();
+  await fillValid(page);
+  await page.getByRole("button", { name: "Send request" }).click();
+  await expect(page.getByRole("status")).toBeFocused();
+});
+
+test("error messages meet 4.5:1 contrast (R13)", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("[data-contact]:visible").first().click();
+  await page.getByRole("button", { name: "Send request" }).click();
+  const color = await page.locator('[data-error-for="email"]').evaluate((el) => getComputedStyle(el).color);
+  const [r, g, b] = (color.match(/[\d.]+/g) ?? []).map(Number);
+  const { contrastRatio, luminance } = await import("./contrast");
+  expect(contrastRatio(luminance(r, g, b), 1)).toBeGreaterThanOrEqual(4.5);
+});
+
 test("Escape closes the dialog and returns focus to the trigger", async ({ page, isMobile }) => {
   test.skip(isMobile, "keyboard flow checked on desktop");
   await page.goto("/");

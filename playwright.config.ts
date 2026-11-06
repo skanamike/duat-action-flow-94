@@ -1,6 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 4321;
+// Dedicated port, and never reuse a running server: a stale server silently skips the build
+// and tests old code (found by mutation-testing the AC4 contrast check).
+const PORT = 4329;
 
 export default defineConfig({
   testDir: "tests/e2e",
@@ -17,10 +19,11 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    // Tests run against the production build, not the dev server.
-    command: `npm run build && npx astro preview --host 127.0.0.1 --port ${PORT}`,
+    // Tests run against the production build, served by a single-process server that applies
+    // the real _redirects and _headers (incl. CSP). `astro preview` leaked an orphaned child process.
+    command: `npm run build && node scripts/serve-dist.mjs ${PORT}`,
     url: `http://127.0.0.1:${PORT}`,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });

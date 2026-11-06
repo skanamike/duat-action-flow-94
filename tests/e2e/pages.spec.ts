@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { IGNORED_ERROR_SOURCES, ROUTES } from "./routes";
+import { worstContrastAgainstWhite } from "./contrast";
 
 for (const route of ROUTES) {
   test.describe(`page ${route.path}`, () => {
@@ -52,6 +53,34 @@ for (const route of ROUTES) {
   });
 }
 
+test("Netlify redirects: retired pages and trailing slashes 301 to canonical URLs (R6)", async ({ request }) => {
+  const cases: Array<[string, string]> = [
+    ["/pantheon", "/company"],
+    ["/companyv1", "/company"],
+    ["/company/", "/company"],
+    ["/company/team/", "/company/team"],
+    ["/product/", "/product"],
+  ];
+  for (const [from, to] of cases) {
+    const res = await request.get(from, { maxRedirects: 0 });
+    expect(res.status(), from).toBe(301);
+    expect(res.headers()["location"], from).toBe(to);
+  }
+});
+
+test("pages run under the real Content-Security-Policy with no violations", async ({ page }) => {
+  const violations: string[] = [];
+  page.on("console", (m) => {
+    if (/Content Security Policy|Refused to (execute|load|apply)/i.test(m.text())) violations.push(m.text());
+  });
+  const res = await page.goto("/");
+  expect(res?.headers()["content-security-policy"]).toContain("default-src 'self'");
+  // Exercise the site's own scripts: the menu (mobile) or the dialog (desktop).
+  await page.locator("[data-contact]:visible").first().click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  expect(violations).toEqual([]);
+});
+
 test("unknown routes get the 404 page with noindex", async ({ page }) => {
   const response = await page.goto("/definitely-not-a-page");
   expect(response?.status()).toBe(404);
@@ -59,19 +88,29 @@ test("unknown routes get the 404 page with noindex", async ({ page }) => {
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
 });
 
-test("/product: 'Schedule Executive Briefing' is visible (was white-on-white)", async ({ page }) => {
+test("/product: every 'Schedule Executive Briefing' button meets 4.5:1 against its real background (AC4)", async ({ page }) => {
   await page.goto("/product");
-  const button = page.getByRole("button", { name: "Schedule Executive Briefing" }).first();
-  await expect(button).toBeVisible();
-  const { color, background } = await button.evaluate((el) => {
-    const s = getComputedStyle(el);
-    return { color: s.color, background: s.backgroundColor };
-  });
-  expect(color).toBe("rgb(255, 255, 255)");
-  // Background must be (mostly) transparent so white text sits on the dark hero, not on white.
-  // Handles rgba(r, g, b, a) as well as Tailwind 4's oklab(L a b / alpha); opaque colours have no alpha.
-  const alpha = Number(background.match(/(?:,|\/)\s*([\d.]+)\)$/)?.[1] ?? 1);
-  expect(alpha).toBeLessThan(0.5);
+  const buttons = page.getByRole("button", { name: "Schedule Executive Briefing" });
+  await expect(buttons).toHaveCount(2);
+  for (const button of await buttons.all()) {
+    await button.scrollIntoViewIfNeeded();
+    await expect(button).toBeVisible();
+    expect(await button.evaluate((el) => getComputedStyle(el).color)).toBe("rgb(255, 255, 255)");
+    const ratio = await worstContrastAgainstWhite(button);
+    expect(ratio, "worst-case contrast of white text vs rendered background").toBeGreaterThanOrEqual(4.5);
+  }
+});
+
+test("Google Analytics exposes window.gtag so conversion events can fire (R1)", async ({ page }) => {
+  await page.goto("/");
+  expect(await page.evaluate(() => typeof (window as unknown as { gtag?: unknown }).gtag)).toBe("function");
+});
+
+test("JSON-LD is valid and cannot break out of its script tag (R22)", async ({ page }) => {
+  await page.goto("/");
+  const raw = await page.locator('script[type="application/ld+json"]').textContent();
+  expect(raw).not.toContain("<");
+  expect(JSON.parse(raw ?? "{}")).toMatchObject({ "@type": "Organization", name: "DUAT" });
 });
 
 test("footer year is current", async ({ page }) => {

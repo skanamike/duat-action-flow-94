@@ -55,7 +55,8 @@ const isCurrent = (href: string): boolean => current === href;
       </button>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden" data-mobile-menu>
+    <!-- R11: scrollable when taller than the viewport (landscape phones). 4.5rem ≈ header bar height. -->
+    <div id="mobile-menu" class="hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain md:hidden" data-mobile-menu>
       <ul class="mt-4 flex flex-col gap-1 border-t border-white/10 pt-4">
         {
           NAV_ITEMS.map((item) => (

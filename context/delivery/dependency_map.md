@@ -20,6 +20,9 @@
 | @astrojs/check | 0.9.12 | `npm run check` |
 | eslint, @eslint/js, typescript-eslint, eslint-plugin-astro, globals | 10.13.0 / 10.0.1 / 8.72.0 / 3.2.1 / 17.13.0 | Lint |
 | @playwright/test | 1.63.0 | E2E. Matches the preinstalled browser build |
+| sharp | 0.35.5 | E2E pixel-contrast measurement (also used by Astro) |
+
+**E2E server:** `scripts/serve-dist.mjs` (no dependency) serves `dist/` and applies `_redirects` + `_headers`, emulating Netlify. Replaces `astro preview`, which left an orphaned child process holding the port.
 | @types/* | — | Types |
 
 **Not used:** vitest. npm 10.9 crashes (`Cannot read properties of null (reading 'edgesOut')`) resolving vitest 4.1.x's peer set. Unit tests use Node's built-in `node --test`, which runs TypeScript natively on Node ≥ 22.18. Revisit when npm is upgraded.

@@ -27,7 +27,9 @@ const walk = (dir) =>
 const files = walk(DIST);
 let failed = false;
 
-console.log("JS per page (gzip):");
+// Scope (dual review R16): first-party JS only. Third-party scripts (Google Analytics
+// gtag.js, async) are listed but not counted; their cost is tracked under DEBT-007.
+console.log("First-party JS per page (gzip):");
 for (const html of files.filter((f) => f.endsWith(".html"))) {
   const src = readFileSync(html, "utf8");
   let bytes = 0;
@@ -39,7 +41,9 @@ for (const html of files.filter((f) => f.endsWith(".html"))) {
   }
   const ok = bytes <= JS_BUDGET_GZ;
   failed ||= !ok;
-  console.log(`  ${ok ? "✓" : "✗"} ${relative(DIST, html).padEnd(22)} ${(bytes / 1024).toFixed(1)} KB (budget ${JS_BUDGET_GZ / 1024} KB)`);
+  const thirdParty = [...src.matchAll(/<script[^>]*src="(https?:\/\/[^"]+)"/g)].map((m) => new URL(m[1]).host);
+  const note = thirdParty.length ? `  + third-party (not counted): ${thirdParty.join(", ")}` : "";
+  console.log(`  ${ok ? "✓" : "✗"} ${relative(DIST, html).padEnd(22)} ${(bytes / 1024).toFixed(1)} KB (budget ${JS_BUDGET_GZ / 1024} KB)${note}`);
 }
 
 console.log("Images:");

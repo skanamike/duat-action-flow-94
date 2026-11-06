@@ -35,17 +35,30 @@ export const LEAD_LIMITS = {
   messageMax: 5000,
 } as const;
 
-// Pragmatic email check: one @, no spaces, and a dot in the domain part.
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Pragmatic email check: one @, no whitespace/quotes/angle brackets, and a dot in the domain part.
+const EMAIL_PATTERN = /^[^\s@<>"'`]+@[^\s@<>"'`]+\.[^\s@<>"'`]+$/;
+// C0 control characters (incl. CR/LF) and DEL. Single-line fields must not contain them (header injection in downstream emails).
+// eslint-disable-next-line no-control-regex
+const CONTROL_CHARS = /[\u0000-\u001f\u007f]/;
 
-/** Trim all text fields; missing fields become empty strings. */
-export function normalizeLead(input: Partial<LeadInput>): LeadInput {
+/** Only real strings count; numbers, objects, null, etc. become "". */
+function text(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+/**
+ * Accepts *any* parsed JSON (including null, arrays, numbers) and returns a
+ * well-formed lead. Untrusted input from the relay goes through here, so it must never throw.
+ */
+export function normalizeLead(input: unknown): LeadInput {
+  const source = (typeof input === "object" && input !== null && !Array.isArray(input) ? input : {}) as Record<string, unknown>;
   return {
-    name: (input.name ?? "").trim(),
-    email: (input.email ?? "").trim(),
-    company: (input.company ?? "").trim(),
-    message: (input.message ?? "").trim(),
-    website: (input.website ?? "").trim(),
+    name: text(source.name),
+    email: text(source.email),
+    company: text(source.company),
+    message: text(source.message),
+    // Any non-empty honeypot value, string or not, marks a bot.
+    website: typeof source.website === "string" ? source.website.trim() : source.website ? "filled" : "",
   };
 }
 
@@ -61,13 +74,15 @@ export function validateLead(lead: LeadInput): LeadErrors {
 
   if (lead.name.length < L.nameMin) errors.name = "Please enter your full name";
   else if (lead.name.length > L.nameMax) errors.name = `Name must be ${L.nameMax} characters or fewer`;
+  else if (CONTROL_CHARS.test(lead.name)) errors.name = "Name contains unsupported characters";
 
-  if (!EMAIL_PATTERN.test(lead.email) || lead.email.length > L.emailMax) {
+  if (!EMAIL_PATTERN.test(lead.email) || lead.email.length > L.emailMax || CONTROL_CHARS.test(lead.email)) {
     errors.email = "Please enter a valid email";
   }
 
   if (lead.company.length < L.companyMin) errors.company = "Please enter your company";
   else if (lead.company.length > L.companyMax) errors.company = `Company must be ${L.companyMax} characters or fewer`;
+  else if (CONTROL_CHARS.test(lead.company)) errors.company = "Company contains unsupported characters";
 
   if (lead.message.length < L.messageMin) errors.message = "Please provide a bit more detail (10+ characters)";
   else if (lead.message.length > L.messageMax) errors.message = `Message must be ${L.messageMax} characters or fewer`;

@@ -48,7 +48,7 @@ scripts/qa-budget.mjs       JS/image size budget
 3. Every "contact" CTA opens the form; the form shows success only on a 2xx from `/api/contact`, and a real error otherwise.
 4. "Schedule Executive Briefing" on /product is visible (contrast ≥ 4.5:1).
 5. `/pantheon` and `/companyv1` redirect 301 to `/company`.
-6. Home page ships ≤ 40 KB gzip JS before interaction.
+6. Home page ships ≤ 40 KB gzip **first-party** JS before interaction. *(Clarified after dual review R16: third-party Google Analytics is excluded from this budget, listed by `qa:budget`, and tracked under DEBT-007.)*
 7. `npm run check`, `lint`, `test`, `build`, `test:e2e` all exit 0, in CI too.
 8. No secrets in source; the HF token is removed from `scripts/`.
 
