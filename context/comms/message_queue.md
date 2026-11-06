@@ -61,3 +61,15 @@ BODY:
   7. Weekly: check Forms → Spam for misclassified leads. Enable Netlify 2FA. Check the plan's form allowance and set usage alerts (DEBT-015/016).
 STATUS: OPEN
 ---
+
+---
+MSG-005
+FROM: Git Operations Agent
+TO: Tech Lead
+TYPE: COMMIT-REQUEST → COMMIT-CONFIRMED
+PRIORITY: P1-High
+TIER: T3
+SUBJECT: TASK-002 committed: Netlify Forms lead capture
+BODY: SHA 28780b9 on claude/ecstatic-pascal-1qcnqo, 23 files. Gates: check/lint/unit pass; secret + personal-email scan clean; artifact scan clean; pre-push build + e2e 79 passed / 7 device-skipped. Pushed.
+STATUS: RESOLVED
+---
