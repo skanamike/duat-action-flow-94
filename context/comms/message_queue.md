@@ -53,10 +53,11 @@ PRIORITY: P0-Critical
 SUBJECT: Operator actions before public deploy
 BODY:
   1. ✅ DONE 2026-11-06 (operator): Hugging Face token revoked (DEBT-001).
-  2. Create a new Zapier Catch Hook → set ZAPIER_WEBHOOK_URL in Netlify (Functions scope) → disable the old hook (DEBT-013).
-  3. Turn on Zapier task-usage alerts; confirm the Netlify plan's function rate limiting (DEBT-014).
+  2. ~~New Zapier hook~~ OBSOLETE (ADR-007): Netlify → Forms → enable form detection, then redeploy.
+  3. ~~Zapier alerts / function rate limit~~ OBSOLETE (ADR-007): Netlify → Forms → Form notifications → email to the operator's notification inbox (set in the Netlify UI only).
   4. Enable GitHub secret scanning + push protection.
   5. Confirm every *.duatflow.com subdomain serves HTTPS (HSTS includeSubDomains).
-  6. Smoke-test a Netlify deploy preview: /pantheon → 301, /company/ → 301, contact form submits.
+  6. Smoke-test a Netlify deploy preview (DEBT-017): /pantheon → 301, /company/ → 301; before detection is enabled the form shows an error; after, a test lead appears under Forms and arrives by email.
+  7. Weekly: check Forms → Spam for misclassified leads. Enable Netlify 2FA. Check the plan's form allowance and set usage alerts (DEBT-015/016).
 STATUS: OPEN
 ---

@@ -18,8 +18,9 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 **RESOLUTION:** Operator revokes the token at huggingface.co → Settings → Access Tokens and checks usage/billing for unknown activity. Rewriting history does not help (clones and forks keep it); revocation is the fix. Also enable GitHub secret scanning + push protection.
 **TRIGGER:** Immediately.
 
-### DEBT-013: Old Zapier catch hook is public
-**AREA:** Security / lead capture · **PRIORITY:** P1-High (SecDev deploy condition C2)
+### DEBT-013: Old Zapier catch hook is public: ⛔ OBSOLETE by ADR-007 (2026-11-06)
+**STATUS:** Lead capture no longer uses Zapier (TASK-002: Netlify Forms). Nothing in the site posts to, or depends on, any Zapier hook, so there is no relay to bypass and no `ZAPIER_WEBHOOK_URL` to set. Residual hygiene only: if the operator ever finds the old Zap, turn it off so stray posts to the public URL go nowhere.
+**AREA:** Security / lead capture · **PRIORITY:** ~~P1-High~~ CLOSED. SecDev deploy condition C2 is satisfied by ADR-007
 **DESCRIPTION:** The previous hook URL (`…/24194548/u6f847r/`) is in public git history, so anyone can post to Zapier directly and bypass the relay. The relay no longer has a hard-coded fallback (R5).
 **RESOLUTION:** Operator creates a new Catch Hook, sets it as `ZAPIER_WEBHOOK_URL` in Netlify (Functions scope), then disables the old hook. Turn on Zapier task-usage alerts.
 **TRIGGER:** Before the first Netlify deploy of this branch (the form returns 503 until the variable is set).
@@ -75,10 +76,30 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 **DESCRIPTION:** GitHub Actions are pinned to movable tags (`@v4`). The secret scan greps only the working tree.
 **RESOLUTION:** Pin actions to SHAs (and keep them updated with Dependabot). Replace the grep with gitleaks over PR commits.
 
-### DEBT-014: Relay rate limiting depends on the Netlify plan
+### DEBT-014: Relay rate limiting depends on the Netlify plan: ⛔ OBSOLETE by ADR-007 (2026-11-06)
+**STATUS:** The Netlify Function and its `config.rateLimit` were removed (TASK-002). Abuse protection is now Netlify Forms' built-in spam filtering plus the `website` honeypot (`netlify-honeypot`). There is no per-IP rate limit; submissions count against the Netlify plan's monthly form allowance instead of Zapier tasks. **The underlying risk is still open and is tracked in DEBT-015.**
 **AREA:** Security / cost · **PRIORITY:** P3-Medium (SecDev #2)
 **DESCRIPTION:** `config.rateLimit` (5/min/IP) is declared in the function. Whether it is enforced depends on the Netlify plan. Every forwarded lead uses one Zapier task.
 **RESOLUTION:** Operator confirms the plan supports function rate limiting. Add Cloudflare Turnstile if spam appears.
+
+### DEBT-015: Form endpoint can be posted directly: no server-side validation or rate limit
+**AREA:** Security / cost · **PRIORITY:** P2-High (TASK-002 dual review A-R1/B-04, SecDev #1/#2)
+**DESCRIPTION:** Anyone can POST `form-name=contact&…` straight to any page, bypassing client validation and the honeypot. The relay's server-side checks (JSON-only, cross-site refusal, byte limits, control characters, Referer sanitising) no longer exist; `origin` is client-supplied. A flood could use up the Netlify form allowance (on credit-based plans that may also pause the site), after which real leads get the (truthful) error.
+**ACCEPTED RISK:** Reasonable for a low-traffic B2B contact form. All Netlify-stored values are treated as untrusted.
+**RESOLUTION:** Netlify reCAPTCHA (`data-netlify-recaptcha`; the AJAX body must include `g-recaptcha-response`; CSP needs `https://www.google.com https://www.gstatic.com` in `script-src` and `frame-src`), or Turnstile (needs a Function and a secret, so a new ADR and SecDev review).
+**TRIGGER:** More than about 5 spam messages a week reach the inbox, OR monthly form usage exceeds 50% of the allowance.
+
+### DEBT-016: Lead personal data stored by Netlify without a privacy notice or retention policy
+**AREA:** Privacy / compliance · **PRIORITY:** P2-High (SecDev #3; extends DEBT-007)
+**DESCRIPTION:** Netlify Forms stores name, email, company and message with no defined retention period. The site has no privacy page naming Netlify as processor.
+**RESOLUTION:** Add a /privacy page (contact data, Netlify as processor/DPA, retention period, analytics) and a one-line notice under the form linking to it. Operator deletes handled submissions (or after N months) and keeps Netlify team access minimal with 2FA.
+**TRIGGER:** Before any paid campaign or EU/UK outreach, whichever comes first.
+
+### DEBT-017: Netlify Forms behaviour is verified only manually
+**AREA:** QA / release · **PRIORITY:** P1-High release gate (dual review A-R4, SecDev #5)
+**DESCRIPTION:** Form detection, the response to a POST before detection (expected 404, so the visitor sees the truthful error), spam filtering and notifications cannot be emulated locally. e2e stubs the POST.
+**RESOLUTION:** Deploy-preview smoke test before launch: (1) before detection is enabled, a submission shows the error; (2) after, a test lead appears under Forms and arrives by email. Consider a scripted post-deploy check later.
+**TRIGGER:** Every production deploy that changes the form markup, and the first launch.
 
 ### DEBT-008: Product roadmap has no dates
 **AREA:** Content · **PRIORITY:** P3-Medium

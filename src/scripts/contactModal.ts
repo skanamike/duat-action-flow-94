@@ -1,7 +1,6 @@
-import { CONTACT_ENDPOINT } from "@/config/site";
 import {
   buildLeadPayload,
-  createHttpLeadAdapter,
+  createNetlifyFormsAdapter,
   hasErrors,
   isSpam,
   normalizeLead,
@@ -23,7 +22,7 @@ export function initContactModal(root: Document = document): void {
   const description = dialog.querySelector<HTMLElement>("#contact-description");
   const status = dialog.querySelector<HTMLElement>("[data-contact-status]");
   const submit = dialog.querySelector<HTMLButtonElement>("[data-contact-submit]");
-  const adapter = createHttpLeadAdapter(CONTACT_ENDPOINT);
+  const adapter = createNetlifyFormsAdapter();
   let opener: HTMLElement | null = null;
 
   const setStatus = (kind: "success" | "error" | "hidden", text = ""): void => {
@@ -120,7 +119,8 @@ export function initContactModal(root: Document = document): void {
     }
     setStatus("hidden");
 
-    const result = await adapter.submit(buildLeadPayload(lead, window.location.href));
+    // Path only: query strings and fragments can carry campaign or personal data.
+    const result = await adapter.submit(buildLeadPayload(lead, window.location.pathname));
 
     if (submit) {
       submit.disabled = false;

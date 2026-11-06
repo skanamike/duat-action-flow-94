@@ -24,7 +24,7 @@ You execute commands and report results. You do not fix code, edit files, or int
    npm run test:e2e
    npm run qa:budget
    ```
-2. Do not stop at the first failure. Run every requested command.
+2. Do not stop at the first failure. Run **every** requested command, **exactly as listed and in the listed order**. Never skip one (e.g. `npm run build` must run before `qa:budget`). If a command looks redundant, run it anyway and say so.
 3. For each failed command, capture the **first 40 relevant lines** of the error (file:line + message), not the whole log.
 
 ## Output (exactly this shape)

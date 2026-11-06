@@ -1,7 +1,7 @@
 /**
  * Lead capture: validation, payload building and the adapter interface
- * (ADR-004, RULE 1 + RULE 5). Pure functions, no DOM and no imports, so the
- * module runs unchanged in the browser, the Netlify Function and `node --test`.
+ * (ADR-007, RULE 1 + RULE 5). Pure functions, no DOM and no imports, so the
+ * module runs unchanged in the browser and in `node --test`.
  */
 
 export interface LeadInput {
@@ -48,7 +48,7 @@ function text(value: unknown): string {
 
 /**
  * Accepts *any* parsed JSON (including null, arrays, numbers) and returns a
- * well-formed lead. Untrusted input from the relay goes through here, so it must never throw.
+ * well-formed lead. Untrusted input (any parsed JSON or form data) goes through here, so it must never throw.
  */
 export function normalizeLead(input: unknown): LeadInput {
   const source = (typeof input === "object" && input !== null && !Array.isArray(input) ? input : {}) as Record<string, unknown>;
@@ -94,7 +94,7 @@ export function hasErrors(errors: LeadErrors): boolean {
   return Object.keys(errors).length > 0;
 }
 
-/** Build the payload forwarded to the CRM/Zapier. The honeypot is never included. */
+/** Build the payload sent to the lead destination. The honeypot is never included. */
 export function buildLeadPayload(lead: LeadInput, origin: string, now: Date = new Date()): LeadPayload {
   return {
     name: lead.name,
@@ -116,18 +116,46 @@ export interface LeadCaptureAdapter {
 
 export const GENERIC_SUBMIT_ERROR = "We couldn't send your request. Please try again or email us directly.";
 
+/** Netlify Forms form name. Must match `name` and the hidden `form-name` in ContactModal.astro. */
+export const CONTACT_FORM_NAME = "contact";
+
+/** Netlify Forms accepts AJAX submissions at any static page; the site root always exists. */
+export const NETLIFY_FORMS_ENDPOINT = "/";
+
+export const FORM_URLENCODED = "application/x-www-form-urlencoded";
+
 /**
- * Browser adapter: POSTs JSON to the same-origin relay and reports the real
- * outcome. `fetchImpl` is injectable for tests.
+ * Encode a lead as a Netlify Forms submission body. Only the whitelisted fields
+ * are sent: never the honeypot, and not `timestamp` (Netlify records its own).
  */
-export function createHttpLeadAdapter(endpoint: string, fetchImpl: typeof fetch = fetch): LeadCaptureAdapter {
+export function encodeNetlifyForm(formName: string, payload: LeadPayload): string {
+  return new URLSearchParams({
+    "form-name": formName,
+    name: payload.name,
+    email: payload.email,
+    company: payload.company,
+    message: payload.message,
+    origin: payload.origin,
+  }).toString();
+}
+
+/**
+ * Browser adapter for Netlify Forms (ADR-007): a same-origin, URL-encoded POST
+ * whose real status decides the outcome. Success only on 2xx. `fetchImpl` is
+ * injectable for tests.
+ */
+export function createNetlifyFormsAdapter(
+  endpoint: string = NETLIFY_FORMS_ENDPOINT,
+  formName: string = CONTACT_FORM_NAME,
+  fetchImpl: typeof fetch = fetch,
+): LeadCaptureAdapter {
   return {
     async submit(payload: LeadPayload): Promise<SubmitResult> {
       try {
         const response = await fetchImpl(endpoint, {
           method: "POST",
-          headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify(payload),
+          headers: { "Content-Type": FORM_URLENCODED },
+          body: encodeNetlifyForm(formName, payload),
         });
         if (response.ok) return { ok: true };
         return { ok: false, error: GENERIC_SUBMIT_ERROR };

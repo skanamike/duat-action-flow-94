@@ -5,7 +5,4 @@
 [build.environment]
   NODE_VERSION = "22"
 
-[functions]
-  directory = "netlify/functions"
-
 # Static pages are served as-is; no SPA catch-all (ADR-001).

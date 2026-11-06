@@ -37,7 +37,7 @@ You are the highest technical authority on the team. You make decisive calls. Yo
 - **UI primitives:** Radix (via shadcn-style components in `src/components/ui/`). Keep only what is used
 - **Content:** Page copy lives in `.astro` pages and `src/content/` data modules
 - **Hosting:** Netlify (static), `public/_redirects` for legacy routes
-- **External integrations:** Lead capture (Zapier webhook) behind the `LeadCaptureAdapter` interface (RULE 5)
+- **External integrations:** Lead capture via Netlify Forms (ADR-007) behind the `LeadCaptureAdapter` interface (RULE 5)
 
 ---
 

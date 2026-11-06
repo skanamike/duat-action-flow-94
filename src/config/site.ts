@@ -21,9 +21,6 @@ export const DEMO_URL = "https://aurachainmonitor-claude-code.onrender.com/";
 /** "Watch Demo" link in the home hero (DEBT-006: confirm whether this differs from DEMO_URL). */
 export const DEMO_VIDEO_URL = "https://demo.duatflow.com";
 
-/** Same-origin lead-capture endpoint (Netlify Function, ADR-004). */
-export const CONTACT_ENDPOINT = "/api/contact";
-
 export interface NavItem {
   label: string;
   href: string;

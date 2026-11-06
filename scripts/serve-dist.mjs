@@ -3,10 +3,13 @@
  * Minimal, single-process static server for e2e tests that emulates the
  * Netlify behaviour this site relies on, so tests exercise the real config:
  *   - public/_redirects   (exact-path 301/302 rules)
- *   - public/_headers     (incl. Content-Security-Policy on every response)
+ *   - public/_headers     (incl. Content-Security-Policy) on every response, including
+ *                         redirects, 404s and rejected methods
  *   - clean URLs          (/company → company.html, /company/team → company/team.html)
  *   - 404.html            for unknown paths (status 404)
- * Functions (/api/*) are NOT emulated: e2e stubs them at the network layer.
+ *   - 404 for any method other than GET/HEAD, as Netlify answers a POST when no
+ *     form was detected. Netlify Forms is NOT emulated: e2e stubs the form POST at
+ *     the network layer, so an unstubbed POST can never fake a successful submission.
  *
  * Usage: node scripts/serve-dist.mjs [port]
  */
@@ -77,12 +80,21 @@ function resolveFile(pathname) {
 const redirects = parseRedirects(existsSync(join(DIST, "_redirects")) ? readFileSync(join(DIST, "_redirects"), "utf8") : "");
 const headerBlocks = parseHeaders(existsSync(join(DIST, "_headers")) ? readFileSync(join(DIST, "_headers"), "utf8") : "");
 
+const READ_METHODS = new Set(["GET", "HEAD"]);
+
 const server = createServer((req, res) => {
   const url = new URL(req.url ?? "/", `http://127.0.0.1:${PORT}`);
   const path = url.pathname;
 
   for (const block of headerBlocks) {
     if (matches(block.pattern, path)) for (const [k, v] of Object.entries(block.headers)) res.setHeader(k, v);
+  }
+
+  if (!READ_METHODS.has(req.method ?? "")) {
+    req.resume(); // drain any request body before answering
+    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+    res.end("Not found");
+    return;
   }
 
   const rule = redirects.get(path);

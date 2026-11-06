@@ -37,7 +37,6 @@ src/components/   Nav, Footer, ContactModal (.astro); shared React pieces; ui/
 src/lib/          Pure, unit-tested logic (lead capture, paths)
 src/scripts/      The only client JS: mobile menu + contact dialog
 src/config/site.ts  Site-wide constants: URLs, email, nav items
-netlify/functions/contact.mts  Contact-form relay → Zapier
 public/_redirects, _headers    Netlify redirects + security headers
 context/          ADRs, debt register, plans, agent message queue
 .claude/agents/   AI delivery team (see CLAUDE.md)
@@ -55,7 +54,22 @@ templates/agent-team/  Reusable copy of the agent team for other repos
 
 Build command `npm run build`, publish directory `dist` (already set in `netlify.toml`).
 
-> **Required before the first deploy:** set `ZAPIER_WEBHOOK_URL` in Netlify → Site configuration → Environment variables (scope: Functions). Use a **new** Zapier Catch Hook, because the old one is public in git history. Without it, the contact form shows an error and offers the email link instead.
+### Contact form (Netlify Forms, ADR-007)
+
+The contact dialog is a Netlify form named `contact`. Netlify finds it by parsing the built HTML at deploy time; the browser then submits it in the background (URL-encoded POST to `/`). There is no server code and no environment variable.
+
+> **Required once, before the form can work:**
+> 1. In Netlify, open **Forms** for this site and **enable form detection** (newer sites have it off by default), then trigger a new deploy so the form is detected. Until then, submissions are rejected and visitors see an error with the email link.
+> 2. Netlify → Forms → **Form notifications** (also under the site's configuration → Notifications → Emails and webhooks) → add an **email notification** for the form `contact`, sent to the operator's notification inbox. Configure the address in the Netlify UI only; never commit it to this repo.
+> 3. On a deploy preview, send a test request and confirm it appears under Forms and arrives by email.
+
+Submissions are stored under **Forms** in the Netlify UI and count against the Netlify plan's monthly form allowance. Netlify's spam filtering and the hidden `website` honeypot field protect the form.
+
+**Ongoing operator hygiene** (SecDev, TASK-002):
+- **Check Forms → Spam weekly.** Spam-flagged submissions send no notification, so a real lead filed as spam would otherwise be missed. Mark false positives as verified.
+- Treat notification emails as untrusted (anyone can post to the form). Check the sender before replying, and don't open links from unknown senders. When exporting CSV, import the columns as text (formula injection).
+- Turn on 2FA on the Netlify account, keep the team members who can see Forms to a minimum, and delete submissions once they're handled (DEBT-016).
+- Watch monthly form usage. Spam over the DEBT-015 trigger means adding reCAPTCHA.
 
 ## How we work
 

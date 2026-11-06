@@ -1,9 +1,12 @@
 import { describe, test } from "node:test";
 import assert from "node:assert/strict";
 import {
+  CONTACT_FORM_NAME,
+  FORM_URLENCODED,
   GENERIC_SUBMIT_ERROR,
   buildLeadPayload,
-  createHttpLeadAdapter,
+  createNetlifyFormsAdapter,
+  encodeNetlifyForm,
   hasErrors,
   isSpam,
   normalizeLead,
@@ -76,35 +79,95 @@ describe("buildLeadPayload", () => {
   });
 });
 
-describe("createHttpLeadAdapter", () => {
-  const payload = buildLeadPayload(normalizeLead(valid), "test");
+const NETLIFY_FIELDS = ["form-name", "name", "email", "company", "message", "origin"];
 
-  test("reports success only on a 2xx response", async () => {
-    const ok = createHttpLeadAdapter("/api/contact", async () => new Response("{}", { status: 200 }));
-    assert.deepEqual(await ok.submit(payload), { ok: true });
+describe("encodeNetlifyForm", () => {
+  const payload = buildLeadPayload(
+    normalizeLead({ ...valid, website: "bot" }),
+    "/product",
+    new Date("2026-11-06T12:00:00Z"),
+  );
+
+  test("sends form-name first, then exactly the five lead fields", () => {
+    const params = new URLSearchParams(encodeNetlifyForm(CONTACT_FORM_NAME, payload));
+    assert.deepEqual([...params.keys()], NETLIFY_FIELDS);
+    assert.deepEqual(Object.fromEntries(params), {
+      "form-name": "contact",
+      name: "Jane Doe",
+      email: "jane@acme.com",
+      company: "Acme",
+      message: "We source lithium from three tiers.",
+      origin: "/product",
+    });
   });
 
-  test("reports failure on a non-2xx response (the old no-cors bug)", async () => {
-    const bad = createHttpLeadAdapter("/api/contact", async () => new Response("{}", { status: 502 }));
-    assert.deepEqual(await bad.submit(payload), { ok: false, error: GENERIC_SUBMIT_ERROR });
+  test("never sends the honeypot or the timestamp, even if extra keys are present", () => {
+    const polluted = { ...payload, website: "http://spam.example" } as typeof payload;
+    const params = new URLSearchParams(encodeNetlifyForm("contact", polluted));
+    assert.equal(params.has("website"), false);
+    assert.equal(params.has("timestamp"), false);
+  });
+
+  test("escapes reserved characters so values survive the round trip", () => {
+    const tricky = { ...payload, company: "R&D = A+B", message: "Line one\nline two & 100% ünïcødé?" };
+    const body = encodeNetlifyForm("contact", tricky);
+    assert.doesNotMatch(body, /R&D/, "raw & would split the field");
+    const params = new URLSearchParams(body);
+    assert.equal(params.get("company"), "R&D = A+B");
+    assert.equal(params.get("message"), "Line one\nline two & 100% ünïcødé?");
+  });
+});
+
+describe("createNetlifyFormsAdapter", () => {
+  const payload = buildLeadPayload(normalizeLead(valid), "/product");
+  const respond =
+    (status: number): typeof fetch =>
+    async () =>
+      new Response(status === 204 ? null : "<html></html>", { status });
+
+  test("reports success on 2xx responses", async () => {
+    for (const status of [200, 204]) {
+      const adapter = createNetlifyFormsAdapter("/", "contact", respond(status));
+      assert.deepEqual(await adapter.submit(payload), { ok: true }, `status ${status}`);
+    }
+  });
+
+  test("reports failure on every non-2xx response (e.g. form not detected → 404)", async () => {
+    for (const status of [400, 404, 405, 422, 429, 500, 502, 503]) {
+      const adapter = createNetlifyFormsAdapter("/", "contact", respond(status));
+      assert.deepEqual(await adapter.submit(payload), { ok: false, error: GENERIC_SUBMIT_ERROR }, `status ${status}`);
+    }
   });
 
   test("reports failure on a network error", async () => {
-    const down = createHttpLeadAdapter("/api/contact", async () => {
+    const down = createNetlifyFormsAdapter("/", "contact", async () => {
       throw new TypeError("network down");
     });
     assert.deepEqual(await down.submit(payload), { ok: false, error: GENERIC_SUBMIT_ERROR });
   });
 
-  test("posts JSON to the configured endpoint", async () => {
+  test("POSTs URL-encoded form data to the site root by default", async () => {
     let seen: { url: string; init?: RequestInit } | undefined;
-    const spy = createHttpLeadAdapter("/api/contact", async (url, init) => {
+    const spy = createNetlifyFormsAdapter(undefined, undefined, async (url, init) => {
       seen = { url: String(url), init };
-      return new Response("{}", { status: 200 });
+      return new Response("", { status: 200 });
     });
     await spy.submit(payload);
-    assert.equal(seen?.url, "/api/contact");
+    assert.equal(seen?.url, "/");
     assert.equal(seen?.init?.method, "POST");
-    assert.deepEqual(JSON.parse(String(seen?.init?.body)), payload);
+    assert.deepEqual(seen?.init?.headers, { "Content-Type": FORM_URLENCODED });
+    assert.equal(seen?.init?.body, encodeNetlifyForm(CONTACT_FORM_NAME, payload));
+    assert.equal(new URLSearchParams(String(seen?.init?.body)).get("form-name"), "contact");
+  });
+
+  test("honours a custom endpoint and form name", async () => {
+    let seen: { url: string; body: string } | undefined;
+    const spy = createNetlifyFormsAdapter("/thanks", "briefing", async (url, init) => {
+      seen = { url: String(url), body: String(init?.body) };
+      return new Response("", { status: 200 });
+    });
+    await spy.submit(payload);
+    assert.equal(seen?.url, "/thanks");
+    assert.equal(new URLSearchParams(seen?.body).get("form-name"), "briefing");
   });
 });

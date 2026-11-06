@@ -27,7 +27,7 @@ The site is a Lovable-generated **Vite + React 18 + Tailwind 3 + shadcn/ui** sin
    → **Revoke it at huggingface.co → Settings → Access Tokens**, then read it from `process.env.HF_TOKEN`.
 2. **Mobile navigation doesn't exist.** On phones the hamburger icon (`Navigation.tsx`, `aria-label="Open contact form"`) opens the contact form, not a menu. Phone visitors cannot reach Product, Technology, Team, or Why Duat.
 3. **Invisible CTA on /product.** "Schedule Executive Briefing" uses `variant="outline"` (white background) with `text-white`, so it renders as a blank white box (visible in the screenshot).
-4. **Contact form can't detect failure.** It posts to Zapier with `mode: "no-cors"`, so the response can't be read and a success toast always appears. The toast also tells prospects to _"check … Zapier task history"_.
+4. **Contact form can't detect failure.** *(Historical finding, fixed: lead capture now uses Netlify Forms, ADR-007.)* It posts to Zapier with `mode: "no-cors"`, so the response can't be read and a success toast always appears. The toast also tells prospects to _"check … Zapier task history"_.
 5. **Horizontal scrolling on phones** on `/company` and `/company/team`.
 
 ### 🟠 Credibility and content
@@ -93,13 +93,13 @@ Delete `/pantheon` and `/companyv1`, or redirect them to `/company`.
 ## 4. Phased roadmap
 
 ### Phase 0: Emergency fixes (½ day) ✅ do first, independent of the framework decision
-- [ ] Revoke the HF token; move it to an env var; add `.env.example`
-- [ ] Real mobile menu (shadcn `Sheet`, already in the repo)
-- [ ] Fix the invisible "Schedule Executive Briefing" button
-- [ ] Contact form: switch to a CORS-friendly endpoint (Netlify Forms, Formspree, or a Netlify Function relaying to Zapier) so failures surface; fix the toast copy
-- [ ] Fix mobile horizontal overflow on /company and /company/team
-- [ ] Update the roadmap dates and footer year (make the year dynamic)
-- [ ] Remove debug `console.log`s from `main.tsx`
+- [x] Revoke the HF token; move it to an env var; add `.env.example`
+- [x] Real mobile menu (shadcn `Sheet`, already in the repo)
+- [x] Fix the invisible "Schedule Executive Briefing" button
+- [x] Contact form: switch to a CORS-friendly endpoint so failures surface; fix the toast copy *(done: Netlify Forms, ADR-007)*
+- [x] Fix mobile horizontal overflow on /company and /company/team
+- [x] Update the roadmap dates and footer year (make the year dynamic)
+- [x] Remove debug `console.log`s from `main.tsx`
 
 ### Phase 1: Content and credibility (1 week, mostly _your_ input)
 - [ ] Decide brand naming; collect a real logo SVG

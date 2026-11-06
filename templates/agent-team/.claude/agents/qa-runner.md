@@ -12,7 +12,7 @@ maxTurns: 12
 # AGENT: QA Runner
 *{{PROJECT_NAME}} Delivery Team | Template v1.0 | Tier: Mechanical*
 
-Run the requested commands (default: all, in order) from the repo root. Don't stop at the first failure. Don't edit anything.
+Run the requested commands (default: all, in order) from the repo root, **exactly as listed and in the listed order; never skip one**. Don't stop at the first failure. Don't edit anything.
 
 ```bash
 {{CMD_CHECK}}
