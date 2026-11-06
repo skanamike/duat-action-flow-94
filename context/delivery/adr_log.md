@@ -51,7 +51,7 @@ CONSEQUENCES: Client JS is just the nav + contact scripts (a few KB). Converting
 
 ---
 
-## ADR-004: Lead capture via a server-side relay behind `LeadCaptureAdapter`
+## ADR-004: Lead capture via a server-side relay behind `LeadCaptureAdapter` (SUPERSEDED by ADR-007)
 DATE: 2026-11-06
 STATUS: ACCEPTED
 
@@ -81,3 +81,16 @@ DECISION: Not ported. Netlify `_redirects` sends both permanently to `/company`.
 DATE: 2026-11-06
 STATUS: ACCEPTED
 DECISION: Pin exact versions. Adopt releases ≥ 2 weeks old (security fixes excepted). Keep only shadcn/Radix components that are actually imported (11 of 48 were in use).
+
+---
+
+## ADR-007: Lead capture via Netlify Forms (supersedes ADR-004)
+DATE: 2026-11-06
+STATUS: ACCEPTED
+CONTEXT: The operator's Zapier account is on the free plan, which does not include the "Webhooks by Zapier" trigger the ADR-004 relay depends on. The previous Zap/hook could not be located.
+DECISION: Submit the existing static contact form to **Netlify Forms** (AJAX, URL-encoded POST to `/` with `form-name=contact`) through a `LeadCaptureAdapter` implementation. Remove the Netlify Function relay and all Zapier configuration. Notifications are configured in the Netlify UI only (no addresses in the repo).
+RATIONALE: Zero third parties, zero secrets, built-in storage, email notifications and spam filtering. The same-origin response keeps success/failure truthful. RULE 5 holds: swapping back to a webhook/CRM later means one new adapter.
+CONSEQUENCES: (+) Less code, no env vars, no public hook risk (DEBT-013 obsolete). (−) Bound to Netlify hosting. Submissions are subject to the Netlify plan's monthly form allowance. Server-side validation is Netlify's (spam only), so client validation is the content gate; acceptable for a contact form.
+ALTERNATIVES CONSIDERED: Zapier paid plan (cost); Formspree free (another third party, lower limits); Function + transactional email API (needs an API key and more code).
+
+ADR-004 STATUS → SUPERSEDED by ADR-007.
