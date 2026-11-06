@@ -52,7 +52,7 @@ TYPE: TASK
 PRIORITY: P0-Critical
 SUBJECT: Operator actions before public deploy
 BODY:
-  1. P0: revoke the Hugging Face token (DEBT-001); the repo is public.
+  1. ✅ DONE 2026-11-06 (operator): Hugging Face token revoked (DEBT-001).
   2. Create a new Zapier Catch Hook → set ZAPIER_WEBHOOK_URL in Netlify (Functions scope) → disable the old hook (DEBT-013).
   3. Turn on Zapier task-usage alerts; confirm the Netlify plan's function rate limiting (DEBT-014).
   4. Enable GitHub secret scanning + push protection.

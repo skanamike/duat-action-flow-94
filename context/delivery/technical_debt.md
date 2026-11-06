@@ -11,7 +11,8 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 
 ---
 
-### DEBT-001: Hugging Face token remains in git history (PUBLIC repo)
+### DEBT-001: Hugging Face token remains in git history (PUBLIC repo): ✅ RESOLVED 2026-11-06
+**STATUS:** Operator reports the token has been revoked. The value remains in history but is now inert.
 **AREA:** Security · **PRIORITY:** P0-Critical (SecDev)
 **DESCRIPTION:** `scripts/generate-images.js` hard-coded an `hf_…` token, introduced in 57f3d7f (2025-10-23). Removed from source in 23571e5, but it is in history, and SecDev confirmed the repo is **public**, so the token has been publicly exposed for about a year.
 **RESOLUTION:** Operator revokes the token at huggingface.co → Settings → Access Tokens and checks usage/billing for unknown activity. Rewriting history does not help (clones and forks keep it); revocation is the fix. Also enable GitHub secret scanning + push protection.
