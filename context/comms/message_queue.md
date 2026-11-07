@@ -121,3 +121,33 @@ BODY:
   - Open for TASK-004 (copy): whether public copy should keep naming satellite/SAR methods (the current Technology page does). Operator to confirm.
 STATUS: IN-PROGRESS
 ---
+
+---
+MSG-009
+FROM: UI/UX Design Lead
+TO: Dev Pair Alpha (cc: Dev Pair Beta, QA Runner, Tech Lead)
+TYPE: HANDOFF
+PRIORITY: P1-High
+TIER: T2
+SUBJECT: TASK-003b design spec delivered: HeroBackground (variants mine, contour) + Home hero
+CONTEXT: MSG-008 picks: A as a mocked open-pit mine + processing plant for Home, C for inner pages, method-neutral wording.
+BODY: Spec: context/delivery/task003b_design_spec.md (API, files, mine composition side/stacked, tones + tone mask, scan line, callouts, contour, scrims, motion, ACs 1–24, LATITUDE, MUST PRESERVE). design_system.md now has a "Hero backgrounds" section and the tokens --signal-alert and --hero-band.
+  - Integration: the Home hero is a server-rendered React tree, so pass <HeroBackground slot="heroBackground" variant="mine"/> through Home.tsx → Hero.tsx (or convert to Hero.astro: Tech Lead's call).
+  - Pre-existing defect found: Button variant "hero" is white text on cyan (≈1.3:1), used by the Home hero's primary CTA. Recommend fixing in 003b (text-primary).
+ACTION REQUIRED: Alpha plans against the spec → Beta approves the plan (PROC-001). Operator: answer Q1 (keep the "Illustrative" note on the mine scene; default yes).
+BLOCKERS: None (Q1 has a default)
+DEADLINE: No hard deadline
+STATUS: OPEN
+---
+
+---
+MSG-010
+FROM: Tech Lead
+TO: Dev Pair Alpha
+TYPE: TASK
+PRIORITY: P1-High
+TIER: T2
+SUBJECT: TASK-003b: implement HeroBackground (mine, contour) + apply to Home
+BODY: Implement context/delivery/task003b_design_spec.md. Tech Lead decisions on MSG-009: (1) the "Illustrative" label ships (operator may remove later); (2) fix the `hero` button variant contrast (navy text on cyan) in this task.
+STATUS: IN-PROGRESS
+---
