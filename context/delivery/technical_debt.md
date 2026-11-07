@@ -106,3 +106,21 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 **AREA:** Content · **PRIORITY:** P3-Medium
 **DESCRIPTION:** The roadmap previously showed "Q1 2025 – CURRENT" (stale by ~18 months). Phases are now labelled Now / Next / Later rather than inventing new dates.
 **RESOLUTION:** Operator confirms the current stage and target dates.
+
+### DEBT-018: Hero background module is far above its 4 KB gzip target (needs a decision above 7 KB)
+**AREA:** Performance · **PRIORITY:** P2-High (TASK-003b fix round)
+**DESCRIPTION:** After the UI/UX design-review fixes (MF-1 to MF-10) the single module (glue + registry + `mine` + `contour` + lib) is **8,182 bytes gzip (8.0 KB)**: over the 6 KB hard limit and over the 7 KB pre-approved ceiling. Before the fixes it was 5.75 KB. The lit-callout state and the vehicles were cut first, as instructed (about 130 B), plus golfing (bench constants, shadow helper, drainage in the grain loop, a smaller footprint test); splitting `contour` into its own chunk saves only about 130 B (it is small), so that was tried and reverted to keep the first frame synchronous. Only Home uses the module. `contour` is covered by an e2e smoke test through the gated fixture page `src/pages/e2e-fixtures/[name].astro` (built only with `E2E_FIXTURES=1`, excluded from the sitemap).
+**RESOLUTION:** Tech Lead to approve 8 KB, or choose cuts. Estimated savings: soft cone shadows (about 250 B), second noise octave (about 350 B), gable roof halves and parapets (about 200 B), the merging bench (about 100 B), the windrow (about 250 B). Bench lighting and anti-aliasing stay.
+**TRIGGER:** Before the next deploy that includes TASK-003b.
+
+### DEBT-019: Hero texture build exceeds the 30 ms target on cold start (e2e bound loosened to 100 ms)
+**AREA:** Performance · **PRIORITY:** P3-Medium (TASK-003b)
+**DESCRIPTION:** `performance.measure("hero-bg:build")`, first (cold JIT) build, DPR 1, five runs each in this sandbox after MF-1: **1440x900: 56-78 ms (66.6, 62.1, 61.1, 77.6, 55.6)**; **1920x1080: 84-103 ms (102.6, 85.5, 95.6, 84.0, 91.3)**. Before MF-1 it was 35-60 ms at 1440x900. Spec target 30 ms, hard limit 50 ms. Most of the cost is the ground raster (pit about 25 ms, grain loop about 18 ms, dump about 7 ms, cold JIT included); the vector layer, smoothing, grain overlay and tone mask together take under 10 ms. **The e2e test bound is 100 ms (Tech Lead accepted this deviation because of sandbox variance), and it is asserted at 1440x900 only**, so the 50 ms hard limit and the 1920x1080 figure are not enforced by any test.
+**RESOLUTION:** Re-measure on real CI hardware. If still over 50 ms: build the ground in two passes (terrain first, features after the first paint), or lower the ground scale below 0.5 for very large viewports.
+**TRIGGER:** First CI measurement above 100 ms, or a Lighthouse TBT regression on Home.
+
+### DEBT-020: `scripts/generate-images.js` still describes `hero-background.png`
+**AREA:** Tooling · **PRIORITY:** P4-Low (design spec follow-up)
+**DESCRIPTION:** The Home hero no longer uses an image (`public/images/generated/hero-background.jpg` was deleted in TASK-003b). The generator script still lists the hero prompt. Left untouched per the spec.
+**RESOLUTION:** Remove the hero entries when the generator is retired.
+**TRIGGER:** Generator retirement.

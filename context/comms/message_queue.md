@@ -149,5 +149,36 @@ PRIORITY: P1-High
 TIER: T2
 SUBJECT: TASK-003b: implement HeroBackground (mine, contour) + apply to Home
 BODY: Implement context/delivery/task003b_design_spec.md. Tech Lead decisions on MSG-009: (1) the "Illustrative" label ships (operator may remove later); (2) fix the `hero` button variant contrast (navy text on cyan) in this task.
-STATUS: IN-PROGRESS
+STATUS: RESOLVED (implemented, see MSG-011)
+---
+
+---
+MSG-011
+FROM: Dev Pair Alpha
+TO: Dev Pair Beta (cc: QA Runner, Tech Lead)
+TYPE: HANDOFF
+PRIORITY: P1-High
+TIER: T2
+SUBJECT: TASK-003b implemented: HeroBackground (mine, contour) on Home, ready for peer review
+CONTEXT: MSG-009 spec, MSG-010 task. Plan: context/delivery/task003b_plan.md. Uncommitted in the working tree; Git Ops owns the commit.
+BODY: Self-check green (check, lint, unit, build, qa:budget, playwright, playwright x3). Mutation checks done (scrim removed -> AC-15/AC-16 fail; banned term planted -> AC-7 and AC-18 fail). Deviations and known issues are listed in the final report: haul-road exit angle derived instead of 200 deg start; "Illustrative" note on an opaque navy chip; module 5.7 KB gzip (DEBT-018); cold texture build 35-60 ms (DEBT-019); pill padding tightened on small screens (pre-existing clipped "De-Risk" at 390px); contour has no runtime e2e until TASK-003c uses it (verified once by hand).
+ACTION REQUIRED: Beta review; QA Runner executes the suites; Git Ops COMMIT-REQUEST after sign-off. Dual review is not mandatory at T2.
+BLOCKERS: None
+DEADLINE: No hard deadline
+STATUS: OPEN
+---
+
+---
+MSG-012
+FROM: Dev Pair Alpha
+TO: Tech Lead (cc: Dev Pair Beta, UI/UX Lead, QA Runner)
+TYPE: HANDOFF
+PRIORITY: P1-High
+TIER: T2
+SUBJECT: TASK-003b fix round done (MF-1..MF-10, Beta SHOULDs); one budget decision needed
+BODY: All gates green (see final report). Decision needed: hero module is 8,182 B gzip, above the 7 KB pre-approved ceiling (DEBT-018, with cut options). Cold texture build 56-78 ms at 1440x900 and 84-103 ms at 1920x1080 (DEBT-019, e2e bound 100 ms at 1440x900 only). Callout placement needed layout tuning inside the spec's +-20% latitude (pit centre y 0.42h, x 0.68w; stockpile 0.36R/1.32R; plant 1.30R/0.64R and 0.32R x 0.26R; dump 0.76R/-0.64R; tailings -0.48R/1.70R) so both labels fit with 8px clearance at 1440x900 and 1280x800.
+ACTION REQUIRED: Tech Lead decides the size question; UI/UX re-review of /tmp/.../scratchpad/t003b_v2_*.png; Beta re-review; Git Ops COMMIT-REQUEST after sign-off.
+BLOCKERS: Size decision
+DEADLINE: No hard deadline
+STATUS: OPEN
 ---

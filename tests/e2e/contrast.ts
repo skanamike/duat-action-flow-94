@@ -1,6 +1,8 @@
 import type { Locator } from "@playwright/test";
 import sharp from "sharp";
 
+export type Rgb = readonly [number, number, number];
+
 /** WCAG relative luminance of an sRGB colour (0–255 channels). */
 export function luminance(r: number, g: number, b: number): number {
   const lin = (c: number): number => {
@@ -15,17 +17,32 @@ export function contrastRatio(l1: number, l2: number): number {
   return (hi + 0.05) / (lo + 0.05);
 }
 
+/** Parses "rgb(r, g, b)" / "rgba(r, g, b, a)" computed colours. */
+export function parseRgb(css: string): Rgb {
+  const m = css.match(/rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/);
+  if (!m) throw new Error(`Not an rgb() colour: ${css}`);
+  return [Number(m[1]), Number(m[2]), Number(m[3])];
+}
+
 /**
- * Worst-case contrast between an element's (white) text and the pixels actually
- * rendered behind it. The text is hidden, the element is screenshotted, and the
- * lightest background pixel is used, so gradients are measured at their worst point.
+ * Worst-case contrast between text of colour `text` and the pixels actually rendered behind an element.
+ * All text in the element and its descendants is made invisible (including gradient-clipped text, whose
+ * gradient would otherwise be captured as "background"), the element is screenshotted, and every pixel is
+ * compared with the text colour: gradients, imagery and animated overlays are measured at their worst point.
  * (Replaces the alpha-only check that passed for the wrong reason; dual review R7/R8.)
  */
-export async function worstContrastAgainstWhite(element: Locator): Promise<number> {
+export async function worstContrastAgainst(element: Locator, text: Rgb): Promise<number> {
   await element.evaluate((el) => {
-    (el as HTMLElement).style.setProperty("color", "transparent", "important");
-    (el as HTMLElement).style.setProperty("transition", "none", "important");
-    el.querySelectorAll("svg").forEach((s) => (s.style.visibility = "hidden"));
+    const nodes = [el as HTMLElement, ...Array.from(el.querySelectorAll<HTMLElement>("*"))];
+    for (const node of nodes) {
+      node.style.setProperty("color", "transparent", "important");
+      node.style.setProperty("-webkit-text-fill-color", "transparent", "important");
+      node.style.setProperty("text-shadow", "none", "important");
+      node.style.setProperty("transition", "none", "important");
+      if (getComputedStyle(node).backgroundClip === "text") node.style.setProperty("background-image", "none", "important");
+      // Icons and decorative (aria-hidden) marks such as separators are not text: leave only what sits behind the words.
+      if (node instanceof SVGElement || node.getAttribute("aria-hidden") === "true") node.style.visibility = "hidden";
+    }
   });
   const png = await element.screenshot();
   // Screenshots are in device pixels. Inset 4 CSS px (scaled by DPR) to skip the border and anti-aliased rounded corners.
@@ -37,9 +54,13 @@ export async function worstContrastAgainstWhite(element: Locator): Promise<numbe
     .removeAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
-  let lightest = 0;
+  const textL = luminance(text[0], text[1], text[2]);
+  let worst = Number.POSITIVE_INFINITY;
   for (let i = 0; i < info.width * info.height * 3; i += 3) {
-    lightest = Math.max(lightest, luminance(data[i], data[i + 1], data[i + 2]));
+    worst = Math.min(worst, contrastRatio(textL, luminance(data[i], data[i + 1], data[i + 2])));
   }
-  return contrastRatio(1, lightest);
+  return worst;
 }
+
+/** White text against the rendered pixels behind an element. */
+export const worstContrastAgainstWhite = (element: Locator): Promise<number> => worstContrastAgainst(element, [255, 255, 255]);

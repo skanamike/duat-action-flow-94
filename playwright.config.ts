@@ -21,7 +21,8 @@ export default defineConfig({
   webServer: {
     // Tests run against the production build, served by a single-process server that applies
     // the real _redirects and _headers (incl. CSP). `astro preview` leaked an orphaned child process.
-    command: `npm run build && node scripts/serve-dist.mjs ${PORT}`,
+    // E2E_FIXTURES=1 also builds the test-only pages in src/pages/e2e-fixtures (never part of a production build).
+    command: `E2E_FIXTURES=1 npm run build && node scripts/serve-dist.mjs ${PORT}`,
     url: `http://127.0.0.1:${PORT}`,
     reuseExistingServer: false,
     timeout: 120_000,

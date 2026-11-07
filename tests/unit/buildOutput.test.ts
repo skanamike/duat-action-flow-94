@@ -37,3 +37,10 @@ test("robots.txt points to the sitemap", () => {
 test("no hard-coded Hugging Face tokens in scripts (SEC-001)", () => {
   assert.doesNotMatch(read("scripts/generate-images.js"), /hf_[A-Za-z0-9]{20,}/);
 });
+
+test("test-only fixture pages are gated off in production builds and kept out of the sitemap (TASK-003b)", () => {
+  assert.match(read("src/pages/e2e-fixtures/[name].astro"), /process\.env\.E2E_FIXTURES === "1" \? \[[^\]]*\] : \[\]/, "fixture routes exist only when E2E_FIXTURES=1");
+  assert.match(read("astro.config.mjs"), /filter: \(page\) => !page\.includes\("\/e2e-fixtures\/"\)/);
+  assert.match(read("playwright.config.ts"), /E2E_FIXTURES=1 npm run build/);
+  assert.doesNotMatch(read("package.json"), /E2E_FIXTURES/, "the real build script must not enable fixtures");
+});

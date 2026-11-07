@@ -13,7 +13,8 @@ export default defineConfig({
   trailingSlash: "never",
   build: { format: "file" },
   // React renders page "views" to static HTML at build time only (ADR-003).
-  integrations: [react(), sitemap()],
+  // Test-only fixture pages (src/pages/e2e-fixtures, built only with E2E_FIXTURES=1) never reach the sitemap.
+  integrations: [react(), sitemap({ filter: (page) => !page.includes("/e2e-fixtures/") })],
   vite: {
     plugins: [tailwindcss()],
   },

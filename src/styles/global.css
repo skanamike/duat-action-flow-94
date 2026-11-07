@@ -28,6 +28,10 @@
   --radius: 0.5rem;
   --moonlight: 210 40% 96%;
   --moonlight-glow: 210 100% 85%;
+  /* Alert callouts and markers on navy ONLY (about 2.8:1 on white). */
+  --signal-alert: 6 100% 68%;
+  /* Height of the image band above the hero text in stacked (phone / portrait) layouts. */
+  --hero-band: clamp(11rem, 30svh, 18rem);
 
   --gradient-primary: linear-gradient(135deg, hsl(213 84% 11%), hsl(213 70% 8%));
   --gradient-secondary: linear-gradient(135deg, hsl(180 95% 56%), hsl(180 85% 60%));
@@ -64,6 +68,12 @@
 
   --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
+
+/*
+ * Hero layout switch: side-by-side when wide AND not tall-and-narrow, stacked otherwise.
+ * Keep in sync with the media query in src/components/HeroBackground.astro.
+ */
+@custom-variant hero-side (@media (min-width: 45.0625rem) and (min-aspect-ratio: 6/5));
 
 /* Previous Tailwind 3 container: centred, 2rem gutter, max 1400px. */
 @utility container {

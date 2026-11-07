@@ -1,0 +1,23 @@
+---
+/**
+ * Test-only pages for the e2e suite (for example a hero using the `contour` variant, which no real page uses yet).
+ * They are generated only when the build runs with E2E_FIXTURES=1 (playwright.config.ts sets it). A normal
+ * `npm run build` produces no route here, and the sitemap filter in astro.config.mjs excludes them anyway.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HeroBackground from "@/components/HeroBackground.astro";
+
+export function getStaticPaths() {
+  return process.env.E2E_FIXTURES === "1" ? [{ params: { name: "hero-contour" } }] : [];
+}
+---
+
+<BaseLayout title="E2E fixture: contour hero" description="Test-only page that renders the contour hero background. Not part of the site and not indexed." index={false}>
+  <section class="relative isolate flex min-h-[100svh] items-start overflow-hidden bg-primary pt-[calc(4.5rem+var(--hero-band))] pb-12 text-white hero-side:items-center hero-side:pt-24 hero-side:pb-16">
+    <HeroBackground variant="contour" />
+    <div class="relative z-10 container mx-auto px-6">
+      <h1 class="text-4xl font-bold">Contour fixture</h1>
+      <p class="mt-4 max-w-xl text-xl text-white/90">Sample copy over the contour background.</p>
+    </div>
+  </section>
+</BaseLayout>

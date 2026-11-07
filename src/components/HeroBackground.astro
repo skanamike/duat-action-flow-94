@@ -1,0 +1,222 @@
+---
+import { HERO_BG_VARIANTS, type HeroBackgroundVariant, type HeroCallout } from "@/lib/heroScene/types";
+import { MAX_CALLOUTS, MINE_CALLOUTS } from "@/lib/heroScene/callouts";
+
+interface Props {
+  /** Which scene to draw. */
+  variant: HeroBackgroundVariant;
+  /** Mine only. Defaults to MINE_CALLOUTS; `false` renders none. At most 2. Ignored by other variants. */
+  callouts?: readonly HeroCallout[] | false;
+  /** "auto" animates when allowed; "still" always renders the static frame. */
+  motion?: "auto" | "still";
+  /** Extra classes on the root. */
+  class?: string;
+}
+
+const { variant, callouts = MINE_CALLOUTS, motion = "auto", class: className } = Astro.props;
+
+if (!HERO_BG_VARIANTS.includes(variant)) {
+  throw new Error(`HeroBackground: unknown variant "${String(variant)}". Expected one of ${HERO_BG_VARIANTS.join(", ")}.`);
+}
+const shown: readonly HeroCallout[] = variant === "mine" && callouts !== false ? callouts : [];
+if (shown.length > MAX_CALLOUTS) {
+  throw new Error(`HeroBackground: at most ${MAX_CALLOUTS} callouts are allowed, got ${shown.length}.`);
+}
+---
+
+<div class:list={["hero-bg", className]} data-hero-bg={variant} data-motion={motion} aria-hidden="true">
+  <canvas class="hero-bg__canvas"></canvas>
+  <div class="hero-bg__scrim"></div>
+  {
+    shown.map((callout) => (
+      <div class="hero-bg__callout" data-anchor={callout.anchor} data-tone={callout.tone}>
+        <span class="hero-bg__reticle" />
+        <span class="hero-bg__leader" />
+        <span class="hero-bg__label">{callout.label}</span>
+      </div>
+    ))
+  }
+  {variant === "mine" && <span class="hero-bg__note">Illustrative</span>}
+</div>
+
+<style>
+  /*
+   * Layout mode. Keep this media query in sync with `@custom-variant hero-side` in src/styles/global.css.
+   * Script reads the result from --hero-bg-layout; it never re-declares the breakpoint.
+   */
+  .hero-bg {
+    --hero-bg-layout: stacked;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    contain: strict;
+    background: hsl(var(--primary));
+  }
+  @media (min-width: 45.0625rem) and (min-aspect-ratio: 6/5) {
+    .hero-bg {
+      --hero-bg-layout: side;
+    }
+  }
+
+  .hero-bg__canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+  .hero-bg[data-ready] .hero-bg__canvas {
+    opacity: 1;
+    transition: opacity 300ms ease-out;
+  }
+
+  /* The scrim sits above the canvas so the animated overlay is attenuated behind the text. */
+  .hero-bg__scrim {
+    position: absolute;
+    inset: 0;
+  }
+  .hero-bg[data-hero-bg="mine"] .hero-bg__scrim {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--primary) / 0.2) 0,
+      hsl(var(--primary) / 0.1) calc(4.5rem + var(--hero-band) * 0.55),
+      hsl(var(--primary) / 0.88) calc(4.5rem + var(--hero-band) + 0.5rem),
+      hsl(var(--primary) / 0.96) 100%
+    );
+  }
+  .hero-bg[data-hero-bg="contour"] .hero-bg__scrim {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--primary) / 0.3) 0,
+      hsl(var(--primary) / 0.15) calc(4.5rem + var(--hero-band) * 0.5),
+      hsl(var(--primary) / 0.85) calc(4.5rem + var(--hero-band) + 0.5rem),
+      hsl(var(--primary) / 0.94) 100%
+    );
+  }
+  @media (min-width: 45.0625rem) and (min-aspect-ratio: 6/5) {
+    .hero-bg[data-hero-bg="mine"] .hero-bg__scrim {
+      background:
+        linear-gradient(
+          90deg,
+          hsl(var(--primary) / 0.94) 0%,
+          hsl(var(--primary) / 0.88) 40%,
+          hsl(var(--primary) / 0.62) 60%,
+          hsl(var(--primary) / 0.12) 85%,
+          hsl(var(--primary) / 0.06) 100%
+        ),
+        linear-gradient(0deg, hsl(var(--primary) / 0.7) 0%, transparent 22%);
+    }
+    .hero-bg[data-hero-bg="contour"] .hero-bg__scrim {
+      background: linear-gradient(
+        90deg,
+        hsl(var(--primary) / 0.9) 0%,
+        hsl(var(--primary) / 0.78) 42%,
+        hsl(var(--primary) / 0.3) 70%,
+        hsl(var(--primary) / 0.1) 100%
+      );
+    }
+  }
+
+  /* Callouts and the note are positioned by script, so they stay hidden until then. */
+  .hero-bg__callout {
+    display: none;
+  }
+  @media (min-width: 68.75rem) and (min-aspect-ratio: 6/5) {
+    .hero-bg__callout {
+      display: block;
+    }
+  }
+  .hero-bg:not([data-ready]) .hero-bg__callout,
+  .hero-bg:not([data-ready]) .hero-bg__note {
+    visibility: hidden;
+  }
+  .hero-bg[data-ready] .hero-bg__callout {
+    animation: hero-bg-in 300ms ease-out;
+  }
+  @keyframes hero-bg-in {
+    from {
+      opacity: 0;
+    }
+  }
+  .hero-bg__callout[data-tone="signal"] {
+    --tone: var(--accent);
+  }
+  .hero-bg__callout[data-tone="alert"] {
+    --tone: var(--signal-alert);
+  }
+  .hero-bg__callout > * {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .hero-bg__reticle {
+    width: 12px;
+    height: 12px;
+    margin: -6px 0 0 -6px;
+    --c: hsl(var(--tone) / 0.9);
+    background:
+      linear-gradient(var(--c), var(--c)) 0 0 / 4px 1px,
+      linear-gradient(var(--c), var(--c)) 0 0 / 1px 4px,
+      linear-gradient(var(--c), var(--c)) 100% 0 / 4px 1px,
+      linear-gradient(var(--c), var(--c)) 100% 0 / 1px 4px,
+      linear-gradient(var(--c), var(--c)) 0 100% / 4px 1px,
+      linear-gradient(var(--c), var(--c)) 0 100% / 1px 4px,
+      linear-gradient(var(--c), var(--c)) 100% 100% / 4px 1px,
+      linear-gradient(var(--c), var(--c)) 100% 100% / 1px 4px;
+    background-repeat: no-repeat;
+  }
+  .hero-bg__leader {
+    height: 1px;
+    width: 0;
+    transform-origin: 0 0;
+    background: hsl(var(--tone) / 0.6);
+  }
+  .hero-bg__label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 11px;
+    line-height: 1.35;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 6px 8px;
+    border-radius: 2px;
+    background: hsl(var(--primary) / 0.92);
+    border: 1px solid hsl(var(--tone) / 0.45);
+    color: hsl(var(--tone));
+  }
+
+  .hero-bg__note {
+    position: absolute;
+    right: 16px;
+    top: calc(4.5rem + 8px);
+    padding: 3px 6px;
+    border-radius: 2px;
+    background: hsl(var(--primary) / 0.8);
+    color: hsl(0 0% 100% / 0.6);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  @media (min-width: 45.0625rem) and (min-aspect-ratio: 6/5) {
+    .hero-bg__note {
+      top: calc(4.5rem + 12px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg[data-ready] .hero-bg__canvas,
+    .hero-bg[data-ready] .hero-bg__callout {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import { initHeroBackgrounds } from "@/scripts/heroBackground";
+  initHeroBackgrounds();
+</script>

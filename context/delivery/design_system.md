@@ -32,7 +32,7 @@
 ## Hero backgrounds (`src/components/HeroBackground.astro`; full spec: `task003b_design_spec.md`)
 | Variant | Where | What |
 |---------|-------|------|
-| `mine` | Home | Code-generated grayscale "orbital imagery" of an open-pit mine + processing plant, slow cyan scan line (14 s cycle), max 2 activity callouts, "Illustrative" note |
+| `mine` | Home | Code-generated grayscale "orbital imagery" of an open-pit mine + processing plant (smoothed ground with fine grain, anti-aliased vector built elements with soft cast shadows), slow cyan scan line (14 s cycle; the still frame has none), max 2 activity callouts, "Illustrative" note (top-right) |
 | `contour` | Inner-page heroes (TASK-003c) | Topographic contours + slow sweep (10 s/rev) |
 
 - One API: `<HeroBackground variant="…" />`, absolutely positioned inside a `relative isolate` hero `<section>`. Zero client React; one small bundled module (< 4 KB gzip target).
