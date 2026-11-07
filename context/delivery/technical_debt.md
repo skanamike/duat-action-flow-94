@@ -26,6 +26,7 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 **TRIGGER:** Before the first Netlify deploy of this branch (the form returns 503 until the variable is set).
 
 ### DEBT-002: Unsourced statistics and claims
+**UPDATE 2026-11-07:** Verified replacements are in task003_004_home_story_plan.md §3: $210B (AlixPartners 2021), 3.7 years and ≈45% (McKinsey Global Institute 2020). "$4.7T" and "$184B" are still unsourced; TASK-004a replaces them.
 **AREA:** Content / credibility · **PRIORITY:** P2-High
 **DESCRIPTION:** "$4.7T crisis", "$184B lost annually", "69% lack visibility", "85–95% prediction accuracy validated", "20TB daily", "first and only platform", and "patented" have no citations on the site.
 **RESOLUTION:** Add sources to `src/content/sources.ts` and footnote them (PROC-006); confirm the patent is granted (vs pending) and adjust the wording.

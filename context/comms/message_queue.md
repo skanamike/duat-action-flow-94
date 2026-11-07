@@ -73,3 +73,22 @@ SUBJECT: TASK-002 committed: Netlify Forms lead capture
 BODY: SHA 28780b9 on claude/ecstatic-pascal-1qcnqo, 23 files. Gates: check/lint/unit pass; secret + personal-email scan clean; artifact scan clean; pre-push build + e2e 79 passed / 7 device-skipped. Pushed.
 STATUS: RESOLVED
 ---
+
+---
+MSG-006
+FROM: Operator (CPIO)
+TO: Tech Lead
+TYPE: TASK
+PRIORITY: P1-High
+SUBJECT: Home page storytelling rewrite ("But/Therefore") + professional hero background
+CONTEXT: Investor/customer credibility. The current copy reads as a list ("and… and…").
+BODY: Plan: context/delivery/task003_004_home_story_plan.md
+  - TASK-003a (T2): background preview page: A real SAR / B generative network / C topographic sweep
+  - TASK-003b (T2): implement the chosen background
+  - TASK-004a (T3): src/content/sources.ts + Home rewrite on the But/Therefore arc (10 beats), sourced proof strip
+  - TASK-004b (T2 each): rewrite Why Duat, Company, Technology, Product, Team intro with the same rule
+ACTION REQUIRED: Operator answers the open questions in §7 (hero option, $240B source, Content Strategist agent, patent status, SAR imagery source)
+BLOCKERS: Operator decisions (§7)
+DEADLINE: No hard deadline
+STATUS: OPEN
+---
