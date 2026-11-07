@@ -106,3 +106,18 @@ BODY:
   - Note: the preview was built by the orchestrator instead of the UI/UX Lead agent (it's an artifact, not site code). The UI/UX Lead reviews the chosen option in TASK-003b.
 STATUS: OPEN (awaiting operator pick)
 ---
+
+---
+MSG-008
+FROM: Operator (CPIO) → Tech Lead
+TYPE: DECISION
+PRIORITY: P1-High
+SUBJECT: Background picks: A (mine + processing) for Home, C for inner pages; keep methods non-specific
+BODY:
+  - Home: Option A, a MOCKED satellite look (no real imagery needed) showing an OPEN-PIT MINE WITH A PROCESSING PLANT.
+  - Inner pages: Option C (terrain contours + sweep). Keep the component pluggable for B or a future "D".
+  - Don't be specific about methods: no "SAR", "backscatter", "Sentinel", "radar" or similar technical terms in visible labels/callouts; use neutral activity language.
+  - Tech Lead tiering: TASK-003b (T2) = HeroBackground component (variants: mine, contour; pluggable) + apply to Home. TASK-003c (T3, multi-page) = apply C to Product, Technology, Company, Team, Why Duat heroes.
+  - Open for TASK-004 (copy): whether public copy should keep naming satellite/SAR methods (the current Technology page does). Operator to confirm.
+STATUS: IN-PROGRESS
+---
