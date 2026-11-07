@@ -18,3 +18,11 @@
 - **Code review and design review answer different questions.** Beta found no defects in a scene that the design gate rejected on sight. Both gates are needed for visual work; neither substitutes for the other.
 - Tech Lead's own screenshot read ("fingerprint", "pixelated") matched the UI/UX diagnosis. Keep the orchestrator's visual look as a cheap pre-filter before reviews.
 - 3rd consecutive task where a contrast test was not load-bearing at the tested size (TASK-001 R7, TASK-002 none, TASK-003b SHOULD-1). Rule added to the QA manager prompt candidate list: **contrast tests must run at the viewport where the protective layer matters most.**
+
+## Round 2 (Alpha fix round), Tech Lead pre-filter, 2026-11-07
+- Gates: all green (402/402 e2e over 3 repeats; mutation checks hold).
+- **Visual:** improved (AA plant, shadows, softer terrain, no still-frame line, label placement) but the pit still reads as a swirl/contour map, with a visible lobe seam and the haul road as an outline loop; the plant still looks card-like.
+- **Cost:** hero chunk 8.0 KB gzip (> 7 KB pre-approval); cold build 55–78 ms @1440, 84–103 ms @1920 (> 50 ms limit, main-thread blocking). Round 2 used ~530k tokens.
+- **Decision (Tech Lead, pending operator):** stop rendering the mine procedurally at runtime. Keep all TASK-003b infrastructure (component API, layout modes, scrim, contour variant, scan line, callouts, tests) and swap the mine raster for a **pre-rendered, compressed image layer** (~60–120 KB AVIF/WebP, responsive). The JS falls to ~2 KB with no build time. Image source options for the operator: (1) licensed stock aerial photo, graded to the palette [recommended]; (2) text-free AI-generated aerial; (3) bake the current procedural render.
+- UI/UX re-review deferred until the image source is chosen (no point re-reviewing a direction about to change).
+- Also queued: `playwright.config.ts` uses POSIX `E2E_FIXTURES=1 …` syntax, which breaks `npm run test:e2e` on the operator's Windows machine. Move it to `webServer.env`.
