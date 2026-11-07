@@ -69,8 +69,13 @@ Pages after Home (same rule, same task family): Why Duat → Company → Technol
 2. "Retailers alone lose $1.73 trillion a year to inventory they got wrong, and disruption is the #1 cause." (IHL, verified headline figures)
 3. "Companies pour hundreds of billions into predicting supply and demand." (only if the IHL $172B is confirmed as *spend*: $172B retail + $38.5B SCM software > $200B, footnoted with both sources)
 
+**Preferred framing (operator, 2026-11-07): "that's a single vertical".** Use *"retail alone"* so the reader extrapolates across industries, rather than asserting an unsourced cross-industry total:
+> "Retail alone loses **$1.73 trillion** a year to supply and demand it got wrong, and disruption is the single biggest cause. Now multiply that across automotive, aerospace, energy and electronics."
+If IHL's $172B is confirmed as *spend*: "Retailers alone invested **$172 billion** in one year to fix it. The losses barely moved."
+Upgrade to an explicit cross-industry "hundreds of billions" only once a single source covering all verticals is found (Gartner/IDC supply-chain tech + planning spend is the target).
+
 **Word-choice notes on the draft:**
-- "100s of BILLIONS" → use phrasing 1 or 2 above, or 3 once the IHL $172B is confirmed as spend.
+- "100s of BILLIONS" → use the "retail alone" framing above. An explicit total needs a cross-industry source.
 - "$240 Billion" → "$210 billion" (the AlixPartners figure), unless the operator has a source for $240B.
 - "Unique" → show it instead of claiming it ("from orbit", "through clouds and at night").
 - "Opportunity to get and stay ahead" → "your head start" (shorter, concrete, one idea).
