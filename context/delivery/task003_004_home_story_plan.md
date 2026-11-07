@@ -38,7 +38,7 @@ Pages after Home (same rule, same task family): Why Duat → Company → Technol
 
 ## 3. Hero copy options (operator to choose or remix)
 
-**Option A: closest to the operator's draft**
+**Option A: closest to the operator's draft** ✅ APPROVED 2026-11-07, with the "retail alone" subhead (see MSG-007)
 > *Eyebrow:* Supply-chain risk intelligence
 > **Enterprises spend billions to predict supply-chain risk. Disruptions keep winning.**
 > Planning tools watch reported data, but disruptions start in the physical world, tiers away and months earlier. That's why Duat watches the physical world itself, from orbit, so you see the next disruption first and turn it into your advantage.

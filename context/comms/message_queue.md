@@ -92,3 +92,17 @@ BLOCKERS: Operator decisions (§7)
 DEADLINE: No hard deadline
 STATUS: OPEN
 ---
+
+---
+MSG-007
+FROM: Operator (CPIO) → Tech Lead
+TYPE: DECISION
+PRIORITY: P2-Medium
+SUBJECT: Hero copy direction approved; background preview published (TASK-003a)
+BODY:
+  - Approved hero: "Companies pour billions into predicting supply and demand. Disruptions keep winning." Subhead uses the "retail alone" framing ($1.73T, IHL 2025). Proof strip: $1.73T (IHL 2025) · $210B (AlixPartners 2021) · 3.7 yrs (McKinsey GI 2020).
+  - TASK-003a preview (private artifact): https://claude.ai/artifact/SsxDsjnnWFmuek2h52NNHn. Options A radar scene (rec. Home), B network cascade, C terrain + sweep (rec. inner pages).
+  - Still open from MSG-006 §7: background pick, Content Strategist agent, patent status, Copernicus access, IHL $172B spend-vs-reduction.
+  - Note: the preview was built by the orchestrator instead of the UI/UX Lead agent (it's an artifact, not site code). The UI/UX Lead reviews the chosen option in TASK-003b.
+STATUS: OPEN (awaiting operator pick)
+---
