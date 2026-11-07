@@ -58,8 +58,19 @@ Pages after Home (same rule, same task family): Why Duat → Company → Technol
 | **Every 3.7 years** | How often industries face a supply disruption lasting a month or longer | McKinsey Global Institute, 2020 |
 | **≈45%** | Of one year's profits lost to disruptions over a decade (average) | McKinsey Global Institute, 2020 |
 
+**Update 2026-11-07: operator intent is "$100s of billions across all SC software, planning and spend to predict demand and supply".** Candidate support:
+- **IHL Group (Sept 2025):** global retail still loses **$1.73T a year** to inventory distortion (out-of-stocks + overstocks) "despite $172 billion in improvements". **Supply-chain disruption is the largest single cause, at $301B a year.**
+  ⚠️ To confirm against the IHL article before use: whether "$172B in improvements" means money **spent** or losses **reduced**. Its 2023 study used $172B as a *reduction*. The page wasn't reachable from the agent sandbox.
+- Supply-chain management software ≈ **$38.5B** (MarketsandMarkets, 2025).
+- Global logistics spend ≈ **$10–13T a year** (Statista via BusinessToday / Cargoson). This is spend on *running* supply chains, not on predicting them.
+
+**Allowed hero phrasings, from safest to boldest:**
+1. "Companies spend billions to predict supply and demand." (always safe)
+2. "Retailers alone lose $1.73 trillion a year to inventory they got wrong, and disruption is the #1 cause." (IHL, verified headline figures)
+3. "Companies pour hundreds of billions into predicting supply and demand." (only if the IHL $172B is confirmed as *spend*: $172B retail + $38.5B SCM software > $200B, footnoted with both sources)
+
 **Word-choice notes on the draft:**
-- "100s of BILLIONS" → "billions": no source supports hundreds of billions for risk spend (SCRM software is about $5–8B a year; all SCM software about $38.5B).
+- "100s of BILLIONS" → use phrasing 1 or 2 above, or 3 once the IHL $172B is confirmed as spend.
 - "$240 Billion" → "$210 billion" (the AlixPartners figure), unless the operator has a source for $240B.
 - "Unique" → show it instead of claiming it ("from orbit", "through clouds and at night").
 - "Opportunity to get and stay ahead" → "your head start" (shorter, concrete, one idea).
