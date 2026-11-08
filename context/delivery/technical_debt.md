@@ -102,6 +102,12 @@ INTRODUCED: [when/why]   TRIGGER: [what forces resolution]
 **RESOLUTION:** Deploy-preview smoke test before launch: (1) before detection is enabled, a submission shows the error; (2) after, a test lead appears under Forms and arrives by email. Consider a scripted post-deploy check later.
 **TRIGGER:** Every production deploy that changes the form markup, and the first launch.
 
+### DEBT-021: CI cannot run (GitHub account billing)
+**AREA:** DevOps / quality gates · **PRIORITY:** P1-High
+**DESCRIPTION:** GitHub Actions jobs fail to start (no runner, ~2 s) because of an account billing issue. RULE 3 ("CI must be real") is currently met only by local execution (DEVIATION-002).
+**RESOLUTION:** Operator fixes billing in GitHub Settings → Billing and plans, then pushes or re-runs to confirm green CI.
+**TRIGGER:** Before the next merge after PR #8. Until then every merge needs the local suite run and logged.
+
 ### DEBT-008: Product roadmap has no dates
 **AREA:** Content · **PRIORITY:** P3-Medium
 **DESCRIPTION:** The roadmap previously showed "Q1 2025 – CURRENT" (stale by ~18 months). Phases are now labelled Now / Next / Later rather than inventing new dates.
