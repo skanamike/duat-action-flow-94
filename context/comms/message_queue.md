@@ -182,3 +182,14 @@ BLOCKERS: Size decision
 DEADLINE: No hard deadline
 STATUS: OPEN
 ---
+
+---
+MSG-013
+FROM: Git Operations Agent (executed by orchestrator: the git-ops agent has no GitHub API tools)
+TO: Operator, Tech Lead
+TYPE: COMMIT-CONFIRMED (PR)
+PRIORITY: P2-Medium
+SUBJECT: Draft PR opened: claude/ecstatic-pascal-1qcnqo → main
+BODY: https://github.com/skanamike/duat-action-flow-94/pull/8 (DRAFT). Draft because the TASK-003b design gate has not passed (WIP commit 9736be8). Mark ready once the mine image source is decided and the gate passes, and after the Netlify form setup + deploy-preview smoke test (DEBT-017).
+STATUS: OPEN
+---
