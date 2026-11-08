@@ -1,1 +1,12 @@
-/*    /index.html   200
+# Retired draft pages (ADR-005)
+/pantheon     /company  301
+/companyv1    /company  301
+/pantheon/    /company  301
+/companyv1/   /company  301
+
+# Trailing-slash variants of every page (R6: build.format "file" emits company.html, not company/index.html)
+/product/        /product        301
+/technology/     /technology     301
+/company/        /company        301
+/company/team/   /company/team   301
+/why-duat/       /why-duat       301

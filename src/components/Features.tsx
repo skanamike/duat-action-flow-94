@@ -74,7 +74,11 @@ const Features = () => {
           </div>
           <div className="rounded-2xl overflow-hidden shadow-2xl border border-border bg-card">
             <img
-              src="/images/generated/sar-intelligence.png"
+              src="/images/generated/sar-intelligence.jpg"
+              width={1920}
+              height={1080}
+              loading="lazy"
+              decoding="async"
               alt="SAR intelligence pipeline from satellite to supply chain insights"
               className="w-full h-auto"
             />

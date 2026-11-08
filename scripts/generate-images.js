@@ -10,7 +10,12 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const API_TOKEN = "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";
+// SEC-001: never hard-code tokens. Provide via environment: HF_TOKEN=... node scripts/generate-images.js
+const API_TOKEN = process.env.HF_TOKEN;
+if (!API_TOKEN) {
+  console.error("HF_TOKEN environment variable is required.");
+  process.exit(1);
+}
 const API_BASE = "https://router.huggingface.co/hf-inference";
 const MODEL = "stabilityai/stable-diffusion-xl-base-1.0";
 

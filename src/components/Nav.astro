@@ -1,0 +1,94 @@
+---
+import Logo from "@/components/Logo.astro";
+import { NAV_ITEMS } from "@/config/site";
+import { publicPath } from "@/lib/paths";
+
+const current = publicPath(Astro.url.pathname);
+const isCurrent = (href: string): boolean => current === href;
+---
+
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-primary/95 backdrop-blur-sm">
+  <nav class="container mx-auto px-6 py-4" aria-label="Main">
+    <div class="flex items-center justify-between">
+      <a href="/" class="transition-opacity hover:opacity-80" aria-label="DUAT home">
+        <Logo />
+      </a>
+
+      <ul class="hidden items-center gap-8 md:flex">
+        {
+          NAV_ITEMS.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+                class:list={[
+                  "transition-colors hover:text-accent",
+                  isCurrent(item.href) ? "text-accent" : "text-white/90",
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <button
+            type="button"
+            data-contact
+            class="h-9 rounded-md bg-gradient-secondary px-3 text-sm font-semibold text-primary transition-all hover:shadow-glow"
+          >
+            Get Started
+          </button>
+        </li>
+      </ul>
+
+      <button
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-md text-white hover:bg-white/10 md:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        aria-label="Open menu"
+        data-menu-toggle
+      >
+        <svg data-icon-open xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg data-icon-close class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+
+    <!-- R11: scrollable when taller than the viewport (landscape phones). 4.5rem ≈ header bar height. -->
+    <div id="mobile-menu" class="hidden max-h-[calc(100dvh-4.5rem)] overflow-y-auto overscroll-contain md:hidden" data-mobile-menu>
+      <ul class="mt-4 flex flex-col gap-1 border-t border-white/10 pt-4">
+        {
+          NAV_ITEMS.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? "page" : undefined}
+                class:list={[
+                  "block rounded-md px-3 py-3 text-lg hover:bg-white/10",
+                  isCurrent(item.href) ? "text-accent" : "text-white",
+                ]}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="pt-2">
+          <button
+            type="button"
+            data-contact
+            class="w-full rounded-md bg-gradient-secondary px-4 py-3 text-lg font-semibold text-primary"
+          >
+            Get Started
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  import { initMobileMenu } from "@/scripts/mobileMenu";
+  initMobileMenu();
+</script>

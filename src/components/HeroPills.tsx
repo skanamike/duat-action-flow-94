@@ -13,13 +13,13 @@ export default function HeroPills() {
         <a
           key={Item.label}
           href="#features"
-          className="flex items-center gap-2 px-4 py-2 text-white text-sm md:text-base hover-scale focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
+          className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 text-white text-sm md:text-base hover-scale focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/60"
           aria-label={`${Item.label} - jump to features`}
         >
           <Item.icon className="h-4 w-4 text-accent" />
           <span className={idx === 1 ? "text-secondary font-semibold" : "text-white/90 font-semibold"}>{Item.label}</span>
           {idx < items.length - 1 && (
-            <span className="mx-3 h-4 w-px bg-white/30" aria-hidden="true" />
+            <span className="mx-1.5 sm:mx-3 h-4 w-px bg-white/30" aria-hidden="true" />
           )}
         </a>
       ))}
